@@ -17,10 +17,6 @@
   "author": "forever-chl <360328177@qq.com>",
   "license": "MIT",
   "dependencies": {
-    "jquery": "^3.3.1",
-    "layer": "^0.1.0",
-    "layui": "0.0.1",
-    "webpack": "^4.4.1",
     "wepy": "^1.6.0",
     "wepy-async-function": "^1.4.4",
     "wepy-com-toast": "^1.0.2"

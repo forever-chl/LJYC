@@ -11,12 +11,12 @@
     .ul_pro .li_close{  float:right; width:22.22%;}
     .ul_pro .li_close span{ background-color:#ACB3BB;}
     .ul_pro .li_clean{  float:right; width:22.22%;}
-    .ul_pro li span{ display:block; background-color:#fff; border-radius:4px; box-shadow: 2px 2px 2px #888888; /* max-width:48px; margin:0 auto; */ line-height:32px; padding-top:2px;  }
+    .ul_pro li span{ display:block; background-color:#fff; border-radius:4px; box-shadow: 2px 2px 2px #888888;line-height:32px; padding-top:2px;  }
     .ul_pro li span:active{ background-color:#4DA9F2; color:#fff;}
 
     .ul_input{ padding:20px;width:350px; margin:0 auto; }
-    .ul_input li{ float:left; width:14%; padding:2px;text-align:center; }
-    .ul_input li span{ display:block; background-color:#fff; border:1px solid #ccc; border-radius:4px; width:40px; margin:0 auto; height:40px; line-height:40px; }
+    .ul_input .input_pro{float:left; width:10%; display:block; background-color:#fff;text-align:center;  border:1px solid #ccc;border-radius:4px;height:40px; line-height:40px; }
+    .input_pro+.input_pro{margin-left:10rpx;}
 
     .ul_keybord{ background-color:#CED3D9; text-align:center; padding:4px 2px; font-size:14px;}
     .ul_keybord li{ float:left; width:10%; padding:2px;box-sizing: border-box;}
@@ -33,10 +33,15 @@
 </style>
 
 <template>
-    <div>
-		<div class="che_tit">输入车牌</div>
-		<div class="car_input">
-			<ul class="clearfix ul_input">
+    <view>
+		<view class="che_tit">输入车牌</view>
+		<view class="car_input">
+            <view class="clearfix ul_input">
+                <repeat for="{{7}}" key="index">
+                    <view class="input_pro"><label>{{carNum&&carNum.length>=index?carNum[index]:''}}</label></view>
+                </repeat>
+            </view>
+			<!-- <ul class="clearfix ul_input">
                 <li class="input_pro" @tap="showProvince"><span>{{carNum&&carNum.length>=1?carNum[0]:''}}</span></li>
                 <li class="input_pp" @tap="showKeybord"><span>{{carNum&&carNum.length>=1?carNum[1]:''}}</span></li>
                 <li class="input_pp"><span>{{carNum&&carNum.length>=1?carNum[2]:''}}</span></li>
@@ -44,10 +49,10 @@
                 <li class="input_pp"><span>{{carNum&&carNum.length>=1?carNum[4]:''}}</span></li>
                 <li class="input_pp"><span>{{carNum&&carNum.length>=1?carNum[5]:''}}</span></li>
                 <li class="input_pp"><span>{{carNum&&carNum.length>=1?carNum[6]:''}}</span></li>
-            </ul>
-		</div>
-    </div>
-	<div class="jp_pro">
+            </ul> -->
+		</view>
+    </view>
+	<view class="jp_pro">
         <ul class='clearfix ul_pro'>
             <repeat for="{{theData}}" key="index" index="index" item="item">
                 <li @tap="choosekey" data-value="{{item}}"><span data-value="{{item}}">{{item}}</span></li>
@@ -55,7 +60,7 @@
             <li class='li_close'><span>关闭</span></li>
             <li class='li_clean'><span>清空</span></li>
         </ul>
-    </div>
+    </view>
 </template>
 
 <script>
