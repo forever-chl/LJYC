@@ -6,28 +6,36 @@
     .clearfix { display: block; }
     
     .che_tit{ text-align:center; padding:20px;}
-    .ul_pro{ background-color:#CED3D9; text-align:center; padding:4px 2px; font-size:14px;}
-    .ul_pro li{ float:left; width:11.11%; padding:2px;box-sizing: border-box;}
-    .ul_pro .li_close{  float:right; width:22.22%;}
-    .ul_pro .li_close span{ background-color:#ACB3BB;}
-    .ul_pro .li_clean{  float:right; width:22.22%;}
-    .ul_pro li span{ display:block; background-color:#fff; border-radius:4px; box-shadow: 2px 2px 2px #888888;line-height:32px; padding-top:2px;  }
-    .ul_pro li span:active{ background-color:#4DA9F2; color:#fff;}
 
+    /* 车牌中文键盘 */
+    .ul_pro{ background-color:#CED3D9; text-align:center; padding:8rpx 4rpx; font-size:28rpx;}
+    .ul_pro .ul_pro_key{ float:left;width:11.11%; padding:4rpx;box-sizing: border-box;}
+    .ul_pro  button{ display:block;background-color:#fff; border-radius:8rpx; box-shadow: 4rpx 4rpx 4rpx #888888;line-height:64rpx; padding-top:4rpx;font-size:28rpx; padding:0;border:none; }
+    .ul_pro  button::after{border:none;}
+    .ul_pro  button.button_active{background-color:#4DA9F2; color:#fff;}
+    /* 车牌关闭按钮 */
+    .ul_pro .li_close{  float:right;width:22.22%;}
+    .ul_pro .li_close button{ background-color:#ACB3BB;}
+    /* 车牌清空按钮 */
+    .ul_pro .li_clean{float:right;width:22.22%;}
+    
+    
     .ul_input{ padding:20px;width:350px; margin:0 auto; }
     .ul_input .input_pro{float:left; width:10%; display:block; background-color:#fff;text-align:center;  border:1px solid #ccc;border-radius:4px;height:40px; line-height:40px; }
     .input_pro+.input_pro{margin-left:10rpx;}
 
-    .ul_keybord{ background-color:#CED3D9; text-align:center; padding:4px 2px; font-size:14px;}
-    .ul_keybord li{ float:left; width:10%; padding:2px;box-sizing: border-box;}
+    /* 字母键盘 */
+    .ul_keybord{ background-color:#CED3D9; text-align:center; padding:8rpx 4rpx; font-size:28rpx;}
+    .ul_keybord .ikey{ float:left; width:10%; padding:2px;box-sizing: border-box;}
     .ul_keybord .ikey20{ margin-left:5%;}
     .ul_keybord .li_w{ width:11.11%; }
 
     .ul_keybord .li_close{  float:right; width:22.22%;}
     .ul_keybord .li_close span{ background-color:#ACB3BB;}
     .ul_keybord .li_clean{  float:right; width:22.22%;}
-    .ul_keybord li span{ display:block; background-color:#fff; border-radius:4px; box-shadow: 2px 2px 2px #888888; /* max-width:48px; margin:0 auto; */ line-height:32px; padding-top:2px;  }
-    .ul_keybord li span:active{ background-color:#4DA9F2; color:#fff;}
+    .ul_keybord .ikey button{ display:block; background-color:#fff; border-radius:8rpx; box-shadow: 4rpx 4rpx 4rpx #888888; font-size:28rpx;padding:0; line-height:64rpx; padding-top:4rpx;  }
+    .ul_keybord .ikey button::after{border:none;}
+    .ul_keybord .ikey button.button_active{ background-color:#4DA9F2; color:#fff;}
 
     .jp_pro{position:fixed;bottom:0;left:0;width:100%;}
 </style>
@@ -53,13 +61,18 @@
 		</view>
     </view>
 	<view class="jp_pro">
-        <ul class='clearfix ul_pro'>
-            <repeat for="{{theData}}" key="index" index="index" item="item">
-                <li @tap="choosekey" data-value="{{item}}"><span data-value="{{item}}">{{item}}</span></li>
+        <view class='clearfix ul_pro' wx:if="{{next==0}}">
+            <repeat for="{{provinces}}" key="index" index="index" item="item">
+                <view class="ul_pro_key" @tap="choosekey({{item}})"><button hover-class="button_active">{{item}}</button></view>
             </repeat>
-            <li class='li_close'><span>关闭</span></li>
-            <li class='li_clean'><span>清空</span></li>
-        </ul>
+            <view class='ul_pro_key li_close'><button>关闭</button></view>
+            <view class='ul_pro_key li_clean'><button hover-class="button_active">清空</button></view>
+        </view>
+        <view class='clearfix ul_keybord' wx:if="{{next>0}}">
+            <repeat for="{{keyNums}}" key="index" index="index" item="item">
+                <view class="ikey ikey{{index}} li_num {{index>=30?'li_w':''}}" @tap="choosekey({{item}})"><button hover-class="button_active">{{item}}</button></view>
+            </repeat>
+        </view>
     </view>
 </template>
 
@@ -118,14 +131,12 @@
                 next=0;
                 this.showKeybord();
             },	
-            choosekey(obj){	
+            choosekey(jj){	
                 var _this=this;
-                var jj=obj.target.dataset.value;
                 if(jj=='OK'){
                     alert("车牌："+_this.carNum.join(''));
                 }else if(jj=='清空'){
                     if(_this.carNum.length==0){
-                        _this.showProvince();
                         _this.next=0;
                     }
                     _this.carNum.pop();	
@@ -133,12 +144,10 @@
                     if(_this.next<1){
                         _this.next=0;
                     }
-                    console.log(_this.next);
                 }else{
                     if(_this.next>5){
                         return;
                     }
-                    console.log(_this.next);
                     for(var i = 0; i<7;i++){
                         if(_this.next==1 & jj<10 &_this.carNum.length>0&_this.carNum[0]!=-1){
                             alert("第二位车牌为字母");
@@ -149,7 +158,6 @@
                         if(_this.next>5){
                             _this.next=6;
                         }
-                         console.log(_this.carNum);
                         return;
                     }
                 }
