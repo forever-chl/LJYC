@@ -1,0 +1,37 @@
+<style lang="less">
+    @import '../less/common.less';
+
+    // 邻家洗车
+    .cc-ljxc{padding:0 0 40rpx 0;}
+
+</style>
+
+<template>
+    <view class="split-bar"></view>
+    <carinfo></carinfo>
+    <view class="split-bar"></view>
+    <view class="cc-ljxc">
+        <view class="ljyc-title">
+            <text>邻家洗车</text>
+            <icon class="ljyct-down f-r"></icon> 
+        </view>
+        <view class="cc-ljxc-list">
+            <view></view>
+        </view>
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy'
+    import carInfo from '@/components/carInfo' 
+    export default class cleanCar extends wepy.page{
+        config={}
+        components={
+            carinfo:carInfo
+        }
+        data={}
+        computed={}
+        methods={}
+        onLoad={}
+    }
+</script>

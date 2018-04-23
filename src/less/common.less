@@ -1,0 +1,52 @@
+// 文字大小
+.fs-24{font-size:24rpx;}
+.fs-26{font-size:26rpx;}
+.fs-30{font-size:30rpx;}
+.fs-32{font-size:32rpx;}
+.fs-36{font-size:36rpx;}
+
+// 文字颜色
+.c-6{color:#666;}
+.c-9{color:#999;}
+.c-2{color:#222;}
+.c-b3{color:#b3b3b3;}
+.c-707577{color:#707577;}
+
+// 分隔条
+.split-bar{height:24rpx;background-color:#f7f7f7;}
+
+//外边距
+// 右
+.mr-20{margin-right:20rpx;}
+// 上
+.mt-10{margin-top:10rpx;}
+.mt-16{margin-top:16rpx;}
+.mt-18{margin-top:18rpx;}
+
+// 内边距
+// 左
+.pl-32{padding-left:32rpx;}
+
+// 浮动
+.f-r{float:right;}
+.f-l{float: left;}
+
+// 清楚浮动
+.clear::after{content:"";display:block;width:0;height:0;clear: both;}
+
+// 背景图标
+.ljyc-icon(@x,@y,@w,@h){background-image:url('../images/sprite.png');background-position: @x @y;width:@w; height: @h;background-size:686rpx auto;display:block;}
+
+// 绝对居中
+.ljyc-center{top:50%;left:50%;transform:translate(-50%,-50%);}
+
+// title
+.ljyc-title{overflow:hidden;padding:32rpx;}
+.ljyc-more{padding-right:22rpx;position: relative;}
+.ljyc-more::after{content:"";position: absolute;top:50%;right:0;transform:translate(0,-50%);.ljyc-icon(-674rpx,-218rpx,11rpx,20rpx);}
+.ljyct-down{padding-right:22rpx;height:32rpx; position: relative;}
+.ljyct-down::after{content:"";position: absolute;top:50%;right:0;transform:translate(0,-50%);.ljyc-icon(-299rpx,-393rpx,22rpx,22rpx);}
+
+// 一行文字超出省略
+.overflow-text{width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+

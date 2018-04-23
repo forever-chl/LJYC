@@ -29,23 +29,26 @@ module.exports = {
     },*/
     babel: {
       sourceMap: true,
-      presets: [
-        'env'
-      ],
+      presets: ['env'],
       plugins: [
         'transform-class-properties',
         'transform-decorators-legacy',
         'transform-object-rest-spread',
-        'transform-export-extensions',
+        'transform-export-extensions'
       ]
     }
   },
-  plugins: {
-  },
+  // plugins: {
+  //   img2base64: {
+  //     css: true,
+  //     html: false,
+  //     path: './src/images/'
+  //   }
+  // },
   appConfig: {
     noPromiseAPI: ['createSelectorQuery']
   }
-}
+};
 
 if (prod) {
 
