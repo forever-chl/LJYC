@@ -140,21 +140,21 @@
         components={}
         data={
             bannerList:[
-                "../images/banner/0152cf574518996ac72525ae8ed7a3.jpg",
-                "../images/banner/46358PICyWG_1024.jpg",
-                "../images/banner/56n58PICKGq_1024.jpg"
+                "http://pic.58pic.com/58pic/17/16/11/56n58PICKGq_1024.jpg",
+                "http://pic.qiantucdn.com/58pic/17/98/71/46358PICyWG_1024.jpg",
+                "http://img.zcool.cn/community/0152cf574518996ac72525ae8ed7a3.jpg"
             ],
             storeList:[
-                {"url":'../images/picture/timg.jpg',"name":"门店1","address":"南山大道"},
-                {"url":'../images/picture/timg2.jpg',"name":"门店2","address":"民治大道"},
-                {"url":'../images/picture/timg3.jpg',"name":"门店3","address":"宝安大道"},
-                {"url":'../images/picture/timg4.jpg',"name":"门店4","address":"盐田大道"},
-                {"url":'../images/picture/timg5.jpg',"name":"门店5","address":"龙华大道"},
-                {"url":'../images/picture/timg6.jpg',"name":"门店6","address":"水贝园"}
+                {"url":'http://pic2.ooopic.com/12/21/02/87bOOOPIC71_1024.jpg',"name":"门店1","address":"南山大道"},
+                {"url":'http://img.zcool.cn/community/016f29554362d40000019ae9adb29d.jpg',"name":"门店2","address":"民治大道"},
+                {"url":'http://pic2.ooopic.com/12/21/02/87bOOOPIC71_1024.jpg',"name":"门店3","address":"宝安大道"},
+                {"url":'http://img.zcool.cn/community/016f29554362d40000019ae9adb29d.jpg',"name":"门店4","address":"盐田大道"},
+                {"url":'http://pic2.ooopic.com/12/21/02/87bOOOPIC71_1024.jpg',"name":"门店5","address":"龙华大道"},
+                {"url":'http://img.zcool.cn/community/016f29554362d40000019ae9adb29d.jpg',"name":"门店6","address":"水贝园"}
             ],
             projectList:[
-                {"url":'../images/picture/timg.jpg',"name":"门店1门店1门店1门店1门店1门店1门店1门店1门店1","address":"南山大道南山大道南山大道南山大道南山大道南山大道南山大道","far":"100","comment":"13万"},
-                {"url":'../images/picture/timg2.jpg',"name":"门店2","address":"民治大道","far":"100","comment":"13万"},
+                {"url":'http://pic2.ooopic.com/12/21/02/87bOOOPIC71_1024.jpg',"name":"门店1门店1门店1门店1门店1门店1门店1门店1门店1","address":"南山大道南山大道南山大道南山大道南山大道南山大道南山大道","far":"100","comment":"13万"},
+                {"url":'http://img.zcool.cn/community/016f29554362d40000019ae9adb29d.jpg',"name":"门店2","address":"民治大道","far":"100","comment":"13万"},
             ]
         }
         computed={}
