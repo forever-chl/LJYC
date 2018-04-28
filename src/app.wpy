@@ -31,26 +31,26 @@ export default class extends wepy.app {
     tabBar: {
       color: '#b3b3b3',
       selectedColor: '#fc8e1a',
-      borderStyle: 'white',
+      borderStyle: 'black',
       backgroundColor: '#fff',
       list: [
         {
           pagePath: 'pages/index',
           text: '首页',
           iconPath: 'images/tabbar/home.png',
-          selectedIconPath: 'images/tabbar/home-select.png'
+          selectedIconPath: 'images/tabbar/home-se.png'
         },
         {
           pagePath: 'pages/order',
           text: '订单',
           iconPath: 'images/tabbar/order.png',
-          selectedIconPath: 'images/tabbar/order-select.png'
-        },
+          selectedIconPath: 'images/tabbar/order-se.png' 
+        }, 
         {
           pagePath: 'pages/my',
           text: '我的',
           iconPath: 'images/tabbar/my.png',
-          selectedIconPath: 'images/tabbar/my-select.png'
+          selectedIconPath: 'images/tabbar/my-se.png'
         }
       ]
     }
