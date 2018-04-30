@@ -22,7 +22,7 @@ module.exports = {
   },
   compilers: {
     less: {
-      compress: prod
+      compress: true
     },
     /*sass: {
       outputStyle: 'compressed'
@@ -51,9 +51,13 @@ module.exports = {
 };
 
 if (prod) {
+  delete module.exports.compilers.babel.sourcesMap;
 
   // 压缩sass
   // module.exports.compilers['sass'] = {outputStyle: 'compressed'}
+
+  // 压缩less
+  module.exports.compilers['less'] = { compress: true };
 
   // 压缩js
   module.exports.plugins = {
