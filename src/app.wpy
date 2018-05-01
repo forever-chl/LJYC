@@ -8,7 +8,7 @@
   box-sizing: border-box;
 }
 </style>
-
+<style lang="less" src="./less/base.less"></style>
 <script>
 import wepy from 'wepy'
 import 'wepy-async-function'
@@ -28,7 +28,7 @@ export default class extends wepy.app {
       navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'black'
     },
-    tabBar: {
+   /*  tabBar: {
       color: '#b3b3b3',
       selectedColor: '#fc8e1a',
       borderStyle: 'black',
@@ -53,7 +53,7 @@ export default class extends wepy.app {
           selectedIconPath: 'images/tabbar/my-se.png'
         }
       ]
-    }
+    } */
   }
 
   globalData = {
@@ -61,8 +61,10 @@ export default class extends wepy.app {
   }
 
   constructor () {
-    super()
-    this.use('requestfix')
+    super();
+     // 注册中间件
+    this.use('requestfix');
+    this.use('promisify');
   }
 
   onLaunch() {

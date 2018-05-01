@@ -130,15 +130,22 @@
                 </view>
            </repeat>            
         </view>
+        <tabs/>
     </view>
 </template>
 
 <script>
     import wepy from 'wepy';
     import {uniqueString} from '@/lib/utils';
+    import tabs from '@/components/tabs';
+
     export default class index extends wepy.page{
-        config={}
-        components={}
+        config={
+            navigationBarTitleText: '邻家养车'
+        };
+        components={
+            tabs:tabs
+        };
         data={
             bannerList:[
                 "http://pic.58pic.com/58pic/17/16/11/56n58PICKGq_1024.jpg",
@@ -157,13 +164,13 @@
                 {"url":'http://pic2.ooopic.com/12/21/02/87bOOOPIC71_1024.jpg',"name":"门店1门店1门店1门店1门店1门店1门店1门店1门店1","address":"南山大道南山大道南山大道南山大道南山大道南山大道南山大道","far":"100","comment":"13万"},
                 {"url":'http://img.zcool.cn/community/016f29554362d40000019ae9adb29d.jpg',"name":"门店2","address":"民治大道","far":"100","comment":"13万"},
             ]
-        }
-        computed={}
+        };
+        computed={};
         methods={
             uniqueString(){
                 return uniqueString();
             }
-        }
+        };
     }
 </script>
 
