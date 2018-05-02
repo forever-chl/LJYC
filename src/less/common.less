@@ -1,3 +1,5 @@
+@import "./variable.less";
+
 // 文字大小
 .fs-24{font-size:24rpx;}
 .fs-26{font-size:26rpx;}
@@ -33,9 +35,6 @@
 
 // 清楚浮动
 .clear::after{content:"";display:block;width:0;height:0;clear: both;}
-
-// 背景图标
-.ljyc-icon(@x,@y,@w,@h){background-image:url('https://ljyc.oss-cn-hangzhou.aliyuncs.com/wx/background_img.png');background-position: @x @y;width:@w; height: @h;background-size:686rpx auto;display:block;}
 
 // 绝对居中
 .ljyc-center{top:50%;left:50%;transform:translate(-50%,-50%);}

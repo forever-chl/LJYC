@@ -9,6 +9,7 @@
 }
 </style>
 <style lang="less" src="./less/base.less"></style>
+<style lang="less" src="./less/common.less"></style>
 <script>
 import wepy from 'wepy'
 import 'wepy-async-function'
