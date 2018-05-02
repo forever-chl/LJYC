@@ -1,15 +1,25 @@
 <template>
-   <view></view>
+   <view>
+       <tabs :currentTab="currentTab"></tabs>
+   </view>
 </template>
 
 <script>
-import wepy from 'wepy'
-export default class index extends wepy.page{
-    config={}
-    components={}
-    data={}
+import wepy from 'wepy';
+import tabs from '@/components/tabs';
+export default class order extends wepy.page{
+    def = {
+        currentTab:'currentMy'
+    }
+    config={
+        navigationBarTitleText: '个人中心'
+    }
+    components={
+        tabs:tabs
+    }
+    data={...this.def}
     computed={}
     methods={}
-    onLoad={}
+    async onLoad () {}
 }
 </script>

@@ -1,6 +1,10 @@
 <style lang="less">
     @import '../less/variable.less';
-
+    .index-main{
+        position: relative;
+        width: 100%;
+        padding-bottom:102rpx; 
+    }
     // baner
     .index-banner{position:relative;}
     .index-banner-image{width:100%;height:320rpx;}
@@ -44,93 +48,95 @@
 </style>
 
 <template>
-    <view class="index-banner">
-        <view class="index-location fs-24">
-            <icon class="il-icon"></icon>
-            <text class="c-6 mr-20">深圳市</text>
-            <text class="c-9">水榭春天二期</text>
+    <view class="index-main">
+        <view class="index-banner">
+            <view class="index-location fs-24">
+                <icon class="il-icon"></icon>
+                <text class="c-6 mr-20">深圳市</text>
+                <text class="c-9">水榭春天二期</text>
+            </view>
+            <swiper indicator-dots="true" autoplay="true" interval="5000" duration="1000">
+                <block wx:for="{{bannerList}}" wx:key="uniqueString">
+                    <swiper-item>
+                    <image src="{{item}}" class="index-banner-image"/>
+                    </swiper-item>
+                </block>
+            </swiper>
         </view>
-        <swiper indicator-dots="true" autoplay="true" interval="5000" duration="1000">
-            <block wx:for="{{bannerList}}" wx:key="uniqueString">
-                <swiper-item>
-                <image src="{{item}}" class="index-banner-image"/>
-                </swiper-item>
-            </block>
-        </swiper>
-    </view>
-    <view class="top-menu c-707577 fs-26">
-         <view class="tm-item">
-             <icon class="tm-xc"></icon>
-             <text class="mt-16">洗车</text>
-         </view>
-          <view class="tm-item">
-             <icon class="tm-mr"></icon>
-             <text class="mt-16">美容</text>
-         </view>
-          <view class="tm-item">
-             <icon class="tm-pq"></icon>
-             <text class="mt-16">喷漆</text>
-         </view>
-          <view class="tm-item">
-             <icon class="tm-by"></icon>
-             <text class="mt-16">保养</text>
-         </view>
-    </view>
-    <view class="split-bar"></view>
-    <view class="top-menu-other">
-        <view class="tmo-item">
-            <icon class="tmoi-tccz"></icon>
-            <view class="pl-32">
-                <view class="fs-32 c-2">套餐充值</view>
-                <view class="fs-24 c-b3">套餐充值更优惠</view>
+        <view class="top-menu c-707577 fs-26">
+            <view class="tm-item">
+                <icon class="tm-xc"></icon>
+                <text class="mt-16">洗车</text>
+            </view>
+            <view class="tm-item">
+                <icon class="tm-mr"></icon>
+                <text class="mt-16">美容</text>
+            </view>
+            <view class="tm-item">
+                <icon class="tm-pq"></icon>
+                <text class="mt-16">喷漆</text>
+            </view>
+            <view class="tm-item">
+                <icon class="tm-by"></icon>
+                <text class="mt-16">保养</text>
             </view>
         </view>
-        <view class="tmo-item">
-            <icon class="tmoi-sys"></icon>
-            <view class="pl-32">
-                <view class="fs-32 c-2">扫一扫</view>
-                <view class="fs-24 c-b3">扫码取钥匙</view>
+        <view class="split-bar"></view>
+        <view class="top-menu-other">
+            <view class="tmo-item">
+                <icon class="tmoi-tccz"></icon>
+                <view class="pl-32">
+                    <view class="fs-32 c-2">套餐充值</view>
+                    <view class="fs-24 c-b3">套餐充值更优惠</view>
+                </view>
+            </view>
+            <view class="tmo-item">
+                <icon class="tmoi-sys"></icon>
+                <view class="pl-32">
+                    <view class="fs-32 c-2">扫一扫</view>
+                    <view class="fs-24 c-b3">扫码取钥匙</view>
+                </view>
             </view>
         </view>
-    </view>
-    <view class="split-bar"></view>
-    <view class="index-store">
-        <view class="ljyc-title">
-            <text class="fs-36 c-2">门店介绍</text>
-            <text class="fs-26 c-9 f-r ljyc-more">更多</text>
+        <view class="split-bar"></view>
+        <view class="index-store">
+            <view class="ljyc-title">
+                <text class="fs-36 c-2">门店介绍</text>
+                <text class="fs-26 c-9 f-r ljyc-more">更多</text>
+            </view>
+            <scroll-view class="is-list" scroll-x="true" scroll-with-animation="true">
+                <repeat for="{{storeList}}" key="index" index="index" item="item">
+                    <view class="is-item">
+                        <image src="{{item.url}}" mode="aspectFill" lazy-load="true"></image>
+                        <view class="fs-30 c-2 mt-18">{{item.name}}</view>
+                        <view class="fs-24 c-9 mt-16">{{item.address}}</view>
+                    </view>
+                </repeat>
+            </scroll-view>
         </view>
-        <scroll-view class="is-list" scroll-x="true" scroll-with-animation="true">
-             <repeat for="{{storeList}}" key="index" index="index" item="item">
-                 <view class="is-item">
-                     <image src="{{item.url}}" mode="aspectFill" lazy-load="true"></image>
-                     <view class="fs-30 c-2 mt-18">{{item.name}}</view>
-                     <view class="fs-24 c-9 mt-16">{{item.address}}</view>
-                 </view>
-            </repeat>
-        </scroll-view>
-    </view>
-    <view class="split-bar"></view>
-    <view class="index-pro">
-        <view class="ljyc-title">
-            <text class="fs-36 c-2">标准介绍</text>
-            <text class="fs-26 c-9 f-r ljyc-more">更多</text>
-        </view>
-        <view class="ip-list">
-            <repeat for="{{projectList}}" key="index" index="index" item="item">
-                <view class="ip-item clear">
-                    <image src="{{item.url}}" mode="aspectFill" lazy-load="false"></image>
-                    <view class="ipi-right">
-                        <view class="fs-30 c-2 overflow-text">{{item.name}}</view>
-                        <view class="ipir-address fs-24 c-9 mt-16">{{item.address}}</view>
-                        <view class="fs-24 c-9 clear">
-                            <text class="address-icon">{{item.far}}米</text>
-                            <text class="f-r comment-icon">{{item.comment}}评论</text>
+        <view class="split-bar"></view>
+        <view class="index-pro">
+            <view class="ljyc-title">
+                <text class="fs-36 c-2">标准介绍</text>
+                <text class="fs-26 c-9 f-r ljyc-more">更多</text>
+            </view>
+            <view class="ip-list">
+                <repeat for="{{projectList}}" key="index" index="index" item="item">
+                    <view class="ip-item clear">
+                        <image src="{{item.url}}" mode="aspectFill" lazy-load="false"></image>
+                        <view class="ipi-right">
+                            <view class="fs-30 c-2 overflow-text">{{item.name}}</view>
+                            <view class="ipir-address fs-24 c-9 mt-16">{{item.address}}</view>
+                            <view class="fs-24 c-9 clear">
+                                <text class="address-icon">{{item.far}}米</text>
+                                <text class="f-r comment-icon">{{item.comment}}评论</text>
+                            </view>
                         </view>
                     </view>
-                </view>
-           </repeat>            
+            </repeat>            
+            </view>
+            <tabs/>
         </view>
-        <tabs/>
     </view>
 </template>
 

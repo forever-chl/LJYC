@@ -1,15 +1,29 @@
 <template>
-   <view></view>
+   <view>
+       <carList></carList>
+       <tabs :currentTab="currentTab"></tabs>
+   </view>
 </template>
 
 <script>
-import wepy from 'wepy'
-export default class index extends wepy.page{
-    config={}
-    components={}
-    data={}
+import wepy from 'wepy';
+import tabs from '@/components/tabs';
+import carList from '@/components/carList';
+
+export default class order extends wepy.page{
+    def = {
+        currentTab:'currentOrder'
+    }
+    config={
+        navigationBarTitleText: '我的订单'
+    }
+    components={
+        tabs:tabs,
+        carList:carList
+    }
+    data={...this.def}
     computed={}
     methods={}
-    onLoad={}
+    async onLoad () {}
 }
 </script>

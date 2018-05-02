@@ -1,0 +1,63 @@
+<style lang="less">
+.index-list-main{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    .scroll-wrapping{
+        width: 100%;
+        height: 100%;
+    }
+    .scroll-view-item{
+        height: 300px;
+        width: 100%
+    }
+    .bc_green{
+        background: green;
+    }
+    .bc_red{
+        background: red;
+    }
+    .bc_yellow{
+        background: yellow;
+    }
+    .bc_blue{
+        background: blue;
+    }
+}
+</style>
+<template>
+    <view class="index-list-main">
+        <scroll-view class="scroll-wrapping"  scroll-y="true" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+            <view id="green" class="scroll-view-item bc_green"></view>
+            <view id="red"  class="scroll-view-item bc_red"></view>
+            <view id="yellow" class="scroll-view-item bc_yellow"></view>
+            <view id="blue" class="scroll-view-item bc_blue"></view>
+        </scroll-view>
+    </view>
+</template>
+<script>
+import wepy from 'wepy'
+export default class carList extends wepy.component {
+    def = {
+        toView: 'blue',
+        scrollTop: 100 
+    }
+    props = {
+        
+    };
+    data = {...this.def};
+    methods = {
+        upper(e) {
+            console.log(e)
+        },
+        lower(e) {
+            console.log(e)
+        },
+        scroll(e) {
+            console.log(e)
+        }
+    };
+}
+</script>
+
