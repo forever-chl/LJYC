@@ -6,11 +6,19 @@
     overflow: hidden;
     .scroll-wrapping{
         width: 100%;
-        height: 100%;
     }
     .scroll-view-item{
         height: 300px;
-        width: 100%
+        width: 100%;
+        .list-group-title{
+            width: 100%;
+            display: black;
+            height: 78rpx;
+            line-height: 78rpx;
+            font-size: 30rpx;
+            color:#999;
+            background: #f2f5f7;
+        }
     }
     .bc_green{
         background: green;
@@ -28,11 +36,31 @@
 </style>
 <template>
     <view class="index-list-main">
-        <scroll-view class="scroll-wrapping"  scroll-y="true" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
-            <view id="green" class="scroll-view-item bc_green"></view>
-            <view id="red"  class="scroll-view-item bc_red"></view>
-            <view id="yellow" class="scroll-view-item bc_yellow"></view>
-            <view id="blue" class="scroll-view-item bc_blue"></view>
+        <scroll-view class="scroll-wrapping" style="height: {{screenHeight}}px;"   scroll-y="true" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+            <view id="green" class="scroll-view-item bc_green">
+                <view class="list-group-title">A</view>
+                <view>
+
+                </view>
+            </view>
+            <view id="red" class="scroll-view-item bc_red">
+                <view class="list-group-title">B</view>
+                <view>
+
+                </view>
+            </view>
+            <view id="yellow" class="scroll-view-item bc_yellow">
+                <view class="list-group-title">C</view>
+                <view>
+
+                </view>
+            </view>
+            <view id="blue" class="scroll-view-item bc_blue">
+                <view class="list-group-title">D</view>
+                <view>
+
+                </view>
+            </view>
         </scroll-view>
     </view>
 </template>
@@ -41,23 +69,37 @@ import wepy from 'wepy'
 export default class carList extends wepy.component {
     def = {
         toView: 'blue',
-        scrollTop: 100 
+        scrollTop: 100,
+        screenHeight : 667
     }
     props = {
         
     };
     data = {...this.def};
+    
     methods = {
         upper(e) {
-            console.log(e)
+            //console.log(e)
         },
         lower(e) {
-            console.log(e)
+            //console.log(e)
         },
         scroll(e) {
             console.log(e)
         }
     };
+    async onLoad (option) {
+        this.getSystemInfo();
+    };
+    getSystemInfo(){
+        let wpy = this;
+        wx.getSystemInfo({
+            success(res) {
+                console.log(res)
+                wpy.screenHeight = res.screenHeight;
+            }
+        })
+    }
 }
 </script>
 

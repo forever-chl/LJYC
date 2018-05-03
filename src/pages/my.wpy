@@ -1,6 +1,6 @@
 <template>
    <view>
-       <tabs :currentTab="currentTab"></tabs>
+       <!-- <tabs :currentTab="currentTab"></tabs> -->
    </view>
 </template>
 

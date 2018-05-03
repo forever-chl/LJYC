@@ -29,7 +29,7 @@ export default class extends wepy.app {
       navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'black'
     },
-   /*  tabBar: {
+    tabBar: {
       color: '#b3b3b3',
       selectedColor: '#fc8e1a',
       borderStyle: 'black',
@@ -54,7 +54,7 @@ export default class extends wepy.app {
           selectedIconPath: 'images/tabbar/my-se.png'
         }
       ]
-    } */
+    } 
   }
 
   globalData = {

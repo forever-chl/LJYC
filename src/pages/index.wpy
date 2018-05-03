@@ -135,8 +135,8 @@
                     </view>
             </repeat>            
             </view>
-            <tabs/>
         </view>
+       <!--  <tabs/> -->
     </view>
 </template>
 
