@@ -20,6 +20,22 @@
             background: #f2f5f7;
         }
     }
+    .list-fixed{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        .fixed-title{
+            height: 78rpx;
+            line-height: 78rpx;
+            padding-left: 20rpx;
+            font-size: 30rpx;
+            color: #fff;
+            background: #000000;
+        }
+    }
+      
+
     .bc_green{
         background: green;
     }
@@ -36,32 +52,27 @@
 </style>
 <template>
     <view class="index-list-main">
-        <scroll-view class="scroll-wrapping" style="height: {{screenHeight}}px;"   scroll-y="true" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+        <scroll-view class="scroll-wrapping" id="scroll-wrapping" style="height: {{screenHeight}}px;"   scroll-y="true" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}">
             <view id="green" class="scroll-view-item bc_green">
                 <view class="list-group-title">A</view>
-                <view>
-
-                </view>
+                <view></view>
             </view>
             <view id="red" class="scroll-view-item bc_red">
                 <view class="list-group-title">B</view>
-                <view>
-
-                </view>
+                <view></view>
             </view>
             <view id="yellow" class="scroll-view-item bc_yellow">
                 <view class="list-group-title">C</view>
-                <view>
-
-                </view>
+                <view></view>
             </view>
             <view id="blue" class="scroll-view-item bc_blue">
                 <view class="list-group-title">D</view>
-                <view>
-
-                </view>
+                <view> </view>
             </view>
         </scroll-view>
+        <view class="list-fixed" style="transform:translate3d(0,{{fixedTop}}rpx,0)">
+            <view class="fixed-title">{{fixedTitle}}</view>
+        </view>
     </view>
 </template>
 <script>
@@ -69,33 +80,82 @@ import wepy from 'wepy'
 export default class carList extends wepy.component {
     def = {
         toView: 'blue',
-        scrollTop: 100,
-        screenHeight : 667
+        screenHeight : 667,
+        listTop:[],
+        currentIndex : 0,
+        y:0,
+        diff:0,
+        fixedTop:0,
+        Map:['A','B','C','D']
     }
     props = {
         
     };
     data = {...this.def};
-    
-    methods = {
-        upper(e) {
-            //console.log(e)
-        },
-        lower(e) {
-            //console.log(e)
-        },
-        scroll(e) {
-            console.log(e)
+    computed = {
+        fixedTitle () {
+            if (this.y <= 0) {
+                return 'A'
+            }  
+            return this.Map[this.currentIndex];
         }
+    };
+    watch = {
+      diff (newValue) {
+        let fixedTop = (newValue > 0 && newValue < 78) ? newValue - 78 : 0
+        if (this.fixedTop === fixedTop) {
+            return;
+        }
+        this.fixedTop = fixedTop;
+      }
+    };
+    methods = {
+        upper(e) {},
+        lower(e) {},
+        scroll(e) {
+           let scrollTop = e.detail.scrollTop;
+            this.scrollY(scrollTop);
+        }
+    };
+    scrollY(y){
+        this.y = y;
+        // 当滚动到顶部，y < 0
+        if (y < 0) {
+          this.currentIndex = 0;
+          return
+        }
+        let listTop = this.listTop;
+        for (let i = 0; i < listTop.length - 1; i++) {
+          let top1 = listTop[i];
+          let top2 = listTop[i + 1];
+          if (y >= top1 && y < top2) {
+            this.currentIndex = i;
+            this.diff  = top2 - y;
+            return;
+          }
+        }
+        // 当滚动到底部，且y大于最后一个元素的上限
+        this.currentIndex = listTop.length - 2;
+    };
+    calculateTop(){
+        let wpy = this;
+        let query = wx.createSelectorQuery();
+        let items =  query.selectAll('#scroll-wrapping > .scroll-view-item');
+        items.boundingClientRect((rects)=>{
+            rects.forEach((rect)=>{
+               console.log(rect);
+               this.listTop.push(rect.top);
+            })
+        }).exec();
     };
     async onLoad (option) {
         this.getSystemInfo();
+        this.calculateTop();
     };
     getSystemInfo(){
         let wpy = this;
         wx.getSystemInfo({
             success(res) {
-                console.log(res)
                 wpy.screenHeight = res.screenHeight;
             }
         })
