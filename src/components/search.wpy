@@ -1,0 +1,47 @@
+<style lang="less">
+.serach-main{
+    top: 0;
+    right: 0;
+    width: 100%;
+    z-index: 999;
+    .wrapping{
+        position: relative;
+        width: 686rpx;
+        height: 60rpx;
+        .search{
+            font-size: 28rpx;
+            width: 632rpx;
+            height: 60rpx;
+            line-height: 60rpx;
+            background: #f2f3f5;
+            border-radius: 30rpx;
+            padding-left: 54rpx;
+        }
+        .s-icon{
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 14rpx;
+        }
+    }
+}
+</style>
+<template>
+    <view class="serach-main row-center" style="position:{{position}}">
+        <view class="wrapping">
+            <input class="search" type="text" placeholder="搜索车辆品牌" placeholder-style="color: #999;">
+            <image class="icon-mg s-icon" src="../images/icon/search-icon.png"/>
+        </view>
+    </view>
+</template>
+<script>
+import wepy from 'wepy';
+export default class search extends wepy.component {
+    props = {
+       position: {
+            type: String,
+            default: 'fixed'
+        }
+    };
+}
+</script>

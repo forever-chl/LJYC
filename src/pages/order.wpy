@@ -1,5 +1,18 @@
+<style lang="less">
+.order-main{
+    position: relative;
+    width: 100%;
+    .search{
+        margin-bottom: 40rpx;
+    }
+}
+</style>
+
 <template>
-   <view>
+   <view class="order-main">
+     <!--   <view class="search">
+           <search ></search>
+       </view> -->
        <carList></carList>
        <!-- <tabs :currentTab="currentTab"></tabs> -->
    </view>
@@ -9,17 +22,20 @@
 import wepy from 'wepy';
 import tabs from '@/components/tabs';
 import carList from '@/components/carList';
+import search from '@/components/search';
 
 export default class order extends wepy.page{
     def = {
-        currentTab:'currentOrder'
+        currentTab:'currentOrder',
+        topNumber:30
     }
     config={
         navigationBarTitleText: '我的订单'
     }
     components={
         tabs:tabs,
-        carList:carList
+        carList:carList,
+        search:search
     }
     data={...this.def}
     computed={}

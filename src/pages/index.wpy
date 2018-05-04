@@ -56,7 +56,7 @@
                 <text class="c-9">水榭春天二期</text>
             </view>
             <swiper indicator-dots="true" autoplay="true" interval="5000" duration="1000">
-                <block wx:for="{{bannerList}}" wx:key="uniqueString">
+                <block wx:for="{{bannerList}}" wx:key="index">
                     <swiper-item>
                     <image src="{{item}}" class="index-banner-image"/>
                     </swiper-item>
@@ -142,7 +142,6 @@
 
 <script>
     import wepy from 'wepy';
-    import {uniqueString} from '@/lib/utils';
     import tabs from '@/components/tabs';
 
     export default class index extends wepy.page{
@@ -172,11 +171,7 @@
             ]
         };
         computed={};
-        methods={
-            uniqueString(){
-                return uniqueString();
-            }
-        };
+        methods={};
     }
 </script>
 

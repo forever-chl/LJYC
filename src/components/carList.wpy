@@ -3,21 +3,34 @@
     position: relative;
     width: 100%;
     height: 100%;
-    overflow: hidden;
     .scroll-wrapping{
         width: 100%;
     }
     .scroll-view-item{
-        height: 300px;
         width: 100%;
+        background: #ffffff;
         .list-group-title{
             width: 100%;
             display: black;
             height: 78rpx;
             line-height: 78rpx;
+            padding-left: 40rpx;
             font-size: 30rpx;
             color:#999;
-            background: #f2f5f7;
+            background: #f2f3f5;
+        }
+        .list-group-info{
+            height:100rpx;
+            font-size: 30rpx;
+            color: #333333;
+            margin: 0 40rpx;
+            &.boder-b{
+                border-bottom: 1rpx solid #e5e5e5;
+            }
+            .icon{
+                display: inline-block;
+                padding-right: 40rpx;
+            }
         }
     }
     .list-fixed{
@@ -28,93 +41,137 @@
         .fixed-title{
             height: 78rpx;
             line-height: 78rpx;
-            padding-left: 20rpx;
+            padding-left: 40rpx;
             font-size: 30rpx;
-            color: #fff;
-            background: #000000;
+            color: #999;
+            background: #f2f3f5;
         }
     }
-      
-
-    .bc_green{
-        background: green;
-    }
-    .bc_red{
-        background: red;
-    }
-    .bc_yellow{
-        background: yellow;
-    }
-    .bc_blue{
-        background: blue;
+    .list-shortcut{
+        position: fixed;
+        z-index: 30;
+        right: 20rpx;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40rpx;
+        padding: 40rpx 0;
+        border-radius: 20rpx;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.3);
+        font-family: Helvetica;
+        .item{
+            padding: 6rpx;
+            line-height: 1;
+            color: rgba(255, 255, 255, 0.5);
+           /*  color: #222222; */
+            font-size: 26rpx;
+            &.current{
+                color: #ffcd32;
+            }
+        }
     }
 }
 </style>
 <template>
     <view class="index-list-main">
-        <scroll-view class="scroll-wrapping" id="scroll-wrapping" style="height: {{screenHeight}}px;"   scroll-y="true" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}">
-            <view id="green" class="scroll-view-item bc_green">
-                <view class="list-group-title">A</view>
-                <view></view>
-            </view>
-            <view id="red" class="scroll-view-item bc_red">
-                <view class="list-group-title">B</view>
-                <view></view>
-            </view>
-            <view id="yellow" class="scroll-view-item bc_yellow">
-                <view class="list-group-title">C</view>
-                <view></view>
-            </view>
-            <view id="blue" class="scroll-view-item bc_blue">
-                <view class="list-group-title">D</view>
-                <view> </view>
-            </view>
+        <scroll-view class="scroll-wrapping" id="scroll-wrapping" style="height: {{windowHeight}}px;" scroll-y="true" scroll-into-view="{{toView}}" bindscroll="scroll">
+            <repeat for="{{dataList}}" item="item" index="index" key="{{item.title}}" >
+                <view id="{{item.title}}" class="scroll-view-item">
+                    <view class="list-group-title">{{item.title}}</view>
+                    <repeat for="{{item.items}}" key="index" index="subindex" item="subItem">
+                        <view class="row list-group-info {{item.items.length-1 != subindex ? 'boder-b' : ''}} ">
+                            <image class="icon-xl icon" src="{{subItem.avatar}}"/>
+                            <text>{{subItem.name}}</text>
+                        </view> 
+                    </repeat>
+                </view>
+            </repeat>
         </scroll-view>
-        <view class="list-fixed" style="transform:translate3d(0,{{fixedTop}}rpx,0)">
+        <view class="list-fixed" hidden="{{fixedTitle === ''}}" style="transform:translate3d(0,{{fixedTop}}px,0)">
             <view class="fixed-title">{{fixedTitle}}</view>
+        </view>
+        <view class="list-shortcut">
+            <view  wx:for="{{Map}}" wx:for-index="index" wx:for-item="item" wx:key="index" class="item {{currentIndex == index ? 'current' : ''}}" @tap="intoView({{item}},{{index}})">{{item}}</view>
         </view>
     </view>
 </template>
 <script>
-import wepy from 'wepy'
+import wepy from 'wepy';
 export default class carList extends wepy.component {
     def = {
-        toView: 'blue',
-        screenHeight : 667,
+        windowHeight : 300,
         listTop:[],
         currentIndex : 0,
         y:0,
         diff:0,
         fixedTop:0,
-        Map:['A','B','C','D']
+        toView:'A',
+        isClick:false,
+        Map:(()=>{
+            let temp = [];
+            for(var i=0;i<26;i++) temp.push(String.fromCharCode(65+i));
+            return temp;
+        })(),
+        dataList:(()=>{
+            let code = [];
+            for(var i=0;i<26;i++) code.push(String.fromCharCode(65+i));
+            let temp = [];
+            for(var i=0;i<26;i++) {
+                temp.push(
+                    {
+                        title:code[i],
+                        items:[
+                            {avatar:'../images/tabbar/my-se.png',name:'奥迪'+code[i]},
+                            {avatar:'../images/tabbar/my-se.png',name:'阿尔法罗密欧'+code[i]},
+                            {avatar:'../images/tabbar/my-se.png',name:'阿斯顿马丁'+code[i]},
+                            {avatar:'../images/tabbar/my-se.png',name:'ALPINA'+code[i]},
+                        ]
+                    }
+                )
+            }
+            return temp;
+        })()
     }
     props = {
-        
+        top:{
+            type: Number,
+            default: 0
+        },
+        bottom:{
+            type: Number,
+            default: 44
+        }
     };
     data = {...this.def};
     computed = {
-        fixedTitle () {
+        fixedTitle(){
             if (this.y <= 0) {
-                return 'A'
+                return '';
             }  
-            return this.Map[this.currentIndex];
+            return this.Map[this.currentIndex] ? this.Map[this.currentIndex] : '';
         }
     };
     watch = {
       diff (newValue) {
-        let fixedTop = (newValue > 0 && newValue < 78) ? newValue - 78 : 0
-        if (this.fixedTop === fixedTop) {
-            return;
-        }
+        let fixedTop = ( (newValue > 0 && newValue < 78) ? newValue - 78 : 0 ) / 2;
+        if (this.fixedTop === fixedTop) return;
         this.fixedTop = fixedTop;
       }
     };
     methods = {
-        upper(e) {},
-        lower(e) {},
         scroll(e) {
            let scrollTop = e.detail.scrollTop;
-            this.scrollY(scrollTop);
+           this.scrollY(scrollTop);
+        },
+        intoView(item,index){
+            this.toView = item;
+            this.currentIndex = index;
+            this.isClick = true;
+            
+            /* console.log('点击选择 item：'+item);
+            console.log('当前 fixedTitle ：'+this.Map[this.currentIndex]);
+            console.log('当前 index ：'+ index);
+            console.log('当前 currentIndex ：'+ index); */
         }
     };
     scrollY(y){
@@ -129,8 +186,12 @@ export default class carList extends wepy.component {
           let top1 = listTop[i];
           let top2 = listTop[i + 1];
           if (y >= top1 && y < top2) {
-            this.currentIndex = i;
-            this.diff  = top2 - y;
+            if(!this.isClick){
+                this.currentIndex = i;
+                this.diff  = top2 - y; 
+            }
+            this.isClick = false;
+           /*  console.log('当前 i ：'+ i); */
             return;
           }
         }
@@ -143,20 +204,22 @@ export default class carList extends wepy.component {
         let items =  query.selectAll('#scroll-wrapping > .scroll-view-item');
         items.boundingClientRect((rects)=>{
             rects.forEach((rect)=>{
-               console.log(rect);
                this.listTop.push(rect.top);
             })
         }).exec();
     };
     async onLoad (option) {
-        this.getSystemInfo();
-        this.calculateTop();
+        this.getSystemInfo(this.bottom);
+        setTimeout(() => {
+            this.calculateTop();
+        }, 1000);
     };
-    getSystemInfo(){
+    getSystemInfo(bottom){
         let wpy = this;
         wx.getSystemInfo({
             success(res) {
-                wpy.screenHeight = res.screenHeight;
+                //这里要减去底部 设置的值
+                wpy.windowHeight = res.windowHeight - bottom;
             }
         })
     }
