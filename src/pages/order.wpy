@@ -1,21 +1,27 @@
 <style lang="less">
+
 .order-main{
     position: relative;
     width: 100%;
-    .search{
-        margin-bottom: 40rpx;
+    overflow: hidden;
+    .head{
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 110rpx;
+        padding:10rpx 0 40rpx 0;
+        background: #ffffff;
+        z-index: 100;
     }
 }
 </style>
 
 <template>
-   <view class="order-main">
-     <!--   <view class="search">
-           <search ></search>
-       </view> -->
-       <carList></carList>
-       <!-- <tabs :currentTab="currentTab"></tabs> -->
-   </view>
+    <view class="order-main" style="height:{{wiHeight}}">
+        <search class="head"/>
+        <carList/>
+    </view>
 </template>
 
 <script>
@@ -27,10 +33,12 @@ import search from '@/components/search';
 export default class order extends wepy.page{
     def = {
         currentTab:'currentOrder',
-        topNumber:30
+        topNumber:30,
+        wiHeight:0
     }
     config={
-        navigationBarTitleText: '我的订单'
+        navigationBarTitleText: '我的订单',
+        disableScroll: true //禁止页面整体不能上下滚动
     }
     components={
         tabs:tabs,
@@ -40,6 +48,16 @@ export default class order extends wepy.page{
     data={...this.def}
     computed={}
     methods={}
-    async onLoad () {}
+    onLoad (option) {
+        this.getSystemInfo();
+    };
+    getSystemInfo(){
+        let _this = this;
+        wx.getSystemInfo({
+            success(res) {
+                _this.wiHeight = res.windowHeight+'px';
+            }
+        })
+    }
 }
 </script>

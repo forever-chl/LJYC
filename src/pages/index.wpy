@@ -64,7 +64,7 @@
             </swiper>
         </view>
         <view class="top-menu c-707577 fs-26">
-            <view class="tm-item">
+            <view class="tm-item" @tap.stop="toPage('cleanCar')">
                 <icon class="tm-xc"></icon>
                 <text class="mt-16">洗车</text>
             </view>
@@ -171,7 +171,11 @@
             ]
         };
         computed={};
-        methods={};
+        methods={
+            toPage(name){
+                 this.$navigate(name);
+            }
+        };
     }
 </script>
 

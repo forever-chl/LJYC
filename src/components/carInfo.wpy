@@ -31,7 +31,9 @@ export default class carInfo extends wepy.component{
     data={}
     computed={}
     methods={}
-    onLoad={}
+    async onLoad (options) {
+
+    };
 }
 </script>
 

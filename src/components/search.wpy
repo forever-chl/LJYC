@@ -1,14 +1,10 @@
 <style lang="less">
 .serach-main{
-    top: 0;
-    right: 0;
-    width: 100%;
-    z-index: 999;
     .wrapping{
         position: relative;
         width: 686rpx;
         height: 60rpx;
-        .search{
+        .input{
             font-size: 28rpx;
             width: 632rpx;
             height: 60rpx;
@@ -27,9 +23,9 @@
 }
 </style>
 <template>
-    <view class="serach-main row-center" style="position:{{position}}">
+    <view class="serach-main row-center">
         <view class="wrapping">
-            <input class="search" type="text" placeholder="搜索车辆品牌" placeholder-style="color: #999;">
+            <input class="input" name="name" value="" placeholder="搜索车辆品牌" placeholder-style="color: #999;">
             <image class="icon-mg s-icon" src="../images/icon/search-icon.png"/>
         </view>
     </view>
@@ -37,11 +33,8 @@
 <script>
 import wepy from 'wepy';
 export default class search extends wepy.component {
-    props = {
-       position: {
-            type: String,
-            default: 'fixed'
-        }
+    methods = {
+        
     };
 }
 </script>

@@ -1,8 +1,12 @@
 <style lang="less">
-    @import '../less/common.less';
+@import '../less/common.less';
 
-    // 邻家洗车
-    .cc-ljxc{padding:0 0 40rpx 0;}
+// 邻家洗车
+.cc-ljxc{
+    padding:0 0 40rpx 0;
+    font-size: 32rpx;
+    line-height: 1;
+}
 
 </style>
 
@@ -12,7 +16,7 @@
     <view class="split-bar"></view>
     <view class="cc-ljxc">
         <view class="ljyc-title">
-            <text>邻家洗车</text>
+            <text class="title">邻家洗车</text>
             <icon class="ljyct-down f-r"></icon> 
         </view>
         <view class="cc-ljxc-list">
@@ -23,15 +27,19 @@
 
 <script>
     import wepy from 'wepy'
-    import carInfo from '@/components/carInfo' 
+    import carInfo from '@/components/carInfo';
     export default class cleanCar extends wepy.page{
-        config={}
+        config={
+            navigationBarTitleText: '标准洗车'
+        };
         components={
             carinfo:carInfo
-        }
-        data={}
-        computed={}
-        methods={}
-        onLoad={}
+        };
+        data={};
+        computed={};
+        methods={};
+        async onLoad (options) {
+
+        };
     }
 </script>
