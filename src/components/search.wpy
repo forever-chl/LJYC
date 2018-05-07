@@ -25,7 +25,7 @@
 <template>
     <view class="serach-main row-center">
         <view class="wrapping">
-            <input class="input" name="name" value="" placeholder="搜索车辆品牌" placeholder-style="color: #999;">
+            <input class="input" name="name" value="" placeholder="搜索车辆品牌" placeholder-style="color: #999;" />
             <image class="icon-mg s-icon" src="../images/icon/search-icon.png"/>
         </view>
     </view>

@@ -1,45 +1,169 @@
 <style lang="less">
-@import '../less/common.less';
-
 // 邻家洗车
-.cc-ljxc{
-    padding:0 0 40rpx 0;
-    font-size: 32rpx;
-    line-height: 1;
+.cleanCar-main{
+    position: relative;padding-bottom:120rpx; 
+    .cc-ljxc{
+        padding:0 0 40rpx 0; line-height: 1;
+        .b-f0{
+            padding-left: 0; margin-left: 32rpx;border-bottom: 1px solid #f0f0f0;
+        }
+        .cc-ljxc-list{
+            padding:0 32rpx;
+        }
+        .row-between{
+            padding-top: 40rpx;
+            .left,.right{
+                line-height: 1;
+            }
+            .info{
+                width: 80rpx;height: 34rpx;line-height: 34rpx; text-align: center;padding: 0;border-radius: 17rpx;
+            }
+        }
+    }
+    .card{
+        height: 104rpx;line-height: 1;padding:0 32rpx;
+        .icon-more{
+            width: 11rpx;height: 20rpx;vertical-align: middle;
+        }
+    }
 }
-
 </style>
 
 <template>
-    <view class="split-bar"></view>
-    <carinfo></carinfo>
-    <view class="split-bar"></view>
-    <view class="cc-ljxc">
-        <view class="ljyc-title">
-            <text class="title">邻家洗车</text>
-            <icon class="ljyct-down f-r"></icon> 
+    <view class="cleanCar-main fs-32">
+        <view class="split-bar"></view>
+        <carinfo/>
+        <view class="split-bar"></view>
+        <view class="cc-ljxc fs-32">
+            <view class="ljyc-title b-f0">
+                <text class="title">邻家洗车</text>
+                <icon class="ljyct-down f-r"></icon> 
+            </view>
+            <view class="cc-ljxc-list">
+                <view class="row-between">
+                    <view class="row left">
+                        <image class="icon-xm mr26" src="{{icon.server.off}}" mode="aspectFit" lazy-load="false"></image>
+                        <text >标准洗车</text>
+                    </view>
+                    <view class="row">
+                        <text class="c-ff3a32 fs-32 mr48">￥40.0</text>
+                        <button class="info fs-20 c-2">详情</button>
+                    </view>
+                </view>
+                <view class="row-between">
+                    <view class="row left">
+                        <image class="icon-xm mr26" src="{{icon.server.on}}" mode="aspectFit" lazy-load="false"></image>
+                        <text >标准洗车</text>
+                    </view>
+                    <view class="row">
+                        <text class="c-ff3a32 fs-32 mr48">￥40.0</text>
+                        <button class="info fs-20 c-2">详情</button>
+                    </view>
+                </view>
+            </view>
         </view>
-        <view class="cc-ljxc-list">
-            <view></view>
+        <view class="split-bar"></view>
+        <view class="cc-ljxc fs-32">
+            <view class="ljyc-title b-f0">
+                <text class="title">邻家美容</text>
+                <icon class="ljyct-down f-r"></icon> 
+            </view>
+            <view class="cc-ljxc-list">
+                <view class="row-between">
+                    <view class="row left">
+                        <image class="icon-xm mr26" src="{{icon.server.off}}" mode="aspectFit" lazy-load="false"></image>
+                        <text >标准洗车</text>
+                    </view>
+                    <view class="row">
+                        <text class="c-ff3a32 fs-32 mr48">￥40.0</text>
+                        <button class="info fs-20 c-2">详情</button>
+                    </view>
+                </view>
+                <view class="row-between">
+                    <view class="row left">
+                        <image class="icon-xm mr26" src="{{icon.server.on}}" mode="aspectFit" lazy-load="false"></image>
+                        <text >标准洗车</text>
+                    </view>
+                    <view class="row">
+                        <text class="c-ff3a32 fs-32 mr48">￥40.0</text>
+                        <button class="info fs-20 c-2">详情</button>
+                    </view>
+                </view>
+            </view>
         </view>
+        <view class="split-bar"></view>
+        <view class="cc-ljxc fs-32">
+            <view class="ljyc-title b-f0">
+                <text class="title">11护航提醒</text>
+                <image class="icon-xm f-r" src="{{icon.warn}}" mode="aspectFit" lazy-load="false"></image>
+            </view>
+            <view class="cc-ljxc-list">
+                <view class="row-between">
+                    <view class="row left">
+                        <image class="icon-xm mr26" src="{{icon.server.off}}" mode="aspectFit" lazy-load="false"></image>
+                        <text >标准洗车</text>
+                    </view>
+                    <view class="row">
+                        <text class="c-ff3a32 fs-32 mr48">￥40.0</text>
+                        <text class="fs-20 c-fc8d1a">建议更换</text>
+                    </view>
+                </view>
+                <view class="row-between">
+                    <view class="row left">
+                        <image class="icon-xm mr26" src="{{icon.server.on}}" mode="aspectFit" lazy-load="false"></image>
+                        <text >标准洗车</text>
+                    </view>
+                    <view class="row">
+                        <text class="c-ff3a32 fs-32 mr48">￥40.0</text>
+                        <text class="fs-20 c-fc8d1a">建议更换</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="split-bar"></view>
+        <view class="row-between card">
+            <view><text>优惠券</text></view>
+            <view class="row">
+                <text class="fs-28 c-6 mr26">3张可用优惠券</text>
+                <image class="icon-more" src="{{icon.more}}" mode="aspectFit" lazy-load="false"></image>
+            </view>
+        </view>
+        <view class="split-bar"></view>
+        <orderPanel/>
+        <dialog/>
     </view>
 </template>
 
 <script>
-    import wepy from 'wepy'
-    import carInfo from '@/components/carInfo';
-    export default class cleanCar extends wepy.page{
-        config={
-            navigationBarTitleText: '标准洗车'
-        };
-        components={
-            carinfo:carInfo
-        };
-        data={};
-        computed={};
-        methods={};
-        async onLoad (options) {
-
-        };
+import wepy from 'wepy'
+import carInfo from '@/components/carInfo';
+import orderPanel from '@/components/orderPanel';
+import dialog from '@/components/dialog';
+import Tips from '@/lib/Tips';
+export default class cleanCar extends wepy.page{
+    def = {
+        icon:{
+            server:{
+                off:'../images/icon/not-selected-server.png',
+                on:'../images/icon/selected-server.png'
+            },
+            warn:'../images/icon/warn.png',
+            more:'../images/icon/more.png'
+        }
     }
+    config={
+        navigationBarTitleText: '标准洗车'
+    };
+    components={
+        carinfo:carInfo,
+        orderPanel:orderPanel,
+        dialog:dialog
+    };
+    data={...this.def};
+    computed={};
+    methods={};
+    async onLoad (options) {
+        //Tips.confirm('剩余标准洗车卡10次',"不使用卡", "使用卡");
+    };
+}
 </script>

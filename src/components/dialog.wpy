@@ -1,0 +1,55 @@
+<style lang="less">
+.dialog-main{
+    position: fixed; top: 0;width: 100%;z-index: 99999;
+    .mask{
+        position: absolute;top: 0; width: 100%; height: 100%; background: #000000;opacity:.3;filter:alpha(opacity=30);
+    }
+    .wrapping{
+        position: absolute;top:50%;left:50%;transform:translate(-50%,-50%); z-index: 10; width: 500rpx;height: 280rpx;background: #ffffff;border-radius: 10rpx;
+        .bd{
+           padding-top:80rpx; padding-bottom: 68rpx; line-height: 1;border-bottom: 1px solid #e5e5e5;text-align: center;
+        }
+        .ft{
+            flex: 1;
+            .default,.primary{
+                flex: 1; height: 100%;
+            }
+            .default{
+                border-right: 1px solid #e5e5e5;
+            }
+        }
+    }
+}
+</style>
+
+<template>
+  <view class="dialog-main" style="height: {{wiHeight}} ;" catchtouchmove>
+      <view class="mask"></view>
+        <view class="column wrapping fs-32 c-2">
+            <!-- <view class="hd"><strong class="title">弹窗标题</strong></view> -->
+            <view class="bd">剩余标准洗车卡<text class="c-ff3a32">10</text>次</view>
+            <view class="row ft">
+                <text class="row-center default c-9">不使用卡</text>
+                <text class="row-center primary">使用卡</text>
+            </view>
+        </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+export default class carList extends wepy.component {
+    data = {wiHeight:'0px'}
+    onLoad (option) {
+        this.getSystemInfo();
+    };
+    getSystemInfo(){
+        let _this = this;
+        wx.getSystemInfo({
+            success(res) {
+                _this.wiHeight = res.windowHeight+'px';
+            }
+        })
+    }
+}
+</script>

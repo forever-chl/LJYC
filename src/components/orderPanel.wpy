@@ -1,0 +1,31 @@
+<style lang="less">
+.order-panel{
+    position: fixed;bottom: 0;left: 0; width: 100%;height: 120rpx;background: #ffffff;border-top: 1px solid #f0f0f0;
+    .left{
+        flex: 1;padding-left:32rpx;
+        .original{
+            position: relative;
+            .decoration{
+                position: absolute;top:50%;right:0;transform:translate(0,-50%); width: 100%;height: 1rpx;background: #999999;transform:scaleY(0.5);
+            }
+        }
+    }
+    .rigth{
+        flex: 0 0 40%;height: 120rpx;background: #fc8d1a;
+    }
+}
+</style>
+<template>
+    <view class="row order-panel">
+        <view class="row left">
+            <text class="fs-22 c-9">实付</text><text class="mr32 ml32 fs-36 c-ff3a32">￥80.0</text><text class="fs-22 c-9 original">$255<text class="decoration"></text></text>
+        </view>
+        <view class="row-center fs-36 rigth"><text class="c-fff">提交订单</text></view>
+    </view>
+</template>
+<script>
+import wepy from 'wepy';
+export default class orderPanel extends wepy.component {
+  
+}
+</script>
