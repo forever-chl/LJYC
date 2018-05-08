@@ -1,36 +1,59 @@
 <style lang="less">
 .dialog-main{
-    position: fixed; top: 0;width: 100%;z-index: 99999;
+    position: fixed; top: 0;width: 100%;z-index: 999;
     .mask{
         position: absolute;top: 0; width: 100%; height: 100%; background: #000000;opacity:.3;filter:alpha(opacity=30);
     }
     .wrapping{
-        position: absolute;top:50%;left:50%;transform:translate(-50%,-50%); z-index: 10; width: 500rpx;height: 280rpx;background: #ffffff;border-radius: 10rpx;
-        .bd{
-           padding-top:80rpx; padding-bottom: 68rpx; line-height: 1;border-bottom: 1px solid #e5e5e5;text-align: center;
-        }
-        .ft{
-            flex: 1;
-            .default,.primary{
-                flex: 1; height: 100%;
+        position: absolute;top:0; width: 100%;height: 100%; z-index: 10;
+        .content{
+            position: absolute;top:50%;left:50%; transform:translate(-50%,-50%) ; width: 500rpx;height: 280rpx;background: #ffffff;border-radius: 10rpx;
+            .bd{
+            padding-top:80rpx; padding-bottom: 68rpx; line-height: 1;border-bottom: 1px solid #e5e5e5;text-align: center;
             }
-            .default{
-                border-right: 1px solid #e5e5e5;
+            .ft{
+                flex: 1;
+                .default{
+                    flex: 1; height: 100%;
+                }
+                .primary{
+                    border-left: 1px solid #e5e5e5;
+                }
             }
         }
+    }
+    
+}
+.dialog-close{
+    opacity: 0;z-index: -999;
+    .wrapping{
+        //transform: scale(1.185);
+        transform:translatey(-110%); transition: transform 1.2s ease;
+    }
+   
+}
+.dialog-open{
+    opacity: 1;z-index: 999;
+    .wrapping{
+        transform: scale(1);transition-duration: .4s; 
+        transform:translatey(0); transition: transform 1.2s ease;
     }
 }
 </style>
 
 <template>
-  <view class="dialog-main" style="height: {{wiHeight}} ;" catchtouchmove>
-      <view class="mask"></view>
-        <view class="column wrapping fs-32 c-2">
-            <!-- <view class="hd"><strong class="title">弹窗标题</strong></view> -->
-            <view class="bd">剩余标准洗车卡<text class="c-ff3a32">10</text>次</view>
-            <view class="row ft">
-                <text class="row-center default c-9">不使用卡</text>
-                <text class="row-center primary">使用卡</text>
+  <view class="dialog-main {{isOpen?'dialog-open':'dialog-close'}}" style="height: {{wiHeight}};" catchtouchmove="touchmove">
+        <view class="mask"></view>
+        <view class="wrapping" @tap.stop="close">
+            <view class="column content fs-32 c-2">
+                <!-- <view class="hd"><text class="title">弹窗标题</text></view> -->
+                <view class="bd">
+                    <slot name="content">默认内容</slot>
+                </view>
+                <view class="ft row">
+                    <view class="row-center default c-9" @tap.stop="close">{{confirmText}}</view>
+                    <view class="row-center default primary" @tap="tap">{{cancelText}}</view>
+                </view>
             </view>
         </view>
   </view>
@@ -38,10 +61,44 @@
 
 <script>
 import wepy from 'wepy';
-export default class carList extends wepy.component {
-    data = {wiHeight:'0px'}
+export default class dialog extends wepy.component {
+    data = {
+        wiHeight:'0px',
+        isOpen:false
+    };
+    props = {
+        confirmText: {
+            type: String,
+            default: '取消'
+        },
+        cancelText: {
+            type: String,
+            default: '确认',
+        }
+    };
+    methods={
+        touchmove(e){
+
+        },
+        close(){
+            this.close();
+        },
+        open(){
+            this.open();
+        },
+        tap(){
+            console.log('child is clicked');
+            this.$emit('payload', 100);
+        }
+    };
     onLoad (option) {
         this.getSystemInfo();
+    };
+    open(){
+        this.isOpen = true;
+    };
+    close(){
+        this.isOpen = false;
     };
     getSystemInfo(){
         let _this = this;
@@ -50,6 +107,6 @@ export default class carList extends wepy.component {
                 _this.wiHeight = res.windowHeight+'px';
             }
         })
-    }
+    };
 }
 </script>

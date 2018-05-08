@@ -173,7 +173,7 @@
         computed={};
         methods={
             toPage(name){
-                 this.$navigate(name);
+                this.$navigate(name);
             }
         };
     }

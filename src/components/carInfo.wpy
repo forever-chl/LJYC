@@ -1,4 +1,6 @@
 <style lang="less">
+@import "../less/variable.less";
+
  /* 车牌信息 */
 .ljyc-car-info{display:flex;}
 .ljyc-car-info>view{width:50%;padding:24rpx 44rpx 24rpx 130rpx;position:relative;}
@@ -15,7 +17,7 @@
             <view class="fs-32 c-2">停车场</view>
             <view class="fs-24 c-9 mt-16">水榭春天1期</view>
         </view>
-        <view class="lci-card">
+        <view class="lci-card" @tap="tap">
             <view class="fs-32 c-2">车牌信息</view>
             <view class="fs-24 c-9 mt-16">粤B236489</view>
         </view>
@@ -29,7 +31,11 @@ export default class carInfo extends wepy.component{
     components={}
     data={}
     computed={}
-    methods={}
+    methods={
+        tap(){
+            this.$emit('addCar');
+        }
+    }
     async onLoad (options) {
 
     };

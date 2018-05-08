@@ -16,7 +16,7 @@
                 line-height: 1;
             }
             .info{
-                width: 80rpx;height: 34rpx;line-height: 34rpx; text-align: center;padding: 0;border-radius: 17rpx;
+                width: 80rpx;height: 34rpx;line-height: 34rpx; text-align: center;padding: 0;border-radius: 17rpx;border-bottom: 1px solid #f0f0f0;
             }
         }
     }
@@ -32,7 +32,7 @@
 <template>
     <view class="cleanCar-main fs-32">
         <view class="split-bar"></view>
-        <carinfo/>
+        <carinfo @addCar.user="addCar"/>
         <view class="split-bar"></view>
         <view class="cc-ljxc fs-32">
             <view class="ljyc-title b-f0">
@@ -47,7 +47,7 @@
                     </view>
                     <view class="row">
                         <text class="c-ff3a32 fs-32 mr48">￥40.0</text>
-                        <button class="info fs-20 c-2">详情</button>
+                        <text class="info fs-20 c-2" @tap="info">详情</text>
                     </view>
                 </view>
                 <view class="row-between">
@@ -57,7 +57,7 @@
                     </view>
                     <view class="row">
                         <text class="c-ff3a32 fs-32 mr48">￥40.0</text>
-                        <button class="info fs-20 c-2">详情</button>
+                        <text class="info fs-20 c-2" @tap="info">详情</text>
                     </view>
                 </view>
             </view>
@@ -76,7 +76,7 @@
                     </view>
                     <view class="row">
                         <text class="c-ff3a32 fs-32 mr48">￥40.0</text>
-                        <button class="info fs-20 c-2">详情</button>
+                        <text class="info fs-20 c-2" @tap="info">详情</text>
                     </view>
                 </view>
                 <view class="row-between">
@@ -86,7 +86,7 @@
                     </view>
                     <view class="row">
                         <text class="c-ff3a32 fs-32 mr48">￥40.0</text>
-                        <button class="info fs-20 c-2">详情</button>
+                        <text class="info fs-20 c-2" @tap="info">详情</text>
                     </view>
                 </view>
             </view>
@@ -121,7 +121,7 @@
             </view>
         </view>
         <view class="split-bar"></view>
-        <view class="row-between card">
+        <view class="row-between card" @tap="openDialog">
             <view><text>优惠券</text></view>
             <view class="row">
                 <text class="fs-28 c-6 mr26">3张可用优惠券</text>
@@ -130,7 +130,10 @@
         </view>
         <view class="split-bar"></view>
         <orderPanel/>
-        <dialog/>
+        <dialog  @payload.user="payload" :confirmText.sync="confirmText" :cancelText.sync="cancelText">
+            <view slot="content">剩余标准洗车卡<text class="c-ff3a32">10</text>次</view>
+        </dialog>
+        <cardPanel/>
     </view>
 </template>
 
@@ -139,6 +142,7 @@ import wepy from 'wepy'
 import carInfo from '@/components/carInfo';
 import orderPanel from '@/components/orderPanel';
 import dialog from '@/components/dialog';
+import cardPanel from '@/components/cardPanel';
 import Tips from '@/lib/Tips';
 export default class cleanCar extends wepy.page{
     def = {
@@ -149,7 +153,9 @@ export default class cleanCar extends wepy.page{
             },
             warn:'../images/icon/warn.png',
             more:'../images/icon/more.png'
-        }
+        },
+        confirmText:'不使用卡',
+        cancelText:'使用卡'
     }
     config={
         navigationBarTitleText: '标准洗车'
@@ -157,13 +163,31 @@ export default class cleanCar extends wepy.page{
     components={
         carinfo:carInfo,
         orderPanel:orderPanel,
-        dialog:dialog
+        dialog:dialog,
+        cardPanel:cardPanel
     };
     data={...this.def};
     computed={};
-    methods={};
+    openDialog(){
+        this.$invoke('dialog', 'open');
+    }
+    methods={
+        openDialog(){
+            this.openDialog();
+        },
+        payload (num, evt) {
+            console.log('parent received emit event, number is: ' + num)
+        },
+        info(){
+            this.$invoke('cardPanel', 'open');
+        },
+        addCar(){
+            console.log('add car');
+            this.$navigate('addCar');
+        }
+    };
     async onLoad (options) {
-        //Tips.confirm('剩余标准洗车卡10次',"不使用卡", "使用卡");
+        //this.openDialog();
     };
 }
 </script>

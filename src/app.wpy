@@ -20,6 +20,7 @@ export default class extends wepy.app {
     pages: [
       'pages/index',
       'pages/cleanCar',
+      'pages/addCar',
       'pages/order',
       'pages/my'
     ],
