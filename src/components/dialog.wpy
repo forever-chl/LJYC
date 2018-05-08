@@ -27,8 +27,9 @@
 .dialog-close{
     opacity: 0;z-index: -999;
     .wrapping{
-        //transform: scale(1.185);
-        transform:translatey(-110%); transition: transform 1.2s ease;
+        transform: scale(1.185);
+        //transform:translatey(-110%); transition: transform 1.2s ease;
+        opacity: 0;
     }
    
 }
@@ -36,7 +37,8 @@
     opacity: 1;z-index: 999;
     .wrapping{
         transform: scale(1);transition-duration: .4s; 
-        transform:translatey(0); transition: transform 1.2s ease;
+        //transform:translatey(0); transition: transform 1.2s ease;
+        opacity: 1; transform: opacity .3s;
     }
 }
 </style>
