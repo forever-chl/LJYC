@@ -131,7 +131,7 @@
         <view class="split-bar"></view>
         <orderPanel/>
         <dialog  @payload.user="payload" :confirmText.sync="confirmText" :cancelText.sync="cancelText">
-            <view slot="content">剩余标准洗车卡<text class="c-ff3a32">10</text>次</view>
+            <view slot="content">剩余标准美容卡<text class="c-ff3a32">10</text>次</view>
         </dialog>
         <cardPanel/>
     </view>
@@ -147,7 +147,7 @@ import Tips from '@/lib/Tips';
 
 import base from '@/mixins/base';
 
-export default class cleanCar extends wepy.page{
+export default class beautyCar extends wepy.page{
     def = {
         init: false,
         icon:{
@@ -162,7 +162,7 @@ export default class cleanCar extends wepy.page{
         cancelText:'使用卡'
     }
     config={
-        navigationBarTitleText: '标准洗车'
+        navigationBarTitleText: '汽车美容'
     };
     components={
         carinfo:carInfo,

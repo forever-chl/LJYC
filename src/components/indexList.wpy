@@ -13,9 +13,6 @@
             }
             .list-group-info{
                 height:100rpx; font-size: 30rpx; color: #333333; margin: 0 40rpx;
-                &.boder-b{
-                    border-bottom: 1px solid #f0f0f0;
-                }
                 .icon{
                     display: inline-block;padding-right: 40rpx;
                 }
@@ -50,7 +47,7 @@
                 <view id="{{item.title}}" class="scroll-view-item">
                     <view class="list-group-title">{{item.title}}</view>
                     <repeat for="{{item.items}}" key="index" index="subindex" item="subItem">
-                        <view class="row list-group-info {{item.items.length-1 != subindex ? 'boder-b' : ''}} ">
+                        <view class="row list-group-info {{item.items.length-1 != subindex ? 'border-b-f0' : ''}} ">
                             <image class="icon-xl icon" src="{{subItem.avatar}}"/>
                             <text>{{subItem.name}}</text>
                         </view> 
@@ -69,7 +66,7 @@
 </template>
 <script>
 import wepy from 'wepy';
-export default class carList extends wepy.component {
+export default class indexList extends wepy.component {
     def = {
         wiHeight : 0,
         listTop:[],

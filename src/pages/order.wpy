@@ -1,63 +1,31 @@
 <style lang="less">
-
-.order-main{
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    .head{
-        position: relative;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 110rpx;
-        padding:10rpx 0 40rpx 0;
-        background: #ffffff;
-        z-index: 100;
-    }
-}
+.order-main{}
 </style>
 
 <template>
-    <view class="order-main" style="height:{{wiHeight}}">
-        <search class="head"/>
-        <carList/>
+    <view class="order-main">
+       
     </view>
 </template>
 
 <script>
 import wepy from 'wepy';
-import tabs from '@/components/tabs';
-import carList from '@/components/carList';
-import search from '@/components/search';
+
 
 export default class order extends wepy.page{
     def = {
-        currentTab:'currentOrder',
-        topNumber:30,
-        wiHeight:0
+        
     }
     config={
-        navigationBarTitleText: '我的订单',
-        disableScroll: true //禁止页面整体不能上下滚动
+        navigationBarTitleText: '我的订单'
     }
-    components={
-        tabs:tabs,
-        carList:carList,
-        search:search
-    }
+    components={}
     data={...this.def}
     computed={}
     methods={}
     onLoad (option) {
-        this.getSystemInfo();
-    };
-    getSystemInfo(){
-        let _this = this;
-        wx.getSystemInfo({
-            success(res) {
-                _this.wiHeight = res.windowHeight+'px';
-            }
-        })
+       
     }
+    
 }
 </script>

@@ -1,0 +1,49 @@
+<style lang="less">
+.maintenance-main{
+
+}
+</style>
+
+<template>
+    <view class="maintenance-main" wx:if="{{init}}">
+        <view class="split-bar"></view>
+        <view class="row">
+            <view class="item"></view>
+        </view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import base from '@/mixins/base';
+
+export default class beautyCar extends wepy.page{
+  def = {
+        init: false,
+        icon:{
+            server:{
+                off:'../images/icon/not-selected-server.png',
+                on:'../images/icon/selected-server.png'
+            },
+            warn:'../images/icon/warn.png',
+            more:'../images/icon/more.png'
+        }
+    }
+    config={
+        navigationBarTitleText: '汽车保养'
+    };
+    components={
+       
+    };
+    data={...this.def};
+    computed={};
+
+    methods={
+        
+    };
+    mixins = [base];
+    async onLoad (options) {
+        this.loaded(); 
+    };
+}
+</script>

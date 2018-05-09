@@ -1,181 +1,53 @@
 <style lang="less">
-    @import '../less/variable.less';
-    .index-main{
-        position: relative;
-        width: 100%;
-        padding-bottom:102rpx; 
-    }
-    // baner
-    .index-banner{position:relative;}
-    .index-banner-image{width:100%;height:320rpx;}
-    // banner地址定位
-    .index-location{position:absolute;top:32rpx;left:50%; width:634rpx;height:30rpx;padding:20rpx 18rpx 20rpx 18rpx;display:flex; z-index:99999;margin-left:-335rpx;background-color:#fff;}
-    .il-icon{.ljyc-icon(-35rpx,-393rpx,30rpx,30rpx);margin-right:6rpx;}
-
-    // 顶部功能图标
-    .top-menu{padding:40rpx 0;display:flex;justify-content:space-around;}
-    .tm-item{width:88rpx;text-align:center;}
-    .tm-xc{.ljyc-icon(-93rpx,-300rpx,88rpx,88rpx);}
-    .tm-mr{.ljyc-icon(0,-300rpx,88rpx,88rpx);}
-    .tm-pq{.ljyc-icon(-474rpx,-125rpx,88rpx,88rpx);}
-    .tm-by{.ljyc-icon(-567rpx,-125rpx,88rpx,88rpx);}
-
-    // 顶部其他功能
-    .top-menu-other{padding:50rpx 0;display:flex;}
-    .tmo-item{width:50%;padding-left:60rpx;display:flex;}
-    .tmoi-tccz{.ljyc-icon(-346rpx,-300rpx,70rpx,70rpx);}
-    .tmoi-sys{.ljyc-icon(-271rpx,-300rpx,70rpx,70rpx);}
-
-    // 门店列表
-    .is-list{display:flex;white-space:nowrap;padding-bottom:40rpx;}
-    .is-item{width:300rpx;overflow:hidden;display:inline-block;}
-    .is-item+.is-item{margin-left:12rpx;}
-    .is-item:first-child{margin-left:32rpx;}
-    .is-item:last-child{margin-right:32rpx;}
-    .is-item>image{width:300rpx;height:200rpx;border-radius:8rpx;overflow:hidden;}
     
-    //产品列表
-    .ip-list{padding:0 32rpx;}
-    .ip-item{margin-bottom:40rpx;}
-    .ip-item>image{width:250rpx;height:180rpx;border-radius:8rpx;float:left;}
-    .ipi-right{margin-left:250rpx;height:180rpx;padding-left:24rpx;display:flex;flex-direction:column;justify-content:space-between;}
-    .ipir-address{flex-grow:1;}
-    // 地图小图标
-    .address-icon{padding-left:40rpx;position:relative;}
-    .address-icon::before{content:"";display:block;position: absolute;top:0;left:0; .ljyc-icon(-35rpx,-393rpx,30rpx,30rpx);}
-    .comment-icon{padding-left:40rpx;position:relative;}
-    .comment-icon::before{content:"";display:block;position: absolute;top:0;left:0; .ljyc-icon(-35rpx,-393rpx,30rpx,30rpx);}
 </style>
 
 <template>
-    <view class="index-main">
-        <view class="index-banner">
-            <view class="index-location fs-24">
-                <icon class="il-icon"></icon>
-                <text class="c-6 mr-20">深圳市</text>
-                <text class="c-9">水榭春天二期</text>
-            </view>
-            <swiper indicator-dots="true" autoplay="true" interval="5000" duration="1000">
-                <block wx:for="{{bannerList}}" wx:key="index">
-                    <swiper-item>
-                    <image src="{{item}}" class="index-banner-image"/>
-                    </swiper-item>
-                </block>
-            </swiper>
+    <view>
+        <view wx:if="{{currentTab == 'currentHome'}}">
+            <home />
         </view>
-        <view class="top-menu c-707577 fs-26">
-            <view class="tm-item" @tap.stop="toPage('cleanCar')">
-                <icon class="tm-xc"></icon>
-                <text class="mt-16">洗车</text>
-            </view>
-            <view class="tm-item">
-                <icon class="tm-mr"></icon>
-                <text class="mt-16">美容</text>
-            </view>
-            <view class="tm-item">
-                <icon class="tm-pq"></icon>
-                <text class="mt-16">喷漆</text>
-            </view>
-            <view class="tm-item">
-                <icon class="tm-by"></icon>
-                <text class="mt-16">保养</text>
-            </view>
+        <view wx:if="{{currentTab == 'currentOrder'}}">
+            <order />
         </view>
-        <view class="split-bar"></view>
-        <view class="top-menu-other">
-            <view class="tmo-item">
-                <icon class="tmoi-tccz"></icon>
-                <view class="pl-32">
-                    <view class="fs-32 c-2">套餐充值</view>
-                    <view class="fs-24 c-b3">套餐充值更优惠</view>
-                </view>
-            </view>
-            <view class="tmo-item">
-                <icon class="tmoi-sys"></icon>
-                <view class="pl-32">
-                    <view class="fs-32 c-2">扫一扫</view>
-                    <view class="fs-24 c-b3">扫码取钥匙</view>
-                </view>
-            </view>
+
+        <view wx:if="{{currentTab == 'currentMy'}}">
+            <my />
         </view>
-        <view class="split-bar"></view>
-        <view class="index-store">
-            <view class="ljyc-title">
-                <text class="fs-36 c-2">门店介绍</text>
-                <text class="fs-26 c-9 f-r ljyc-more">更多</text>
-            </view>
-            <scroll-view class="is-list" scroll-x="true" scroll-with-animation="true">
-                <repeat for="{{storeList}}" key="index" index="index" item="item">
-                    <view class="is-item">
-                        <image src="{{item.url}}" mode="aspectFill" lazy-load="true"></image>
-                        <view class="fs-30 c-2 mt-18">{{item.name}}</view>
-                        <view class="fs-24 c-9 mt-16">{{item.address}}</view>
-                    </view>
-                </repeat>
-            </scroll-view>
-        </view>
-        <view class="split-bar"></view>
-        <view class="index-pro">
-            <view class="ljyc-title">
-                <text class="fs-36 c-2">标准介绍</text>
-                <text class="fs-26 c-9 f-r ljyc-more">更多</text>
-            </view>
-            <view class="ip-list">
-                <repeat for="{{projectList}}" key="index" index="index" item="item">
-                    <view class="ip-item clear">
-                        <image src="{{item.url}}" mode="aspectFill" lazy-load="false"></image>
-                        <view class="ipi-right">
-                            <view class="fs-30 c-2 overflow-text">{{item.name}}</view>
-                            <view class="ipir-address fs-24 c-9 mt-16">{{item.address}}</view>
-                            <view class="fs-24 c-9 clear">
-                                <text class="address-icon">{{item.far}}米</text>
-                                <text class="f-r comment-icon">{{item.comment}}评论</text>
-                            </view>
-                        </view>
-                    </view>
-            </repeat>            
-            </view>
-        </view>
-       <!--  <tabs/> -->
+        <tabs :currentTab.sync="currentTab" />
     </view>
 </template>
 
 <script>
-    import wepy from 'wepy';
-    import tabs from '@/components/tabs';
+import wepy from 'wepy';
+import tabs from '@/components/tabs';
+import home from '@/components/pages/home';
+import order from '@/components/pages/order';
+import my from '@/components/pages/my';
 
-    export default class index extends wepy.page{
-        config={
-            navigationBarTitleText: '邻家养车'
-        };
-        components={
-            tabs:tabs
-        };
-        data={
-            bannerList:[
-                "http://pic.58pic.com/58pic/17/16/11/56n58PICKGq_1024.jpg",
-                "http://pic.qiantucdn.com/58pic/17/98/71/46358PICyWG_1024.jpg",
-                "http://img.zcool.cn/community/0152cf574518996ac72525ae8ed7a3.jpg"
-            ],
-            storeList:[
-                {"url":'http://pic2.ooopic.com/12/21/02/87bOOOPIC71_1024.jpg',"name":"门店1","address":"南山大道"},
-                {"url":'http://img.zcool.cn/community/016f29554362d40000019ae9adb29d.jpg',"name":"门店2","address":"民治大道"},
-                {"url":'http://pic2.ooopic.com/12/21/02/87bOOOPIC71_1024.jpg',"name":"门店3","address":"宝安大道"},
-                {"url":'http://img.zcool.cn/community/016f29554362d40000019ae9adb29d.jpg',"name":"门店4","address":"盐田大道"},
-                {"url":'http://pic2.ooopic.com/12/21/02/87bOOOPIC71_1024.jpg',"name":"门店5","address":"龙华大道"},
-                {"url":'http://img.zcool.cn/community/016f29554362d40000019ae9adb29d.jpg',"name":"门店6","address":"水贝园"}
-            ],
-            projectList:[
-                {"url":'http://pic2.ooopic.com/12/21/02/87bOOOPIC71_1024.jpg',"name":"门店1门店1门店1门店1门店1门店1门店1门店1门店1","address":"南山大道南山大道南山大道南山大道南山大道南山大道南山大道","far":"100","comment":"13万"},
-                {"url":'http://img.zcool.cn/community/016f29554362d40000019ae9adb29d.jpg',"name":"门店2","address":"民治大道","far":"100","comment":"13万"},
-            ]
-        };
-        computed={};
-        methods={
-            toPage(name){
-                this.$navigate(name);
-            }
-        };
+import base from '@/mixins/base';
+
+export default class index extends wepy.page{
+    def = {
+       init: false,
+       currentTab: 'currentHome'
     }
+    config={
+        navigationBarTitleText: '邻家养车'
+    };
+    components={
+        home:home,
+        order:order,
+        my:my,
+        tabs:tabs
+    };
+    data={...this.def};
+    computed={};
+    methods={};
+    mixins = [base];
+    async onLoad (options) {
+        this.loaded(); 
+    };
+}
 </script>
 

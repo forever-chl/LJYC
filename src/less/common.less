@@ -115,7 +115,7 @@ image{
 }
 // 文字大小
 .fs-20{font-size:20rpx;}
-.fs-22{font-size:20rpx;}
+.fs-22{font-size:22rpx;}
 .fs-24{font-size:24rpx;}
 .fs-26{font-size:26rpx;}
 .fs-28{font-size:28rpx;}
@@ -158,6 +158,7 @@ image{
 .mr32{margin-right: 32rpx;}
 .ml32{margin-left: 32rpx;}
 .mr48{margin-right: 48rpx}
+.mr50{margin-right: 50rpx}
 
 // 内边距
 // 左
@@ -182,3 +183,30 @@ image{
 
 // 一行文字超出省略
 .overflow-text{width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+
+.border-utils(@w,@h,@color,@scalex){
+  content:"";
+  height:@h;
+  width:@w;
+  position:absolute;
+  box-sizing:border-box;
+  background-color:@color;
+  transform:@scalex;
+}
+/*f0f0f0边框线*/
+.border-r-f0{
+  position:relative;
+  &:before{.border-utils(1px,100%,#f0f0f0,scaleX(0.5));top:0;right:0;}
+}
+.border-b-f0{
+  position:relative;
+  &:before{.border-utils(100%,1px,#f0f0f0,scaley(0.5));bottom:0;left:0;}
+}
+.border-l-f0{
+  position:relative;
+  &:before{.border-utils(1px,100%,#f0f0f0,scaleX(0.5));top:0;left:0;}
+}
+.border-t-f0{
+  position:relative;
+  &:before{.border-utils(100%,1px,#f0f0f0,scaley(0.5));top:0;right:0;}
+}

@@ -7,9 +7,9 @@
 <script>
 import wepy from 'wepy';
 import tabs from '@/components/tabs';
-export default class order extends wepy.page{
+export default class myCenter extends wepy.page{
     def = {
-        currentTab:'currentMy'
+        
     }
     config={
         navigationBarTitleText: '个人中心'

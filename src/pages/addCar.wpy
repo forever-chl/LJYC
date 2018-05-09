@@ -1,17 +1,44 @@
 <style lang="less">
-    .add-car-main{
-        position: relative; top: 0; width: 686rpx; padding:32rpx 0 0 0;margin:0 auto;
+@import "../less/variable.less";
+.add-car-main{
+    position: relative; top: 0; width: 100%; height: 100%; padding-top:40rpx; background:@color-bg-body; line-height: 1;
+    .wrapping{
+        width: 686rpx; margin:0 auto;
+        .item{
+            height: 120rpx;padding:0 44rpx;margin-bottom: 40rpx; background: #ffffff;box-sizing:border-box;
+            .icon-more{
+                width: 11rpx;height: 20rpx;vertical-align: middle;
+            }
+        }
         .add{
-            width: 100%; height: 120rpx;border:1px dashed #f0f0f0;
+            width: 100%; height: 120rpx; /* margin-top:32rpx; */ border:1px dashed #f0f0f0;
         }
     }
+}
 </style>
 
 <template>
   <view class="add-car-main fs-30 c-3">
-      <view class="row-center add">
-          <image src="../images/icon/add.png" class="icon-xxl"  mode="aspectFill" lazy-load="true"></image>
-          <view class="ml-20">添加车辆</view>
+      <view class="wrapping" wx:if="{{init}}">
+        <view class="row-between item">
+            <view class="row">
+                <image src="../images/tabbar/my-se.png" class="icon-xl mr50"  mode="aspectFill" lazy-load="true"></image>
+                <view class="ml-20">粤B564512</view>
+            </view>
+            <image src="../images/icon/more.png" class="icon-more"  mode="aspectFill" lazy-load="true"></image>
+        </view>
+        <view class="row-between item">
+            <view class="row">
+                <image src="../images/tabbar/my-se.png" class="icon-xl mr50"  mode="aspectFill" lazy-load="true"></image>
+                <view class="ml-20">粤B564512</view>
+            </view>
+            <image src="../images/icon/more.png" class="icon-more"  mode="aspectFill" lazy-load="true"></image>
+        </view>
+
+        <view class="row-center add" @tap="addCar">
+            <image src="../images/icon/add.png" class="icon-xxl"  mode="aspectFill" lazy-load="true"></image>
+            <view class="ml-20">添加车辆</view>
+        </view>
       </view>
   </view>
 </template>
@@ -19,20 +46,28 @@
 <script>
 import wepy from 'wepy';
 import tabs from '@/components/tabs';
+import base from '@/mixins/base';
 
 export default class addCar extends wepy.page{
     def = {
-        
-    }
+        init: false,
+    };
     config={
         navigationBarTitleText: '添加车辆'
-    }
+    };
     components={
         
-    }
-    data={...this.def}
-    computed={}
-    methods={}
-    async onLoad () {}
+    };
+    data={...this.def};
+    computed={};
+    methods={
+        addCar(){
+            this.$navigate('carList');
+        }
+    };
+    async onLoad () {
+        this.loaded(); 
+    };
+    mixins = [base];
 }
 </script>

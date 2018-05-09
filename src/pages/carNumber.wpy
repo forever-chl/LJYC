@@ -68,71 +68,71 @@
 </template>
 
 <script>
-  import wepy from 'wepy'
-  import testMixin from '../mixins/test'
+import wepy from 'wepy'
+import testMixin from '../mixins/test'
 
-    export default class carNumber extends wepy.page {
-        config={
-            navigationBarTitleText:"输入车牌号"
-        };
-        data={
-            provinces:["京","沪","浙","苏","粤","鲁","晋","冀",
-            "豫","川","渝","辽","吉","黑","皖","鄂",
-            "津","贵","云","桂","琼","青","新","藏",
-            "蒙","宁","甘","陕","闽","赣","湘"],
-            keyNums:["0","1","2","3","4","5","6","7","8","9",
-            "Q","W","E","R","T","Y","U","I","O","P",
-            "A","S","D","F","G","H","J","K","L",
-            "OK","Z","X","C","V","B","N","M","Del"],
-            next:0,
-            carNumLength:7,
-            theData:[],
-            carNum:[]
-        };
-        methods={
-            changeInput(index){
-                this.next=index;
-                console.log(this.next);
-            },
-            choosekey(keyValue){	
-                var _this=this;
-                if(keyValue=='OK'){
+export default class carNumber extends wepy.page {
+    config={
+        navigationBarTitleText:"输入车牌号"
+    };
+    data={
+        provinces:["京","沪","浙","苏","粤","鲁","晋","冀",
+        "豫","川","渝","辽","吉","黑","皖","鄂",
+        "津","贵","云","桂","琼","青","新","藏",
+        "蒙","宁","甘","陕","闽","赣","湘"],
+        keyNums:["0","1","2","3","4","5","6","7","8","9",
+        "Q","W","E","R","T","Y","U","I","O","P",
+        "A","S","D","F","G","H","J","K","L",
+        "OK","Z","X","C","V","B","N","M","Del"],
+        next:0,
+        carNumLength:7,
+        theData:[],
+        carNum:[]
+    };
+    methods={
+        changeInput(index){
+            this.next=index;
+            console.log(this.next);
+        },
+        choosekey(keyValue){	
+            var _this=this;
+            if(keyValue=='OK'){
+                wx.showToast({
+                    title: '车牌：'+_this.carNum.join(""),
+                    icon: 'none',
+                    duration: 2000
+                });
+            }else if(keyValue=='Del'){
+                if(_this.carNum.length==0){
+                    _this.next=0;
+                }else{
+                    _this.carNum.pop();	
+                    _this.next=_this.carNum.length;
+                }
+            }else if(keyValue==-99){
+                _this.next=0;
+                _this.carNum=[];
+            }else{
+                if(_this.next>=_this.carNumLength){
+                    return;
+                }
+                if(_this.next==1 & keyValue<10 &_this.carNum.length>0&_this.carNum[0]!=-1){
                     wx.showToast({
-                        title: '车牌：'+_this.carNum.join(""),
+                        title: '第二位车牌为字母',
                         icon: 'none',
                         duration: 2000
                     });
-                }else if(keyValue=='Del'){
-                    if(_this.carNum.length==0){
-                        _this.next=0;
-                    }else{
-                        _this.carNum.pop();	
-                        _this.next=_this.carNum.length;
-                    }
-                }else if(keyValue==-99){
-                    _this.next=0;
-                    _this.carNum=[];
-                }else{
-                    if(_this.next>=_this.carNumLength){
-                        return;
-                    }
-                    if(_this.next==1 & keyValue<10 &_this.carNum.length>0&_this.carNum[0]!=-1){
-                        wx.showToast({
-                            title: '第二位车牌为字母',
-                            icon: 'none',
-                            duration: 2000
-                        });
-                        return;
-                    }
-                    _this.carNum[_this.next]=keyValue;
-                    console.log(_this.carNum);
-                    _this.next=_this.next+1;
-                    if(_this.next>_this.carNumLength-1){
-                        _this.next=_this.carNumLength;
-                    }
+                    return;
+                }
+                _this.carNum[_this.next]=keyValue;
+                console.log(_this.carNum);
+                _this.next=_this.next+1;
+                if(_this.next>_this.carNumLength-1){
+                    _this.next=_this.carNumLength;
                 }
             }
-        };
-    }
+        }
+    };
+}
 </script>
 

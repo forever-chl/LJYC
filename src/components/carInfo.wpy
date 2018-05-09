@@ -2,7 +2,7 @@
 @import "../less/variable.less";
 
  /* 车牌信息 */
-.ljyc-car-info{display:flex;}
+.ljyc-car-info{display:flex;line-height: 1;}
 .ljyc-car-info>view{width:50%;padding:24rpx 44rpx 24rpx 130rpx;position:relative;}
 .ljyc-car-info>view::before{content:"";position:absolute;top:50%;left:48rpx;transform:translate(0,-50%);}
 .ljyc-car-info>view::after{content:"";position:absolute;top:50%;right:32rpx;transform:translate(0,-50%);.ljyc-icon(-674rpx,-218rpx,11rpx,20rpx);}

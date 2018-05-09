@@ -1,44 +1,32 @@
 <style lang="less">
 .tabs-main{
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-   /*  height: 102rpx;
-    overflow: hidden; */
-    font-size: 22rpx;
-    background: #fff;
-    padding-top: 10rpx;
-    box-shadow: 0 0 22rpx 6rpx rgba(229, 229, 229, 0.4);
+    position: fixed; bottom: 0;right: 0;width: 100%;line-height: 1;background: #fff; padding-top: 10rpx;box-shadow: 0 0 22rpx 6rpx rgba(229, 229, 229, 0.4);
     .item{
-        flex: 1;
-        text-align: center;
+        flex: 1;text-align: center;
         .tabs-icon{
             margin: 0 auto;
         }
         .tabs-primary{
             color: #b3b3b3;
         }
-        
     }
-    
 }
 </style>
 
 <template>
-  <view class="tabs-main">
+  <view class="tabs-main fs-22">
       <view class="row-between">
-          <view class="item"  @tap="toPage('index')">
+          <view class="item"  @tap="toPage('currentHome')">
                <image class="icon-xl tabs-icon" src="{{currentTab == 'currentHome' ? iconList.currentHome : iconList.home }}" />
-               <text class="tabs-primary mt10 mb10">首页</text>
+               <view class="tabs-primary mt10 mb10">首页</view>
           </view>
-          <view class="item" @tap="toPage('order')">
+          <view class="item" @tap="toPage('currentOrder')">
                <image class="icon-xl tabs-icon" src="{{currentTab == 'currentOrder' ? iconList.currentOrder : iconList.order}}" />
-               <text class="tabs-primary mt10 mb10">订单</text>
+               <view class="tabs-primary mt10 mb10">订单</view>
           </view>
-          <view class="item" @tap="toPage('my')">
+          <view class="item" @tap="toPage('currentMy')">
                <image class="icon-xl tabs-icon " src="{{currentTab == 'currentMy' ? iconList.currentMy : iconList.my}}" />
-               <text class="tabs-primary mt10 mb10">我的</text>
+               <view class="tabs-primary mt10 mb10">我的</view>
           </view>
       </view>
   </view>
@@ -59,14 +47,15 @@ export default class tabs extends wepy.component {
     props = {
         currentTab: {
             type: String,
-            default: 'currentHome'
+            default: 'currentHome',
+            twoWay: true
         }
     };
     data = {...this.def};
     methods = {
-        toPage(type) {
-           //this.$navigate('/pages/'+type);
-           wx.navigateTo({url: '/pages/'+type})
+        toPage(tab) {
+            this.currentTab = tab;
+            this.$apply();
         }
     };
     async onLoad () {}

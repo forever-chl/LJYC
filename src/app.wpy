@@ -17,12 +17,16 @@ import 'wepy-async-function'
 
 export default class extends wepy.app {
   config = {
-    pages: [
+    pages: [ 
+      /* 'pages/order',
+      'pages/my', */
       'pages/index',
-      'pages/cleanCar',
-      'pages/addCar',
-      'pages/order',
-      'pages/my'
+      'pages/cleanCar', //洗车
+      'pages/beautyCar', //美容
+      'pages/maintenanceCar', //保养
+      'pages/addCar', 
+    
+      'pages/carList'
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -30,7 +34,7 @@ export default class extends wepy.app {
       navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'black'
     },
-    tabBar: {
+    /* tabBar: {
       color: '#b3b3b3',
       selectedColor: '#fc8e1a',
       borderStyle: 'black',
@@ -55,7 +59,7 @@ export default class extends wepy.app {
           selectedIconPath: 'images/tabbar/my-se.png'
         }
       ]
-    } 
+    }  */
   }
 
   globalData = {
