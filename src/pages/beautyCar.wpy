@@ -162,7 +162,7 @@ export default class beautyCar extends wepy.page{
         cancelText:'使用卡'
     }
     config={
-        navigationBarTitleText: '汽车美容'
+        navigationBarTitleText: '美容'
     };
     components={
         carinfo:carInfo,

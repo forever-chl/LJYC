@@ -162,7 +162,7 @@ export default class cleanCar extends wepy.page{
         cancelText:'使用卡'
     }
     config={
-        navigationBarTitleText: '标准洗车'
+        navigationBarTitleText: '洗车'
     };
     components={
         carinfo:carInfo,
