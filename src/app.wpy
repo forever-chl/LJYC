@@ -17,49 +17,20 @@ import 'wepy-async-function'
 
 export default class extends wepy.app {
   config = {
-    pages: [ 
-      /* 'pages/order',
-      'pages/my', */
-      'pages/index',
+    pages: [
+      'pages/index', //欢迎页面
       'pages/cleanCar', //洗车
       'pages/beautyCar', //美容
       'pages/maintenanceCar', //保养
-      'pages/addCar', 
-    
-      'pages/carList'
+      'pages/addCar',  //添加汽车
+      'pages/carList' //选择汽车列表
     ],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
       navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'black'
-    },
-    /* tabBar: {
-      color: '#b3b3b3',
-      selectedColor: '#fc8e1a',
-      borderStyle: 'black',
-      backgroundColor: '#fff',
-      list: [
-        {
-          pagePath: 'pages/index',
-          text: '首页',
-          iconPath: 'images/tabbar/home.png',
-          selectedIconPath: 'images/tabbar/home-se.png'
-        },
-        {
-          pagePath: 'pages/order',
-          text: '订单',
-          iconPath: 'images/tabbar/order.png',
-          selectedIconPath: 'images/tabbar/order-se.png' 
-        }, 
-        {
-          pagePath: 'pages/my',
-          text: '我的',
-          iconPath: 'images/tabbar/my.png',
-          selectedIconPath: 'images/tabbar/my-se.png'
-        }
-      ]
-    }  */
+    }
   }
 
   globalData = {
