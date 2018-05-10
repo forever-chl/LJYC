@@ -1,0 +1,140 @@
+<style lang="less">
+@import "../less/variable.less";
+.goodsList-main{
+    position: relative; width: 100%;padding-bottom:102rpx;
+    .filter{
+        padding:40rpx 32rpx 24rpx 32rpx; line-height: 1;
+        .icon-filter{
+            width: 16rpx;height: 10rpx; vertical-align: middle;
+        }
+    }
+    .filter-item{
+        position: fixed;z-index: 10;width: 100%;  background: @color-bg-body; line-height: 1;
+        .group{ 
+            padding: 0 32rpx 32rpx 32rpx; background: #ffffff;
+            .title{padding: 36rpx 0;}
+            .list{
+                .image{width: 180rpx;height: 88rpx; vertical-align: middle;}
+                .lable{width: 140rpx;height: 60rpx; line-height: 60rpx; text-align: center; border:1px solid #f0f0f0;border-radius: 30rpx;}
+            }
+        }
+        .ft{
+            width: 100%;height: 120rpx;
+            .def{flex: 1; line-height: 120rpx;text-align: center;background: #ffffff;}
+            .right{
+               background: #fc8d1a;color: #ffffff;
+            }
+        }
+    }
+    .item{
+        padding: 32rpx;line-height:1;
+        .goods-image{
+            .mixin-icon-image(120rpx);margin-right: 24rpx;
+        }
+        .describe{
+            .t{line-height: 38rpx;}
+            .p{ position: relative;bottom: 0;left: 0;line-height: 1;}
+        }
+    }
+}
+</style>
+<template>
+    <view class="goodsList-main" wx:if="{{init}}">
+        <view class="row filter fs-28 c-2" @tap="handChange">
+            <view class="mr10 {{isFilter?'c-fc8d1a':''}}">筛选</view>
+            <image class="icon-filter" src="{{isFilter?icon.orange:icon.silver}}" mode="aspectFit" lazy-load="false"></image>
+        </view>
+        <view class="filter-item border-t-f0" style="height:{{wiHeight}}" hidden="{{!isFilter}}">
+            <view class="group">
+                <view class="fs-24 c-9 title">品牌</view>
+                <view class="list clear">
+                    <view class="f-l mr60">
+                        <image class="image" src="http://pic2.ooopic.com/12/21/02/87bOOOPIC71_1024.jpg" mode="aspectFit" lazy-load="false"></image>
+                    </view>
+                    <view class="f-l mr60">
+                        <image class="image" src="http://pic2.ooopic.com/12/21/02/87bOOOPIC71_1024.jpg" mode="aspectFit" lazy-load="false"></image>
+                    </view>
+                </view>
+            </view>
+            <view class="group">
+                <view class="fs-24 c-9 title">机油等级</view>
+                <view class="list fs-28 c-2 clear">
+                    <view class="f-l mr60 lable">半合成</view>
+                    <view class="f-l mr60 lable">全合成</view>
+                </view>
+            </view>
+            <view class="group">
+                <view class="fs-24 c-9 title">机油粘度</view>
+                <view class="list fs-28 c-2 clear">
+                    <view class="f-l mr60 lable">5W-40</view>
+                    <view class="f-l mr60 lable">5W-40</view>
+                </view>
+            </view>
+            <view class="row fs-36 ft border-t-f0">
+                <view class="def c-6" @tap="">重置</view>
+                <view class="def right" @tap="">确认</view>
+            </view>
+        </view>
+        <view class="split-bar"></view>
+        <view class="row item fs-28 c-2 border-b-f0">
+            <image class="goods-image" src="http://pic2.ooopic.com/12/21/02/87bOOOPIC71_1024.jpg" mode="aspectFit" lazy-load="false"></image>
+            <view class="describe">
+                <view class="t mb30">
+                    高发动机内部清洗剂水榭春天1期-喷漆
+                </view>
+                <view class="p c-ff3a32">￥80.0</view>
+            </view>
+        </view>
+        <view class="row item fs-28 c-2">
+            <image class="goods-image" src="http://pic2.ooopic.com/12/21/02/87bOOOPIC71_1024.jpg" mode="aspectFit" lazy-load="false"></image>
+            <view class="describe">
+                <view class="t mb30">
+                    高发动机内部清洗剂水榭春天1期-喷漆
+                </view>
+                <view class="p c-ff3a32">￥80.0</view>
+            </view>
+        </view>
+    </view>
+</template>
+<script>
+import wepy from 'wepy'
+import base from '@/mixins/base';
+
+export default class beautyCar extends wepy.page{
+    def = {
+        init: false,
+        wiHeight:'0px',
+        icon:{
+            orange:'../images/icon/filter-orange.png',
+            silver:'../images/icon/filter-silver.png'
+        },
+        isFilter:false
+    }
+    config={
+        navigationBarTitleText: '商品列表'
+    };
+    components={
+       
+    };
+    data={...this.def};
+    computed={};
+    methods={
+        handChange(){
+            this.isFilter = !this.isFilter;
+        }
+    };
+    mixins = [base];
+    async onLoad (options) {
+        this.getSystemInfo();
+        this.loaded(); 
+    };
+    getSystemInfo(){
+        let _this = this;
+        wx.getSystemInfo({
+            success(res) {
+                _this.wiHeight = res.windowHeight+'px';
+            }
+        })
+    };
+}
+</script>

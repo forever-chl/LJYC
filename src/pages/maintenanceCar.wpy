@@ -1,15 +1,252 @@
 <style lang="less">
+@import "../less/variable.less";
 .maintenance-main{
-
+    position: relative; top: 0;min-height: 100%; background-color:@color-bg-body; padding-bottom: 130rpx;
+    .h-top{
+        height: 120rpx; line-height: 1; background-color: #ffffff; padding:0 32rpx;
+        .item{
+            width: 50%;
+            .input{height: 60rpx;line-height: 60rpx; text-align: right; border:0;}
+        }
+    }
+    .icon-ticket{width: 30rpx;height: 22rpx; vertical-align: middle;}
+    .group{
+        .title{
+            height: 104rpx;padding: 0 32rpx;
+        }
+        .items{
+            background: #ffffff;
+            .head{padding:37rpx 32rpx; line-height: 1;}
+        }
+        .list{
+            padding:0 0 0 32rpx;
+            .field{
+                padding: 30rpx 32rpx 30rpx 52rpx;
+                .left{
+                    width: 70%;
+                    .goods-image{.mixin-icon-image(120rpx);margin-right: 24rpx;}
+                    .describe{
+                        .t{line-height: 38rpx;}
+                        .p{position: relative;bottom: 0;left: 0;line-height: 1;}
+                    }
+                }
+                .right{
+                    width: 30%; height: 100%; align-self:flex-end; text-align:center;
+                    .count{width: 60rpx;height: 40rpx;line-height: 40rpx;}
+                }
+            }
+           
+        }
+        .editList{
+            padding:0 0 0 32rpx;
+            .field{
+                padding: 30rpx 32rpx 30rpx 52rpx;
+                .goods-image{.mixin-icon-image(120rpx);}
+                .count{width: 60rpx;height: 40rpx;line-height: 40rpx;text-align: center;}
+            }
+            .icon-del{.mixin-icon-image(22rpx);margin-right: 8rpx;}
+            .icon-chan{ .mixin-icon-image(20rpx);margin-right: 8rpx;}
+        }
+    }
 }
 </style>
 
 <template>
-    <view class="maintenance-main" wx:if="{{init}}">
+    <view class="maintenance-main fs-32 c-2" wx:if="{{init}}">
         <view class="split-bar"></view>
-        <view class="row">
-            <view class="item"></view>
+        <view class="row-between h-top">
+            <view class="item">当前公里数</view>
+            <view class="item row-end">
+                <input class="input fs-24 mr20" type="number" name="name" value="" placeholder="请输入公里数" placeholder-style="color: #999;"/>
+                <text>KM</text>
+            </view>
         </view>
+        <view class="split-bar"></view>
+        <carinfo @addCar.user="addCar"/>
+        
+        <view class="group">
+            <view class="row title fs-24 c-9">常规保养项目(0/7)</view>
+            <!-- 小保养服务 -->
+            <view class="items mb24">
+                <view class="row-between head">
+                    <view class="row">
+                         <image class="icon-xm mr26" src="{{icon.server.on}}" mode="aspectFit" lazy-load="false"></image>
+                         <view>
+                             <view class="row fs-28 c-2 mb-16">
+                                <view class="mr10">小保养服务</view>
+                                <image class="icon-ticket" src="{{icon.ticketOrange}}" mode="aspectFit" lazy-load="false"></image>
+                             </view>
+                             <view class="fs-22 c-9">10000KM或12个月/次</view>
+                         </view>
+                    </view>
+                    <view class="fs-28 c-2" @tap="handleEdit" wx:if="{{!group1IsEdit}}">编辑</view>
+                    <view class="fs-28 c-fc8d1a" @tap="saveEdit" wx:if="{{group1IsEdit}}">保存</view>
+                </view>
+                <!-- 小保养服务显示列表 -->
+                <view class="list fs-28 c-2 border-t-f0" wx:if="{{!group1IsEdit}}">
+                    
+                    <view class="row-between field border-b-f0">
+                        <view class="row left">
+                            <image class="goods-image" src="http://pic2.ooopic.com/12/21/02/87bOOOPIC71_1024.jpg" mode="aspectFit" lazy-load="false"></image>
+                            <view class="describe">
+                                <view class="t mb30">
+                                    高发动机内部清洗剂水榭春天1期-喷漆
+                                </view>
+                                <view class="p c-ff3a32">￥80.0</view>
+                            </view>
+                        </view>
+                        <view class="row-end right">
+                            <image class="icon-xlg" src="{{icon.plus}}" mode="aspectFit" lazy-load="false"></image>
+                            <view class="fs-28 c-2 count border-f-f0">1</view>
+                            <image class="icon-xlg" src="{{icon.subtract}}" mode="aspectFit" lazy-load="false"></image>
+                        </view>
+                    </view>
+
+                    <view class="row-between field">
+                        <view class="row left">
+                            <image class="goods-image" src="http://pic2.ooopic.com/12/21/02/87bOOOPIC71_1024.jpg" mode="aspectFit" lazy-load="false"></image>
+                            <view class="describe">
+                                <view class="t mb30">
+                                    高发动机内部清洗剂水榭春天1期-喷漆
+                                </view>
+                                <view class="p c-ff3a32">￥80.0</view>
+                            </view>
+                        </view>
+                        <view class="row-end right">
+                            <image class="icon-xlg" src="{{icon.plus}}" mode="aspectFit" lazy-load="false"></image>
+                            <view class="fs-28 c-2 count border-f-f0">1</view>
+                            <image class="icon-xlg" src="{{icon.subtract}}" mode="aspectFit" lazy-load="false"></image>
+                        </view>
+                    </view>
+
+                </view>
+
+                <!-- 编辑列表 -->
+                <view class="editList fs-24 c-2 border-t-f0" wx:if="{{group1IsEdit}}">
+
+                    <view class="row-between field border-b-f0">
+                        <view class="row left">
+                            <image class="goods-image" src="http://pic2.ooopic.com/12/21/02/87bOOOPIC71_1024.jpg" mode="aspectFit" lazy-load="false"></image>
+                            <view class="row ml100">
+                                <image class="icon-xlg" src="{{icon.plus}}" mode="aspectFit" lazy-load="false"></image>
+                                <view class="fs-28 c-2 count border-f-f0">1</view>
+                                <image class="icon-xlg" src="{{icon.subtract}}" mode="aspectFit" lazy-load="false"></image>
+                            </view>
+                        </view>
+                        <view class="row-end">
+                           <image class="icon-del" src="{{icon.delete}}" mode="aspectFit" lazy-load="false"></image>
+                           <view class="mr48">删除</view>
+                           <image class="icon-chan" src="{{icon.exchange}}" mode="aspectFit" lazy-load="false"></image>
+                           <view class="c-fc8d1a" @tap="handChange">更换</view>
+                        </view>
+                    </view>
+                    <view class="row-between field border-b-f0">
+                        <view class="row left">
+                            <image class="goods-image" src="http://pic2.ooopic.com/12/21/02/87bOOOPIC71_1024.jpg" mode="aspectFit" lazy-load="false"></image>
+                            <view class="row ml100">
+                                <image class="icon-xlg" src="{{icon.plus}}" mode="aspectFit" lazy-load="false"></image>
+                                <view class="fs-28 c-2 count border-f-f0">1</view>
+                                <image class="icon-xlg" src="{{icon.subtract}}" mode="aspectFit" lazy-load="false"></image>
+                            </view>
+                        </view>
+                        <view class="row-end">
+                           <image class="icon-del" src="{{icon.delete}}" mode="aspectFit" lazy-load="false"></image>
+                           <view class="mr48">删除</view>
+                           <image class="icon-chan" src="{{icon.exchange}}" mode="aspectFit" lazy-load="false"></image>
+                           <view class="c-fc8d1a">更换</view>
+                        </view>
+                    </view>
+
+                </view>
+
+            </view>
+            <!-- 大保养服务 -->
+            <view class="items mb24">
+                <view class="row-between head">
+                    <view class="row">
+                         <image class="icon-xm mr26" src="{{icon.server.off}}" mode="aspectFit" lazy-load="false"></image>
+                         <view>
+                             <view class="row fs-28 c-2 mb-16">
+                                <view class="mr10">大保养服务</view>
+                                <image class="icon-ticket" src="{{icon.carOrange}}" mode="aspectFit" lazy-load="false"></image>
+                             </view>
+                             <view class="fs-22 c-9">10000KM或12个月/次</view>
+                         </view>
+                    </view>
+                    <view class="fs-28 c-9">￥750</view>
+                </view>
+                <!-- 服务列表 -->
+                <view class="list fs-28 c-2 border-t-f0">
+
+                </view>
+            </view>
+
+            <!-- 最后一个去除 mb24 -->
+            <view class="items">
+                <view class="row-between head">
+                    <view class="row">
+                         <image class="icon-xm mr26" src="{{icon.server.off}}" mode="aspectFit" lazy-load="false"></image>
+                         <view>
+                             <view class="row fs-28 c-2 mb-16">
+                                <view class="mr10">发动机清洗</view>
+                                <image class="icon-ticket" src="{{icon.ticketGreen}}" mode="aspectFit" lazy-load="false"></image>
+                             </view>
+                             <view class="fs-22 c-9">10000KM或12个月/次</view>
+                         </view>
+                    </view>
+                    <view class="fs-28 c-9">￥750</view>
+                </view>
+                <!-- 服务列表 -->
+                <view class="list fs-28 c-2 border-t-f0">
+
+                </view>
+            </view>
+
+        </view>
+        
+        <view class="group">
+            <view class="row title fs-24 c-9">空调护养(0/2)</view>
+            
+            <view class="items mb24">
+                <view class="row-between head">
+                    <view class="row">
+                         <image class="icon-xm mr26" src="{{icon.server.on}}" mode="aspectFit" lazy-load="false"></image>
+                         <view>
+                             <view class="row fs-28 c-2 mb-16">
+                                <view class="mr10">小保养服务</view>
+                                <image class="icon-ticket" src="{{icon.ticketOrange}}" mode="aspectFit" lazy-load="false"></image>
+                             </view>
+                             <view class="fs-22 c-9">10000KM或12个月/次</view>
+                         </view>
+                    </view>
+                    <view class="fs-28 c-9">￥999</view>
+                </view>
+                <!-- 服务列表 -->
+                <view class="list fs-28 c-2 border-t-f0"></view>
+            </view>
+
+            <!-- 最后一个去除 mb24 -->
+            <view class="items">
+                <view class="row-between head">
+                    <view class="row">
+                         <image class="icon-xm mr26" src="{{icon.server.off}}" mode="aspectFit" lazy-load="false"></image>
+                         <view>
+                             <view class="row fs-28 c-2 mb-16">
+                                <view class="mr10">发动机清洗</view>
+                                <image class="icon-ticket" src="{{icon.ticketGreen}}" mode="aspectFit" lazy-load="false"></image>
+                             </view>
+                             <view class="fs-22 c-9">10000KM或12个月/次</view>
+                         </view>
+                    </view>
+                    <view class="fs-28 c-9">￥750</view>
+                </view>
+                <!-- 服务列表 -->
+                <view class="list fs-28 c-2 border-t-f0"></view>
+            </view>
+
+        </view>
+
+        <orderPanel @handleOrder.user="handleOrder"/>
     </view>
 </template>
 
@@ -17,8 +254,11 @@
 import wepy from 'wepy'
 import base from '@/mixins/base';
 
-export default class beautyCar extends wepy.page{
-  def = {
+import orderPanel from '@/components/orderPanel';
+import carInfo from '@/components/carInfo';
+
+export default class maintenanceCar extends wepy.page{
+    def = {
         init: false,
         icon:{
             server:{
@@ -26,20 +266,44 @@ export default class beautyCar extends wepy.page{
                 on:'../images/icon/selected-server.png'
             },
             warn:'../images/icon/warn.png',
-            more:'../images/icon/more.png'
-        }
+            more:'../images/icon/more.png',
+            ticketOrange:'../images/icon/ticket-orange.png',
+            ticketGreen:'../images/icon/ticket-green.png',
+            carOrange:'../images/icon/card-orange.png',
+            plus:'../images/icon/plus.png',
+            subtract:'../images/icon/subtract.png',
+            delete:'../images/icon/delete.png',
+            exchange:'../images/icon/exchange.png'
+        },
+        group1IsEdit:false
     }
     config={
         navigationBarTitleText: '汽车保养'
     };
     components={
-       
+        carinfo:carInfo,
+         orderPanel:orderPanel
     };
     data={...this.def};
     computed={};
 
     methods={
-        
+        addCar(){
+            console.log('add car');
+            this.$navigate('addCar');
+        },
+        handleEdit(){
+            this.group1IsEdit = true;
+        },
+        saveEdit(){
+            this.group1IsEdit = false;
+        },
+        handleOrder(arg){
+            console.log('保养订单提交 ...',arg);
+        },
+        handChange(){
+            this.$navigate('goodsList');
+        }
     };
     mixins = [base];
     async onLoad (options) {

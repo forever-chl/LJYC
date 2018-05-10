@@ -20,12 +20,17 @@
         <view class="row left">
             <text class="fs-22 c-9">实付</text><text class="mr32 ml32 fs-36 c-ff3a32">￥80.0</text><text class="fs-22 c-9 original">$255<text class="decoration"></text></text>
         </view>
-        <view class="row-center fs-36 rigth"><text class="c-fff">提交订单</text></view>
+        <view class="row-center fs-36 rigth" @tap="tap"><text class="c-fff">提交订单</text></view>
     </view>
 </template>
 <script>
 import wepy from 'wepy';
 export default class orderPanel extends wepy.component {
-  
+    methods={
+        tap(){
+            console.log('child is clicked');
+            this.$emit('handleOrder', 100);
+        }
+    };
 }
 </script>

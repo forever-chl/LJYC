@@ -23,7 +23,8 @@ export default class extends wepy.app {
       'pages/beautyCar', //美容
       'pages/maintenanceCar', //保养
       'pages/addCar',  //添加汽车
-      'pages/carList' //选择汽车列表
+      'pages/carList', //选择汽车列表
+      'pages/goodsList' //商品列表
     ],
     window: {
       backgroundTextStyle: 'light',

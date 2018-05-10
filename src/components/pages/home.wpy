@@ -1,9 +1,7 @@
 <style lang="less">
     @import '../../less/variable.less';
     .index-main{
-        position: relative;
-        width: 100%;
-        padding-bottom:102rpx; 
+        position: relative; width: 100%;padding-bottom:102rpx; 
     }
     // baner
     .index-banner{position:relative;}
@@ -76,7 +74,7 @@
                 <icon class="tm-pq"></icon>
                 <text class="mt-16">喷漆</text>
             </view>
-            <view class="tm-item">
+            <view class="tm-item" @tap.stop="toPage('maintenanceCar')">
                 <icon class="tm-by"></icon>
                 <text class="mt-16">保养</text>
             </view>

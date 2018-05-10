@@ -129,7 +129,7 @@
             </view>
         </view>
         <view class="split-bar"></view>
-        <orderPanel/>
+        <orderPanel @handleOrder.user="handleOrder"/>
         <dialog  @payload.user="payload" :confirmText.sync="confirmText" :cancelText.sync="cancelText">
             <view slot="content">剩余标准美容卡<text class="c-ff3a32">10</text>次</view>
         </dialog>
@@ -188,6 +188,9 @@ export default class beautyCar extends wepy.page{
         addCar(){
             console.log('add car');
             this.$navigate('addCar');
+        },
+        handleOrder(arg){
+            console.log('美容订单提交 ...',arg);
         }
     };
     mixins = [base];

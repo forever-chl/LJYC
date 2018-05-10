@@ -1,7 +1,7 @@
 @import "./variable.less";
 
 page{
-  height: 100%;
+  width: 100%; height: 100%;
 }
   
 image{
@@ -68,6 +68,9 @@ image{
   }
 .icon-lg {
   .mixin-icon-image(30rpx);
+}
+.icon-xlg {
+  .mixin-icon-image(40rpx);
 }
 .icon-xl {
   .mixin-icon-image(50rpx);
@@ -143,6 +146,7 @@ image{
 // 上
 .mt-10{margin-top:10rpx;}
 .mt-16{margin-top:16rpx;}
+.mb-16{margin-bottom:16rpx;}
 .mt-18{margin-top:18rpx;}
 
 //******外边距原子样式******/
@@ -154,11 +158,17 @@ image{
 .mt20{margin-top: 20rpx}
 .mb10{margin-bottom: 10rpx}
 .mb20{margin-bottom: 20rpx}
+.mb24{margin-bottom: 20rpx}
+.mb30{margin-bottom: 30rpx}
 .mr26{margin-right: 26rpx;}
+.ml26{margin-left: 26rpx;}
 .mr32{margin-right: 32rpx;}
 .ml32{margin-left: 32rpx;}
 .mr48{margin-right: 48rpx}
 .mr50{margin-right: 50rpx}
+.mr60{margin-right: 60rpx}
+.mr100{margin-right: 100rpx}
+.ml100{margin-left: 100rpx}
 
 // 内边距
 // 左
@@ -209,4 +219,17 @@ image{
 .border-t-f0{
   position:relative;
   &:before{.border-utils(100%,1px,#f0f0f0,scaley(0.5));top:0;right:0;}
+}
+
+/*一像素边全框线*/
+.border-full(@color){
+  content:"";position:absolute;display:block;top:-50%;left:-50%;right:-50%;bottom:-50%;border:solid 1px @color;transform:scale(0.5);
+}
+
+
+.border-f-f0{
+  position:relative;
+  &:after{
+    .border-full(#f0f0f0);
+  }
 }
