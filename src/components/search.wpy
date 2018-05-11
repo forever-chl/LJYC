@@ -25,16 +25,33 @@
 <template>
     <view class="serach-main row-center">
         <view class="wrapping">
-            <input class="input" name="name" value="" placeholder="搜索车辆品牌" placeholder-style="color: #999;" />
+            <input class="input"  @input="inputTyping" name="name" value="" placeholder="搜索车辆品牌" placeholder-style="color: #999;" />
             <image class="icon-mg s-icon" src="../images/icon/search-icon.png"/>
         </view>
     </view>
 </template>
 <script>
 import wepy from 'wepy';
+import { debounce } from '@/lib/utils'
 export default class search extends wepy.component {
+    def = {
+        inputVal:''
+    }
+    data={...this.def};
+    watch = {
+      inputVal(value) {
+          console.log(value);
+          this.searchUpdate(value);
+      }
+    };
+    searchUpdate=debounce((value)=>{
+        console.log('---',value);
+    },1000);
     methods = {
-        
+        inputTyping: function (e) {
+            const input = e.detail.value;
+            this.inputVal = input;
+        }
     };
 }
 </script>
