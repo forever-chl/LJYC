@@ -40,11 +40,12 @@
 </style>
 <template>
     <view class="goodsList-main" wx:if="{{init}}">
-        <view class="row filter fs-28 c-2" @tap="handChange">
+        <view class="row filter fs-28 c-2" @tap="handChange" catchtouchmove="moveFilter">
             <view class="mr10 {{isFilter?'c-fc8d1a':''}}">筛选</view>
             <image class="icon-filter" src="{{isFilter?icon.orange:icon.silver}}" mode="aspectFit" lazy-load="false"></image>
         </view>
-        <view class="filter-item border-t-f0" style="height:{{wiHeight}}" hidden="{{!isFilter}}">
+        <!-- 筛选项目  -->
+        <view class="filter-item border-t-f0" style="height:{{wiHeight}}" hidden="{{!isFilter}}" catchtouchmove="moveFilter">
             <view class="group">
                 <view class="fs-24 c-9 title">品牌</view>
                 <view class="list clear">
@@ -121,6 +122,9 @@ export default class beautyCar extends wepy.page{
     methods={
         handChange(){
             this.isFilter = !this.isFilter;
+        },
+        moveFilter(e){
+
         }
     };
     mixins = [base];
