@@ -8,21 +8,17 @@
     .index-banner-image{width:100%;height:320rpx;}
     // banner地址定位
     .index-location{position:absolute;top:32rpx;left:50%; width:634rpx;height:30rpx;padding:20rpx 18rpx 20rpx 18rpx;display:flex; z-index:99999;margin-left:-335rpx;background-color:#fff;}
-    .il-icon{.ljyc-icon(-35rpx,-393rpx,30rpx,30rpx);margin-right:6rpx;}
+    .il-icon{width:30rpx;height:30rpx;margin-right:6rpx;}
 
     // 顶部功能图标
     .top-menu{padding:40rpx 0;display:flex;justify-content:space-around;}
     .tm-item{width:88rpx;text-align:center;}
-    .tm-xc{.ljyc-icon(-93rpx,-300rpx,88rpx,88rpx);}
-    .tm-mr{.ljyc-icon(0,-300rpx,88rpx,88rpx);}
-    .tm-pq{.ljyc-icon(-474rpx,-125rpx,88rpx,88rpx);}
-    .tm-by{.ljyc-icon(-567rpx,-125rpx,88rpx,88rpx);}
+    .tm-icon{width:88rpx;height:88rpx;}
 
     // 顶部其他功能
     .top-menu-other{padding:50rpx 0;display:flex;}
     .tmo-item{width:50%;padding-left:60rpx;display:flex;}
-    .tmoi-tccz{.ljyc-icon(-346rpx,-300rpx,70rpx,70rpx);}
-    .tmoi-sys{.ljyc-icon(-271rpx,-300rpx,70rpx,70rpx);}
+    .tmoi-icon{width:70rpx;height:70rpx;}
 
     // 门店列表
     .is-list{display:flex;white-space:nowrap;padding-bottom:40rpx;}
@@ -49,7 +45,7 @@
     <view class="index-main" wx:if="{{init}}">
         <view class="index-banner">
             <view class="index-location fs-24">
-                <icon class="il-icon"></icon>
+                <image src="../../images/icon/location.png" class="il-icon"></image>
                 <text class="c-6 mr-20">深圳市</text>
                 <text class="c-9">水榭春天二期</text>
             </view>
@@ -63,33 +59,33 @@
         </view>
         <view class="top-menu c-707577 fs-26">
             <view class="tm-item" @tap.stop="toPage('cleanCar')">
-                <icon class="tm-xc"></icon>
+                <image src="../../images/icon/car-wash.png" class="tm-icon"></image>
                 <text class="mt-16">洗车</text>
             </view>
             <view class="tm-item"  @tap.stop="toPage('beautyCar')">
-                <icon class="tm-mr"></icon>
+                <image src="../../images/icon/beauty.png" class="tm-icon"></image>
                 <text class="mt-16">美容</text>
             </view>
             <view class="tm-item">
-                <icon class="tm-pq"></icon>
+                <image src="../../images/icon/paint.png" class="tm-icon"></image>
                 <text class="mt-16">喷漆</text>
             </view>
             <view class="tm-item" @tap.stop="toPage('maintenanceCar')">
-                <icon class="tm-by"></icon>
+                <image src="../../images/icon/maintain.png" class="tm-icon"></image>
                 <text class="mt-16">保养</text>
             </view>
         </view>
         <view class="split-bar"></view>
         <view class="top-menu-other">
             <view class="tmo-item">
-                <icon class="tmoi-tccz"></icon>
+                <image src="../../images/icon/package-recharge.png" class="tmoi-icon"></image>
                 <view class="pl-32">
                     <view class="fs-32 c-2">套餐充值</view>
                     <view class="fs-24 c-b3">套餐充值更优惠</view>
                 </view>
             </view>
             <view class="tmo-item">
-                <icon class="tmoi-sys"></icon>
+                <image src="../../images/icon/scan.png" class="tmoi-icon"></image>
                 <view class="pl-32">
                     <view class="fs-32 c-2">扫一扫</view>
                     <view class="fs-24 c-b3">扫码取钥匙</view>

@@ -1,0 +1,101 @@
+<style lang='less'>
+    .payInfo{
+        // 支付金额
+        .pi-amount{padding:88rpx 0 100rpx 0;text-align:center;}
+        .pi-amount>view{line-height:60rpx;}
+
+        // 标题
+        .pi-title{height:88rpx;line-height:88rpx;font-size:24rpx;color:#999;background-color:#f7f7f7;padding:0 32rpx;}
+
+        // 支付方式
+        .pi-payType>.radio{height:104rpx;line-height:104rpx;padding:0 32rpx;display:flex;font-size:20rpx;color:#999;flex-wrap:nowrap;border-bottom:solid 1px #eee;}
+        .pip-radio-label{display:flex;flex-wrap:nowrap;flex-grow:1;}
+        .pi-payType>.radio>radio{transform:scale(0.8);}
+        .pip-yue-img{width:40rpx;margin-top:32rpx;margin-right:20rpx;}
+
+        // 余额充值
+        .pi-recharge{text-align:center;font-size:24rpx;color:#999;padding:40rpx;}
+
+        // 立即支付
+        .pi-button{text-align:center;}
+        .pi-button>button{background-color:#fc8d1a;color:#fff;height:80rpx;width:500rpx;line-height:80rpx;border-radius:80rpx;font-size:36rpx;}
+        .pi-button>button.active{background-color:#9c5b15;}
+    }
+</style>
+
+<template>
+    <view class="payInfo">
+        <view class="pi-amount">
+            <view class="fs-60 c-0 fw-b">￥19.86</view>
+            <text class="fs-24 c-9">标准洗车30元</text>
+        </view>
+        <view class="pi-title">支付方式</view>
+        <radio-group class="pi-payType radio-group" @change="radioChange">
+            <label class="radio">
+                <view class="pip-radio-label">
+                    <image class="pip-yue-img" mode="widthFix" src="../images/icon/balance-payment.png"></image>
+                    <view class="fs-32 c-2">余额支付</view>
+                    <view>（余额为<text class="c-ff3a32">2000元</text>）</view>
+                </view>
+                <radio value="1" checked="checked" color="#50b674"/>
+            </label>
+            <label class="radio">
+               <view class="pip-radio-label">
+                    <image class="pip-yue-img" mode="widthFix" src="../images/icon/no-balance-payment.png"></image>
+                    <view class="fs-32 c-9">余额支付</view>
+                    <view>（<text class="c-ff3a32">余额不足，</text>余额为<text class="c-ff3a32">2000元</text>）</view>
+                </view>
+                <radio value="1" checked="checked" color="#50b674" disabled="true"/>
+            </label>
+            <label class="radio">
+                <view class="pip-radio-label">
+                    <image class="pip-yue-img" mode="widthFix" src="../images/icon/wechat.png"></image>
+                    <view class="fs-32 c-2">微信支付</view>
+                    <view>（余额为<text class="c-ff3a32">2000元</text>）</view>
+                </view>
+                <radio value="2" checked="checked"  color="#50b674" />
+            </label>
+        </radio-group>
+        <view class="pi-recharge">余额充值 > </view>
+        <view class="pi-button">
+            <button size="mini" hover-class="active" type="defult" @tap="openDialog">立即支付</button>
+        </view>
+        <dialog  @payload.user="payload" confirmText="确认" cancelText="取消">
+            <view slot="content">预计15点完成订单，请确认是否下单</view>
+        </dialog>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import base from '@/mixins/base';
+import dialog from '@/components/dialog';
+
+export default class beautyCar extends wepy.page{
+    config={
+        navigationBarTitleText: '支付'
+    };
+    data={
+        payType:0
+    }
+    components={
+        dialog:dialog
+    };
+    methods={
+        radioChange(val){
+            this.payType=val.detail.value;
+        },
+        payload(){
+            
+        },
+        openDialog(){
+            this.$invoke('dialog', 'open');
+        }
+    }
+    mixins = [base];
+    async onLoad (options) {
+        this.loaded(); 
+    };
+}
+</script>
+

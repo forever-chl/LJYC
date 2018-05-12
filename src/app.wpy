@@ -24,7 +24,8 @@ export default class extends wepy.app {
       'pages/maintenanceCar', //保养
       'pages/addCar',  //添加汽车
       'pages/carList', //选择汽车列表
-      'pages/goodsList' //商品列表
+      'pages/goodsList', //商品列表
+      'pages/payInfo',//支付
     ],
     window: {
       backgroundTextStyle: 'light',
