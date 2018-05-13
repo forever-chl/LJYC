@@ -158,8 +158,8 @@ export default class cleanCar extends wepy.page{
             warn:'../images/icon/warn.png',
             more:'../images/icon/more.png'
         },
-        confirmText:'不使用卡',
-        cancelText:'使用卡'
+        confirmText:'使用卡',
+        cancelText:'不使用卡'
     }
     config={
         navigationBarTitleText: '洗车'
@@ -191,6 +191,7 @@ export default class cleanCar extends wepy.page{
         },
         handleOrder(arg){
             console.log('洗车订单提交 ...',arg);
+            this.$navigate('payInfo');
         }
     };
     mixins = [base];

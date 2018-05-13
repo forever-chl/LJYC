@@ -62,7 +62,8 @@ export default class addCar extends wepy.page{
     computed={};
     methods={
         addCar(){
-            this.$navigate('carList');
+            //this.$navigate('carList');
+            this.$navigate('carNumber');
         }
     };
     async onLoad () {

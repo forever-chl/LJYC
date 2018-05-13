@@ -19,6 +19,7 @@ export default class extends wepy.app {
   config = {
     pages: [
       'pages/index', //欢迎页面
+      'pages/carNumber',//添加车牌号
       'pages/cleanCar', //洗车
       'pages/beautyCar', //美容
       'pages/maintenanceCar', //保养

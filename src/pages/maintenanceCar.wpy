@@ -282,7 +282,7 @@ export default class maintenanceCar extends wepy.page{
     };
     components={
         carinfo:carInfo,
-         orderPanel:orderPanel
+        orderPanel:orderPanel
     };
     data={...this.def};
     computed={};
@@ -300,6 +300,7 @@ export default class maintenanceCar extends wepy.page{
         },
         handleOrder(arg){
             console.log('保养订单提交 ...',arg);
+            this.$navigate('payInfo');
         },
         handChange(){
             this.$navigate('goodsList');

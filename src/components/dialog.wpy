@@ -9,10 +9,10 @@
         .content{
             position: absolute;top:50%;left:50%; transform:translate(-50%,-50%) ; width: 500rpx;height: 280rpx;background: #ffffff;border-radius: 10rpx;
             .bd{
-            padding-top:80rpx; padding-bottom: 68rpx; line-height: 1;border-bottom: 1px solid #e5e5e5;text-align: center;
+                flex: 1; padding: 0 32rpx;line-height: 1.5; border-bottom: 1px solid #e5e5e5;text-align: center;
             }
             .ft{
-                flex: 1;
+                flex: 0 0 100rpx;
                 .default{
                     flex: 1; height: 100%;
                 }
@@ -49,12 +49,12 @@
         <view class="wrapping" @tap.stop="close">
             <view class="column content fs-32 c-2">
                 <!-- <view class="hd"><text class="title">弹窗标题</text></view> -->
-                <view class="bd">
+                <view class="bd row-center">
                     <slot name="content">默认内容</slot>
                 </view>
                 <view class="ft row">
-                    <view class="row-center default c-9" @tap.stop="close">{{confirmText}}</view>
-                    <view class="row-center default primary" @tap="tap">{{cancelText}}</view>
+                    <view class="row-center default c-9" @tap.stop="close">{{cancelText}}</view>
+                    <view class="row-center default primary" @tap="tap">{{confirmText}}</view>
                 </view>
             </view>
         </view>
@@ -71,11 +71,11 @@ export default class dialog extends wepy.component {
     props = {
         confirmText: {
             type: String,
-            default: '取消'
+            default: '确认'
         },
         cancelText: {
             type: String,
-            default: '确认',
+            default: '取消',
         }
     };
     methods={
