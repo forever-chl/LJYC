@@ -1,0 +1,24 @@
+<style lang="less">
+    .payError{text-align:center;
+        .pe-img{width:145rpx;height:145rpx;display:inline-block;margin:88rpx 0 60rpx;}
+        .pe-button{background-color:#fc8d1a;color:#fff;height:80rpx;width:500rpx;line-height:80rpx;border-radius:80rpx;font-size:36rpx;margin-top:100rpx;}
+        .pe-button.active{background-color:#9c5b15;}
+    }
+</style>
+
+<template>
+    <view class="payError">
+        <image class="pe-img" src="../images/icon/pay-error.png"></image>
+        <view class="fs-40 c-0">支付失败</view>
+        <button class="pe-button" size="mini" hover-class="active" type="defult">重新支付</button>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+export default class extends wepy.page {
+    config={
+        navigationBarTitleText: '支付失败'
+    };
+}
+</script>

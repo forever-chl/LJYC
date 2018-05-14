@@ -1,0 +1,30 @@
+<style lang="less">
+    .paySuc{text-align:center;
+        .ps-img{width:145rpx;height:145rpx;display:inline-block;margin:88rpx 0 60rpx;}
+        .ps-button{margin-top:48rpx;}
+        .ps-button>button{height:66rpx;padding:0 40rpx; font-size:30rpx;color:#222;border:solid 1px #ddd;line-height:66rpx;text-align:center;display:inline-block;border-radius:66rpx;}
+        .ps-button>button.active{background-color:rgb(182, 180, 180);}
+        .ps-button>button+button{margin-left:40rpx;}
+    }
+</style>
+
+<template>
+    <view class="paySuc">
+        <image class="ps-img" src="../images/icon/pay-success.png"></image>
+        <view class="fs-40 c-0">支付成功</view>
+        <view class="ps-button">
+            <button size="mini" hover-class="active" type="defult" plain="true">返回首页</button>
+            <button size="mimi" hover-class="active" type="defult" plain="true">查看订单</button>
+        </view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+export default class extends wepy.page {
+    config={
+        navigationBarTitleText: '支付成功'
+    };
+}
+</script>
+
