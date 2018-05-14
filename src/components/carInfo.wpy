@@ -13,11 +13,11 @@
 
 <template>
     <view class="ljyc-car-info">
-        <view class="lci-stop">
+        <view class="lci-stop" @tap="addVillage">
             <view class="fs-32 c-2">停车场</view>
             <view class="fs-24 c-9 mt-16">水榭春天1期</view>
         </view>
-        <view class="lci-card" @tap="tap">
+        <view class="lci-card" @tap="addCar">
             <view class="fs-32 c-2">车牌信息</view>
             <view class="fs-24 c-9 mt-16">粤B236489</view>
         </view>
@@ -32,7 +32,10 @@ export default class carInfo extends wepy.component{
     data={}
     computed={}
     methods={
-        tap(){
+        addVillage(){
+            this.$emit('addVillage');
+        },
+        addCar(){
             this.$emit('addCar');
         }
     }

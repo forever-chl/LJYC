@@ -42,6 +42,19 @@ export default class index extends wepy.page{
         tabs:tabs
     };
     data={...this.def};
+    watch = {
+        currentTab(value) {
+            if(!value) return;
+            let map = {
+                'currentHome':'邻家养车',
+                'currentOrder':'订单',
+                'currentMy':'个人中心'
+            }
+            wx.setNavigationBarTitle({
+                title: map[value]
+            })
+        }
+    };
     computed={};
     methods={};
     mixins = [base];

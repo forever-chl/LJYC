@@ -10,13 +10,12 @@
 <template>
     <view class="carList-main" style="height:{{wiHeight}}" wx:if="{{init}}">
         <search class="head"/>
-        <carList/>
+        <indexList/>
     </view>
 </template>
 
 <script>
 import wepy from 'wepy';
-import tabs from '@/components/tabs';
 import indexList from '@/components/indexList';
 import search from '@/components/search';
 
@@ -32,8 +31,7 @@ export default class carList extends wepy.page{
         disableScroll: true //禁止页面整体不能上下滚动
     }
     components={
-        tabs:tabs,
-        carList:indexList,
+        indexList:indexList,
         search:search
     }
     data={...this.def}

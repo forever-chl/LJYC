@@ -32,7 +32,7 @@
 <template>
     <view class="cleanCar-main fs-32" wx:if="{{init}}">
         <view class="split-bar"></view>
-        <carinfo @addCar.user="addCar"/>
+        <carinfo @addVillage.user="addVillage" @addCar.user="addCar"/>
         <view class="split-bar"></view>
         <view class="cc-ljxc fs-32">
             <view class="ljyc-title b-f0 border-b-f0">
@@ -184,6 +184,10 @@ export default class cleanCar extends wepy.page{
         },
         info(){
             this.$invoke('cardPanel', 'open');
+        },
+        addVillage(){
+            console.log('add Village  添加小区');
+            this.$navigate('villageList');
         },
         addCar(){
             console.log('add car');

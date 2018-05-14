@@ -36,7 +36,7 @@
         </view>
 
         <view class="row-center add" @tap="addCar">
-            <image src="../images/icon/add.png" class="icon-xxl"  mode="aspectFill" lazy-load="true"></image>
+            <image src="../images/icon/append.png" class="icon-xxl"  mode="aspectFill" lazy-load="true"></image>
             <view class="ml-20">添加车辆</view>
         </view>
       </view>

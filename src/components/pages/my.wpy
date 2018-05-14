@@ -1,16 +1,163 @@
 <style lang="less">
-
+@import '../../less/variable.less';
+.my-main{
+    position: relative; top: 0; width: 100%; background:@color-bg-body; padding-bottom:102rpx; 
+    .head{
+        position: relative; width: 100%;background:#fff;
+        .login{
+            padding:50rpx 0 84rpx 38rpx;
+            .icon-login{
+                .mixin-icon-round(120rpx);background: red;
+            }
+        }
+        .bill{
+            padding-right: 32rpx;
+            .info{
+                padding:32rpx 0 74rpx 0; text-align: right;
+            }
+            .recharge{
+                width: 120rpx; height: 56rpx; line-height:56rpx;text-align: center;background: #fc8d1a;color:#fff; border-radius: 28rpx;
+            }
+        }
+        .ft{
+            line-height: 1;
+           .item{
+               flex: 1;height: 142rpx;
+           } 
+        }
+    }
+    .cell{
+        height: 104rpx;background: #ffffff;
+        .item{
+            flex: 1;padding-left: 94rpx;
+        }
+    }
+    .group{
+        padding-left:44rpx;background: #ffffff;
+        .item{
+            padding-right:44rpx; 
+        }
+        .icon-more{
+            width: 11rpx;height: 20rpx;vertical-align: middle;
+        }
+    }
+}
 </style>
 
 <template>
-    <view>
-        个人中心页面
+    <view class="my-main" wx:if="{{init}}" style="min-height:{{wiHeight}}">
+        <view class="clear head mb24">
+                <view class="clear border-b-f0">
+                    <view class="row f-l login">
+                        <image class="icon-login mr20" src="" mode="aspectFit" lazy-load="false"></image>
+                        <view class="fs-36 c-3">点击登录</view>
+                    </view>
+                    <view class="f-r bill">
+                        <view class="info fs-28 c-2" @tap="toPage('billList')">账单</view>
+                        <button class="recharge fs-26" hover-class="tap-active" type="defult">充值</button>
+                    </view>
+                </view>
+                <view class="row ft">
+                    <view class="column-center item">
+                        <view class="fs-40 c-2 mb20">0</view>
+                        <view class="fs-20 c-9">套餐卡</view>
+                    </view>
+                    <view class="column-center item">
+                        <view class="fs-40 c-2 mb20">0</view>
+                        <view class="fs-20 c-9">优惠券</view>
+                    </view>
+                    <view class="column-center item">
+                        <view class="fs-40 c-2 mb20">0</view>
+                        <view class="fs-20 c-9">余额</view>
+                    </view>
+                </view>
+        </view>
+        <view class="row cell fs-30 c-2 mb24">
+            <view class="row item">
+                <image class="icon-xl mr14" src="../../images/icon/stop.png" mode="aspectFit" lazy-load="false"></image>
+                <view>11护航</view>
+            </view>
+            <view class="row item">
+                <image class="icon-xl mr14" src="../../images/icon/stop.png" mode="aspectFit" lazy-load="false"></image>
+                <view>全检</view>
+            </view>
+        </view>
+        <view class="group fs-30 c-2">
+            <view class="row-between cell item border-b-f0">
+                <view class="row">
+                    <image src="../../images/tabbar/my-se.png" class="icon-xl mr20"  mode="aspectFill" lazy-load="true"></image>
+                    <view>我的卡包</view>
+                </view>
+                <image src="../../images/icon/more.png" class="icon-more"  mode="aspectFill" lazy-load="true"></image>
+            </view>
+            <view class="row-between cell item border-b-f0">
+                <view class="row">
+                    <image src="../../images/tabbar/my-se.png" class="icon-xl mr20"  mode="aspectFill" lazy-load="true"></image>
+                    <view>我的订单</view>
+                </view>
+                <image src="../../images/icon/more.png" class="icon-more"  mode="aspectFill" lazy-load="true"></image>
+            </view>
+            <view class="row-between cell item border-b-f0">
+                <view class="row">
+                    <image src="../../images/tabbar/my-se.png" class="icon-xl mr20"  mode="aspectFill" lazy-load="true"></image>
+                    <view>优惠券</view>
+                </view>
+                <image src="../../images/icon/more.png" class="icon-more"  mode="aspectFill" lazy-load="true"></image>
+            </view>
+            <view class="row-between cell item border-b-f0">
+                <view class="row">
+                    <image src="../../images/tabbar/my-se.png" class="icon-xl mr20"  mode="aspectFill" lazy-load="true"></image>
+                    <view>我的车辆</view>
+                </view>
+                <image src="../../images/icon/more.png" class="icon-more"  mode="aspectFill" lazy-load="true"></image>
+            </view>
+            <view class="row-between cell item border-b-f0">
+                <view class="row">
+                    <image src="../../images/tabbar/my-se.png" class="icon-xl mr20"  mode="aspectFill" lazy-load="true"></image>
+                    <view>平台服务</view>
+                </view>
+                <image src="../../images/icon/more.png" class="icon-more"  mode="aspectFill" lazy-load="true"></image>
+            </view>
+            <view class="row-between cell item">
+                <view class="row">
+                    <image src="../../images/tabbar/my-se.png" class="icon-xl mr20"  mode="aspectFill" lazy-load="true"></image>
+                    <view>设置</view>
+                </view>
+                <image src="../../images/icon/more.png" class="icon-more"  mode="aspectFill" lazy-load="true"></image>
+            </view>
+        </view>
     </view>
 </template>
 
 <script>
 import wepy from 'wepy';
+import base from '@/mixins/base';
+
 export default class myCenter extends wepy.component {
-  
+    def = {
+        init: false,
+        wiHeight:'0px'
+    }
+    data={...this.def};
+    computed={};
+    methods={
+        toPage(name){
+            this.$root.$navigate(name);
+        }
+    };
+    mixins = [base];
+    async onLoad (options) {
+        this.loaded(); 
+        this.getWindowHeight();
+    };
+    getWindowHeight(){
+        let _this = this;
+        wx.getSystemInfo({
+            success(res) {
+                console.log(res);
+                _this.wiHeight = res.windowHeight+'px';
+            }
+        })
+    }
 }
 </script>
