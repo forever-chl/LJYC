@@ -28,7 +28,10 @@ export default class extends wepy.app {
       'pages/villageList', //选择小区列表
       'pages/goodsList', //商品列表
       'pages/payInfo',//支付
-      'pages/billList'//账单
+	    'pages/billList',//账单	
+      'pages/paySuc',//支付成功
+      'pages/payError',//支付失败
+     
     ],
     window: {
       backgroundTextStyle: 'light',
