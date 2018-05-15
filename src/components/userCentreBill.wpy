@@ -1,0 +1,82 @@
+<style lang="less">
+@import "../less/variable.less";
+.userCentreBill-main{
+    .group{
+        position: relative;
+        .head{
+           padding: 0 32rpx; height: 88rpx; line-height: 1; background: #f8f8f8;
+        }
+        .list{
+            line-height: 1; background: #fff;
+            .item{
+               height: 160rpx; padding:0 32rpx;
+               .right{
+                   .ro{
+                        text-align: right;
+                        .original{
+                            position: relative; text-align: center;
+                            .decoration{
+                                position: absolute;top:50%;right:0;transform:translate(0,-50%); width: 100%;height: 1rpx;background: #999999;transform:scaleY(0.5);
+                            }
+                        }
+                    }
+               }
+            }
+        }
+    }
+    .icon-80{
+        .mixin-icon-image(80rpx);
+    }
+}    
+</style>
+
+<template>
+    <view class="userCentreBill-main">
+        <view class="group">
+            <view class="row-between head">
+                <view>
+                    <view class="fs-26 c-2 mb12">2018.03-2018.05</view>
+                    <view class="fs-18 c-9">充值 ￥1000 买套餐 $200 支出</view>
+                </view>
+                <image class="icon-xl" src="../images/icon/order.png" mode="aspectFit" lazy-load="false"></image>
+            </view>
+            <view class="list">
+                <view class="row-between border-b-f0 item">
+                    <view class="row left">
+                        <image class="icon-80 mr20" src="../images/icon/package-recharge.png" mode="aspectFit" lazy-load="false"></image>
+                        <view class="c-2">
+                            <view class="fs-28">水榭春天1期-服务订单</view>
+                            <view class="fs-26 mt-18">[洗车-美容]</view>
+                            <view class="fs-18 c-9 mt-18">03-04 12：22</view>
+                        </view>
+                    </view>
+                    <view class="right">
+                        <view class="fs-28 c-ff3a32">-$45.5</view>
+                        <view class="fs-22 c-9 mt-18 ro"><text class="original">255<text class="decoration"></text></text></view>
+                    </view>
+                </view>
+                <view class="row-between border-b-f0 item">
+                    <view class="row left">
+                        <image class="icon-80 mr20" src="../images/icon/package-recharge.png" mode="aspectFit" lazy-load="false"></image>
+                        <view class="c-2">
+                            <view class="fs-28">水榭春天1期-服务订单</view>
+                            <view class="fs-26 mt-18">[洗车-美容]</view>
+                            <view class="fs-18 c-9 mt-18">03-04 12：22</view>
+                        </view>
+                    </view>
+                    <view class="right">
+                        <view class="fs-28 c-ff3a32">-$45.5</view>
+                        <view class="fs-22 c-9 mt-18 ro"><text class="original">255<text class="decoration"></text></text></view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+export default class userCentreBill extends wepy.component {
+    
+}
+</script>
