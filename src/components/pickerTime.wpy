@@ -1,0 +1,112 @@
+<style lang="less">
+.pickerTime-main{
+    width: 100%;height:348rpx ; overflow: hidden;
+    .picker{
+        width: 100%; height: 348rpx;text-align: center;
+    }
+    .indicator{
+        height: 116rpx;
+    }
+    .item{line-height: 116rpx}
+}
+</style>
+
+<template>
+    <view class="pickerTime-main"  wx:if="{{init}}">
+        <picker-view indicator-class="indicator" class="picker" value="{{value}}" @change="bindChange">
+            <picker-view-column>
+                <view wx:for="{{years}}" wx:key="index" class="item">{{item}}年</view>
+            </picker-view-column>
+            <picker-view-column>
+                <view wx:for="{{months}}" wx:key="index" class="item">{{item}}月</view>
+            </picker-view-column>
+            <picker-view-column wx:if="{{isDay}}">
+                <view wx:for="{{days}}" wx:key="index" class="item">{{item}}日</view>
+            </picker-view-column>
+        </picker-view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+import base from '@/mixins/base';
+import Lang from '@/lib/Lang';
+
+export default class pickerTime extends wepy.component {
+     def = {
+        init: false,
+        value: [9999, 1, 1],
+        years:[],
+        months:[],
+        days:[]
+    }
+    props = {
+        isDay:{
+            default: false
+        },
+        year: {
+            twoWay: true
+        },
+        month: {
+            twoWay: true
+        },
+        day: {
+            twoWay: true
+        }
+    };
+    computed ={
+       
+    };
+    config={
+        navigationBarTitleText: '选择日期'
+    };
+    data={...this.def};
+    methods = {
+        bindChange: function(e) {
+            const val = e.detail.value;
+            this.days = Lang.getDays(this.data.years[val[0]],this.data.months[val[1]]);
+            this.year = this.data.years[val[0]];
+            this.month = this.data.months[val[1]];
+            this.day = this.data.days[val[2]];
+            this.$apply(); 
+        }
+    }
+    mixins = [base];
+    async onLoad () {
+        const now = new Date();
+
+        let temp = Lang.dateFormate(now, 'yyyy-MM-dd');
+        temp = temp.split('-');
+
+        this.year = parseInt(temp[0]);
+        this.month = parseInt(temp[1]);
+        this.day = parseInt(temp[2]);
+
+        this.years = this.getYears();
+        this.months = this.getMonths();
+        this.days = this.getDays();
+        this.value = [this.years.indexOf(this.year), this.months.indexOf(this.month), this.days.indexOf(this.day)];
+
+        this.loaded(); 
+    };
+    getYears(){
+        const date = new Date();
+        const years = [];
+        for (let i = 1990; i <= date.getFullYear(); i++) {
+            years.push(i);
+        }
+        return years;
+    };
+    getMonths(){
+        const months = [];
+        for (let i = 1 ; i <= 12; i++) {
+            months.push(i);
+        }
+        return months;
+    };
+    getDays(){
+        const days = [];
+        return Lang.getDays(this.year,this.month);
+    }
+}
+</script>

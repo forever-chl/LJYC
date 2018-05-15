@@ -57,4 +57,20 @@ export default class Lang {
     }
     return fmt;
   }
+  static getDays(y,m){
+      const bigMonths = ['1','3','5','7','8','10','12'],days=[];
+      let num = 30;
+      if(bigMonths.indexOf(m+'') != -1) num = 31;
+      if(m == 2){
+          if((y % 4 == 0) && (y % 100 != 0 || y % 400 == 0)){
+              num = 29;
+          }else{
+              num = 28;
+          }
+      }
+      for (let i = 1 ; i <= num; i++) {
+          days.push(i);
+      }
+      return days;
+  }
 }

@@ -31,14 +31,14 @@
 </style>
 
 <template>
-    <view class="userCentreBill-main">
+    <view class="userCentreBill-main" wx:if="{{init}}">
         <view class="group">
             <view class="row-between head">
                 <view>
                     <view class="fs-26 c-2 mb12">2018.03-2018.05</view>
                     <view class="fs-18 c-9">充值 ￥1000 买套餐 $200 支出</view>
                 </view>
-                <image class="icon-xl" src="../images/icon/order.png" mode="aspectFit" lazy-load="false"></image>
+                <image class="icon-xl" src="../images/icon/order.png" mode="aspectFit" lazy-load="false" @tap="toPage"></image>
             </view>
             <view class="list">
                 <view class="row-between border-b-f0 item">
@@ -76,7 +76,20 @@
 
 <script>
 import wepy from 'wepy';
+import base from '@/mixins/base';
 export default class userCentreBill extends wepy.component {
-    
+    def = {
+        init: false,
+    }
+    data={...this.def};
+    mixins = [base];
+    async onLoad (options) {
+        this.loaded(); 
+    };
+    methods={
+        toPage(){
+            this.$root.$navigate('selectTime');
+        }
+    }
 }
 </script>

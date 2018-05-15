@@ -9,7 +9,7 @@
         }
     }
     .filter-item{
-        position: fixed;z-index: 10;width: 100%;  background: @color-bg-body; line-height: 1;
+        position: absolute;z-index: 10;width: 100%;  background: @color-bg-body; line-height: 1;
         .list{
             padding:32rpx; background: #ffffff; min-height: 40%;
             .lable{width: 140rpx;height: 60rpx; line-height: 60rpx; text-align: center; border:1px solid #f0f0f0;border-radius: 30rpx;}

@@ -1,0 +1,73 @@
+<style lang="less">
+.select-main{
+    position: relative; top: 0; width: 100%;color: #282828;
+    .head{
+        padding: 40rpx 32rpx 82rpx 32rpx;line-height: 1;
+    }
+    .recharge{
+        width: 120rpx; height: 56rpx; line-height:56rpx;text-align: center;background: #fc8d1a;color:#fff; border-radius: 28rpx;
+    }
+    .time{
+        width: 100%; margin: 0 auto; text-align: center;
+    }
+    .times{
+        width: 100%;height:348rpx ; overflow: hidden;
+        .picker{
+            width: 100%; height: 348rpx;text-align: center;
+        }
+        .indicator{
+            height: 116rpx;
+        }
+        .item{line-height: 116rpx}
+    }
+    
+}
+</style>
+
+<template>
+    <view class="select-main fs-32"  wx:if="{{init}}">
+        <view class="row-between head ">
+            <view>按月选择时间</view>
+            <view>
+                <button class="recharge fs-26" hover-class="tap-active" type="defult">完成</button>
+            </view>
+        </view>
+        <view class="time">{{year}}年{{month}}月{{day}}日</view>
+        <pickerTime :year.sync="year" :month.sync="month" :day.sync="day"/>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+import base from '@/mixins/base';
+import Lang from '@/lib/Lang';
+
+import pickerTime from '@/components/pickerTime'
+
+export default class selectTime extends wepy.page {
+    def = {
+        init: false,
+        
+        year: '',
+        month: '',
+        day: ''
+    }
+    computed = {
+       
+    };
+    components = {
+        pickerTime
+    }
+    config={
+        navigationBarTitleText: '选择日期'
+    };
+    data={...this.def};
+    methods = {
+        
+    }
+    mixins = [base];
+    async onLoad (params, {preload}) {
+        this.loaded(); 
+    };
+}
+</script>

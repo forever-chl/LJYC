@@ -31,6 +31,7 @@ export default class extends wepy.app {
 	    'pages/billList',//账单	
       'pages/paySuc',//支付成功
       'pages/payError',//支付失败
+      'pages/selectTime',//选择日期
      
     ],
     window: {
