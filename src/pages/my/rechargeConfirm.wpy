@@ -1,0 +1,60 @@
+<style lang="less">
+    .rechargeConfirm{
+        //充值金额
+        .rc-top{padding:80rpx 0;text-align:center;}
+
+        // 充值赠送
+        .rc-money{height:104rpx;line-height:104rpx;text-align:center;}
+        .rc-type-list{border-top:solid 1px #eee;border-bottom:solid 1px #eee;padding:46rpx;font-size:24rpx;text-align:center;}
+        .rc-type-list>view+view{margin-top:46rpx;}
+
+        // 更多优惠
+        .rc-more{padding:40rpx 0 80rpx;text-align:center;}
+    }
+</style>
+
+<template>
+    <view class="rechargeConfirm">
+        <view class="rc-top">
+            <view class="fs-60 c-2">￥800</view>
+            <view class="fs-24 c-9">邻家养车-充值</view>
+        </view>
+        <view class="split-bar"></view>
+        <view class="rc-list">
+            <view class="rc-money fs-32 c-2">返200元现金券</view>
+            <view class="rc-type-list">
+                <view>10元现金券<text class="c-fc8d1a">4</text>张</view>
+                <view>20元现金券<text class="c-fc8d1a">3</text>张</view>
+                <view>50元现金券<text class="c-fc8d1a">4</text>张</view>
+            </view>
+        </view>
+        <view class="rc-more fs-24 c-9">更多优惠 ></view>
+        <ljycButton buttonVal="微信支付" @buttonTap.user="pay"></ljycButton>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+import base from '@/mixins/base';
+import button from '@/components/button';
+
+export default class rechargeConfirm extends wepy.page{
+    config={
+        navigationBarTitleText: '充值'
+    };
+    data={};
+    components={
+        ljycButton:button
+    };
+    methods={
+        pay(){
+            console.log('pay');
+        }
+    };
+    mixins = [base];
+    async onLoad (options) {
+        this.loaded();
+    };
+}
+</script>
+

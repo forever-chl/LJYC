@@ -1,0 +1,46 @@
+<style lang="less">
+    .limit{display:flex;flex-wrap:wrap;justify-content:space-between;padding:0 50rpx;
+        .l-info{width:310rpx;height:140rpx;background-color:#fff;border:solid 1rpx #fc8d1a; color:#222;font-size:28rpx;text-align:center;margin-top:40rpx;display:flex;border-radius:10rpx;}
+        .l-info.active{background-color:#fc8d1a;color:#fff;}
+        .l-info-box{width:120rpx;margin:auto;}
+    }
+</style>
+
+<template>
+    <view class="limit">
+        <repeat for="{{list}}" key="index" index="index" item="item">
+            <view class="l-info {{selVal.id==item.id?'active':''}}" @tap="changeSelVal({{item}})">
+                <view class="l-info-box">
+                    <text>充￥{{item.money}}</text>
+                    <text>送{{item.give}}</text>
+                </view>
+            </view>
+        </repeat>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+export default class limit extends wepy.component{
+    props={
+        list:{
+            type:Object,
+            default:null
+        },
+        selVal:{
+            type:Object,
+            default:null,
+            twoWay:true
+        }
+    };
+    data={};
+    components={};
+    methods={
+        changeSelVal(item){
+            this.selVal=item;
+        },
+    };
+}
+</script>
+
+

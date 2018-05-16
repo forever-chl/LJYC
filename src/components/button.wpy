@@ -1,0 +1,46 @@
+<style>
+    .ljyc-button{text-align:center;}
+    .ljyc-button>button{background-color:#fc8d1a;color:#fff;height:80rpx;width:500rpx;line-height:80rpx;border-radius:80rpx;font-size:36rpx;}
+    .ljyc-button>button.active{background-color:#9c5b15;}
+    .ljyc-button>button.disabled{background-color:#ccc;}
+</style>
+
+
+<template>
+    <view class="ljyc-button">
+        <button size="{{buttonSize}}" class="{{isActive==0?'disabled':''}}" hover-class="active" type="{{buttonType}}" @tap="buttonTap">{{buttonVal}}</button>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+export default class button extends wepy.component{
+    props={
+        buttonVal:{
+            type:String,
+            default:'按钮'
+        },
+        isActive:{
+            type:Number,
+            default:1
+        },
+        buttonSize:{
+            type:String,
+            default:'mini'
+        },
+        buttonType:{
+            type:String,
+            default:'default'
+        }
+    };
+    data={};
+    components={};
+    methods={
+        buttonTap(){
+            this.$emit('buttonTap');
+        }
+    };
+    onLoad(){};
+}
+</script>
+

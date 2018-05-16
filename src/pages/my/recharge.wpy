@@ -1,0 +1,62 @@
+<style lang="less">
+    .recharge{
+        .rc-top-img{width:100%;height:272rpx;}
+
+        //是否同意协议
+        .checkboxGroup{padding:80rpx 0 40rpx;}
+    }
+</style>
+
+<template>
+    <view class="recharge">
+        <image class="rc-top-img" src=""></image>
+        <limit :list="limitList" :selVal.sync="defaultMoney"></limit>
+        <ljycCheckbox :radioList="checkboxData"></ljycCheckbox>
+        <ljycButton buttonVal="提交充值" :isActive.sync="isActive" @buttonTap.user="goPage"></ljycButton>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+import base from '@/mixins/base';
+import limit from '@/components/my/limit';
+import button from '@/components/button';
+import checkboxGroup from '@/components/checkboxGroup';
+
+export default class recharge extends wepy.page{
+    config={
+        navigationBarTitleText: '充值'
+    };
+    data={
+        limitList:[
+            {"id":1,"money":800,"give":200},
+            {"id":2,"money":800,"give":200},
+            {"id":3,"money":800,"give":200},
+            {"id":4,"money":800,"give":200}
+        ],
+        defaultMoney:{"id":1,"money":800,"give":200},
+        checkboxData:[{"name":'邻家养车充值协议',"value":1,"checked":0}],
+    };
+    computed={
+        isActive(){
+            return this.checkboxData[0].checked;
+        }
+    }
+    components={
+        limit,
+        ljycButton:button,
+        ljycCheckbox:checkboxGroup
+    };
+    methods={
+        goPage(){
+            this.$root.$navigate('rechargeConfirm');
+        }
+    };
+    mixins = [base];
+    async onLoad (options) {
+        this.loaded();
+    };
+}
+</script>
+
+

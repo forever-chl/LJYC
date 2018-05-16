@@ -1,0 +1,43 @@
+<style lang="less">
+    .checkboxGroup{text-align:center;
+        &>label{display:inline-block;font-size:24rpx;color:#999;}
+        .weui-check__hd_in-checkbox{display:inline-block;}
+    }
+</style>
+
+<template>
+    <checkbox-group class="checkboxGroup" bindchange="changeCheckbox">
+        <label class="weui-cell" wx:for="{{radioList}}">
+            <checkbox class="weui-check" value="{{item.value}}"/>
+            <view class="weui-cell__hd weui-check__hd_in-checkbox">
+                <icon class="weui-icon-checkbox_circle" type="circle" size="18" wx:if="{{!item.checked}}"></icon>
+                <icon class="weui-icon-checkbox_success" color="orange" type="success" size="18" wx:if="{{item.checked}}"></icon>
+            </view>
+            <text>{{item.name}}</text>
+        </label>
+    </checkbox-group>
+</template>
+
+<script>
+import wepy from 'wepy';
+export default class checkboxGroup extends wepy.component{
+    props={
+        radioList:{
+            type:Array,
+            default:[],
+            twoWay:true
+        }
+    }
+    data={};
+    components={};
+    methods={
+        changeCheckbox(e){
+            var radioItems = this.data.radioList;
+            for (var i = 0, len = radioItems.length; i < len; ++i) {
+                radioItems[i].checked = radioItems[i].value == e.detail.value;
+            }
+        }
+    };
+}
+</script>
+

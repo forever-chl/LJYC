@@ -14,7 +14,7 @@
         .pip-yue-img{width:40rpx;margin-top:32rpx;margin-right:20rpx;}
 
         // 余额充值
-        .pi-recharge{text-align:center;font-size:24rpx;color:#999;padding:40rpx;}
+        .pi-recharge{text-align:center;font-size:24rpx;color:#999;padding:40rpx;margin-bottom:158rpx;}
 
         // 立即支付
         .pi-button{text-align:center;}
@@ -57,9 +57,7 @@
             </label>
         </radio-group>
         <view class="pi-recharge">余额充值 > </view>
-        <view class="pi-button">
-            <button size="mini" hover-class="active" type="defult" @tap="openDialog">立即支付</button>
-        </view>
+        <ljycButton buttonVal="立即支付" @buttonTap.user="openDialog"></ljyButton>
         <dialog  @payload.user="payload" confirmText="确认" cancelText="取消">
             <view slot="content" >预计15点完成订单，请确认是否下单</view>
         </dialog>
@@ -70,6 +68,7 @@
 import wepy from 'wepy'
 import base from '@/mixins/base';
 import dialog from '@/components/dialog';
+import button from '@/components/button';
 
 export default class beautyCar extends wepy.page{
     config={
@@ -79,7 +78,8 @@ export default class beautyCar extends wepy.page{
         payType:0
     }
     components={
-        dialog:dialog
+        dialog:dialog,
+        ljycButton:button
     };
     methods={
         radioChange(val){
@@ -90,7 +90,6 @@ export default class beautyCar extends wepy.page{
         },
         openDialog(){
             this.$invoke('dialog', 'open');
-           
         }
     }
     mixins = [base];

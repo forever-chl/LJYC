@@ -1,0 +1,29 @@
+<style lang="less">
+
+</style>
+
+<template>
+    <view class="myCards">
+        
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+import base from '@/mixins/base';
+
+export default class myCards extends wepy.page{
+    config={
+        navigationBarTitleText: '我的卡包'
+    };
+    data={};
+    components={};
+    methods={};
+    mixins = [base];
+    async onLoad (options) {
+        this.loaded();
+    };
+}
+</script>
+
+
