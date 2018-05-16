@@ -39,7 +39,7 @@
                     <image class="icon-filter" src="{{isTpye?icon.orange:icon.silver}}" mode="aspectFit" lazy-load="false"></image>
                 </view>
             </view>
-            <view>搜索</view>
+            <view >搜索</view>
         </view>
         <!-- 筛选项目  -->
         <view class="filter-item border-t-f0" style="height:{{wiHeight}}px" hidden="{{!isFilter && !isTpye}}" catchtouchmove="moveFilter">
@@ -103,6 +103,11 @@ export default class billList extends wepy.page {
     async onLoad (options) {
         this.loaded(); 
         this.getWiHeight();
+    };
+    onShow(){
+        const BillTime = wx.getStorageSync('BillTime');
+        wx.removeStorageSync('BillTime');
+        console.log('从缓存中获取时间：',BillTime);
     };
     getWiHeight(){
         let _this = this;

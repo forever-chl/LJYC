@@ -68,18 +68,18 @@ export default class Tips {
     })
   }
 
-  static toast (title, onHide, icon = 'success') {
+  static toast (title, onHide, icon = 'success',duration = 500) {
     wx.showToast({
       title: title,
       icon: icon,
       mask: true,
-      duration: 500
+      duration: duration
     })
     // 隐藏结束回调
     if (onHide) {
       setTimeout(() => {
         onHide()
-      }, 500)
+      }, duration)
     }
   }
 

@@ -7,7 +7,7 @@
         .login{
             padding:50rpx 0 84rpx 38rpx;
             .icon-login{
-                .mixin-icon-round(120rpx);background: red;
+                .mixin-icon-round(120rpx);
             }
         }
         .bill{
@@ -16,7 +16,13 @@
                 padding:32rpx 0 74rpx 0; text-align: right;
             }
             .recharge{
-                width: 120rpx; height: 56rpx; line-height:56rpx;text-align: center;background: #fc8d1a;color:#fff; border-radius: 28rpx;
+                position: relative;width: 120rpx; height: 56rpx; line-height:56rpx;text-align: center;background: #fc8d1a;color:#fff; border-radius: 28rpx;
+                .tx{
+                    position: absolute;top: 50%; left:47rpx;transform:translate(0,-50%); 
+                }
+                .icon-recharge{
+                    position: absolute;top: 50%; left:15rpx;transform:translate(0,-50%);
+                }
             }
         }
         .ft{
@@ -41,6 +47,15 @@
             width: 11rpx;height: 20rpx;vertical-align: middle;
         }
     }
+    .icon-44{
+        .mixin-icon-round(44rpx);
+    }
+    .icon-35-39{
+        .mixin-icon-w-h(35rpx,39rpx);
+    }
+    .icon-30-26{
+        .mixin-icon-w-h(30rpx,26rpx);
+    }
 }
 </style>
 
@@ -49,12 +64,17 @@
         <view class="clear head mb24">
                 <view class="clear border-b-f0">
                     <view class="row f-l login">
-                        <image class="icon-login mr20" src="" mode="aspectFit" lazy-load="false"></image>
+                        <image class="icon-login mr20" src="{{icons.logo}}" mode="aspectFit" lazy-load="false"></image>
                         <view class="fs-36 c-3">点击登录</view>
                     </view>
                     <view class="f-r bill">
                         <view class="info fs-28 c-2" @tap="toPage('billList')">账单</view>
-                        <button class="recharge fs-26" hover-class="tap-active" type="defult">充值</button>
+                        <button class="recharge fs-26" hover-class="tap-active" type="defult">
+                            <text class="tx">充值</text>
+                            <view class="icon-recharge">
+                                <image class="icon-28" src="{{icons.recharge}}" mode="aspectFit" lazy-load="false"></image>
+                            </view>
+                        </button>
                     </view>
                 </view>
                 <view class="row ft">
@@ -74,56 +94,56 @@
         </view>
         <view class="row cell fs-30 c-2 mb24">
             <view class="row item">
-                <image class="icon-xl mr14" src="../../images/icon/stop.png" mode="aspectFit" lazy-load="false"></image>
+                <image class="icon-44 mr14" src="{{icons.escort}}" mode="aspectFit" lazy-load="false"></image>
                 <view>11护航</view>
             </view>
             <view class="row item">
-                <image class="icon-xl mr14" src="../../images/icon/stop.png" mode="aspectFit" lazy-load="false"></image>
+                <image class="icon-35-39 mr14" src="{{icons.fullCheck}}" mode="aspectFit" lazy-load="false"></image>
                 <view>全检</view>
             </view>
         </view>
         <view class="group fs-30 c-2">
             <view class="row-between cell item border-b-f0">
                 <view class="row">
-                    <image src="../../images/tabbar/my-se.png" class="icon-xl mr20"  mode="aspectFill" lazy-load="true"></image>
+                    <image src="{{icons.card}}" class="icon-xlg mr20"  mode="aspectFill" lazy-load="true"></image>
                     <view>我的卡包</view>
                 </view>
-                <image src="../../images/icon/more.png" class="icon-more"  mode="aspectFill" lazy-load="true"></image>
+                <image src="{{icons.more}}" class="icon-more"  mode="aspectFill" lazy-load="true"></image>
             </view>
             <view class="row-between cell item border-b-f0">
                 <view class="row">
-                    <image src="../../images/tabbar/my-se.png" class="icon-xl mr20"  mode="aspectFill" lazy-load="true"></image>
+                    <image src="{{icons.order}}" class="icon-xlg mr20"  mode="aspectFill" lazy-load="true"></image>
                     <view>我的订单</view>
                 </view>
-                <image src="../../images/icon/more.png" class="icon-more"  mode="aspectFill" lazy-load="true"></image>
+                <image src="{{icons.more}}" class="icon-more"  mode="aspectFill" lazy-load="true"></image>
             </view>
             <view class="row-between cell item border-b-f0">
                 <view class="row">
-                    <image src="../../images/tabbar/my-se.png" class="icon-xl mr20"  mode="aspectFill" lazy-load="true"></image>
+                    <image src="{{icons.preferentialRoll}}" class="icon-30-26 mr20"  mode="aspectFill" lazy-load="true"></image>
                     <view>优惠券</view>
                 </view>
-                <image src="../../images/icon/more.png" class="icon-more"  mode="aspectFill" lazy-load="true"></image>
+                <image src="{{icons.more}}" class="icon-more"  mode="aspectFill" lazy-load="true"></image>
             </view>
             <view class="row-between cell item border-b-f0">
                 <view class="row">
-                    <image src="../../images/tabbar/my-se.png" class="icon-xl mr20"  mode="aspectFill" lazy-load="true"></image>
+                    <image src="{{icons.car}}" class="icon-xlg mr20"  mode="aspectFill" lazy-load="true"></image>
                     <view>我的车辆</view>
                 </view>
-                <image src="../../images/icon/more.png" class="icon-more"  mode="aspectFill" lazy-load="true"></image>
+                <image src="{{icons.more}}" class="icon-more"  mode="aspectFill" lazy-load="true"></image>
             </view>
             <view class="row-between cell item border-b-f0">
                 <view class="row">
-                    <image src="../../images/tabbar/my-se.png" class="icon-xl mr20"  mode="aspectFill" lazy-load="true"></image>
+                    <image src="{{icons.service}}" class="icon-xlg mr20"  mode="aspectFill" lazy-load="true"></image>
                     <view>平台服务</view>
                 </view>
-                <image src="../../images/icon/more.png" class="icon-more"  mode="aspectFill" lazy-load="true"></image>
+                <image src="{{icons.more}}" class="icon-more"  mode="aspectFill" lazy-load="true"></image>
             </view>
             <view class="row-between cell item">
                 <view class="row">
-                    <image src="../../images/tabbar/my-se.png" class="icon-xl mr20"  mode="aspectFill" lazy-load="true"></image>
+                    <image src="{{icons.seting}}" class="icon-xlg mr20"  mode="aspectFill" lazy-load="true"></image>
                     <view>设置</view>
                 </view>
-                <image src="../../images/icon/more.png" class="icon-more"  mode="aspectFill" lazy-load="true"></image>
+                <image src="{{icons.more}}" class="icon-more"  mode="aspectFill" lazy-load="true"></image>
             </view>
         </view>
     </view>
@@ -136,7 +156,20 @@ import base from '@/mixins/base';
 export default class myCenter extends wepy.component {
     def = {
         init: false,
-        wiHeight:'0px'
+        wiHeight:'0px',
+        icons:{
+            'logo':'../images/userCenter/logo.png',
+            'car':'../images/userCenter/car.png',
+            'card':'../images/userCenter/card.png',
+            'escort':'../images/userCenter/escort.png',
+            'fullCheck':'../images/userCenter/full-check.png',
+            'order':'../images/userCenter/order.png',
+            'preferentialRoll':'../images/userCenter/preferential-roll.png',
+            'recharge':'../images/userCenter/recharge.png',
+            'service':'../images/userCenter/service.png',
+            'seting':'../images/userCenter/seting.png',
+            'more':'../images/icon/more.png'
+        }
     }
     data={...this.def};
     computed={};
@@ -147,8 +180,8 @@ export default class myCenter extends wepy.component {
     };
     mixins = [base];
     async onLoad (options) {
-        this.loaded(); 
         this.getWindowHeight();
+        this.loaded(); 
     };
     getWindowHeight(){
         let _this = this;

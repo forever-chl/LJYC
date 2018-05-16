@@ -42,7 +42,7 @@ export default class pickerTime extends wepy.component {
     }
     props = {
         isDay:{
-            default: false
+            default: true
         },
         year: {
             twoWay: true
@@ -78,9 +78,15 @@ export default class pickerTime extends wepy.component {
         let temp = Lang.dateFormate(now, 'yyyy-MM-dd');
         temp = temp.split('-');
 
-        this.year = parseInt(temp[0]);
-        this.month = parseInt(temp[1]);
-        this.day = parseInt(temp[2]);
+        if(!this.year){
+            this.year = parseInt(temp[0]);
+        }
+        if(!this.month){
+            this.month = parseInt(temp[1]);
+        }
+        if(!this.day){
+            this.day = parseInt(temp[2]);
+        }
 
         this.years = this.getYears();
         this.months = this.getMonths();

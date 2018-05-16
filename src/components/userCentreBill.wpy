@@ -27,6 +27,9 @@
     .icon-80{
         .mixin-icon-image(80rpx);
     }
+    .icon-26-29{
+        .mixin-icon-w-h(26rpx,29rpx);
+    }
 }    
 </style>
 
@@ -38,7 +41,7 @@
                     <view class="fs-26 c-2 mb12">2018.03-2018.05</view>
                     <view class="fs-18 c-9">充值 ￥1000 买套餐 $200 支出</view>
                 </view>
-                <image class="icon-xl" src="../images/icon/order.png" mode="aspectFit" lazy-load="false" @tap="toPage"></image>
+                <image class="icon-26-29" src="../images/icon/date-time.png" mode="aspectFit" lazy-load="false" @tap="toPage"></image>
             </view>
             <view class="list">
                 <view class="row-between border-b-f0 item">

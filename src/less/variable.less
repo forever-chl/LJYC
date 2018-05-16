@@ -39,5 +39,12 @@
   .mixin-icon-image(@size);
   border-radius: 50%;
 }
+
+.mixin-icon-w-h(@w,@h){
+  height: @h;
+  width: @w;
+  vertical-align: middle;
+}
+
 // 背景图标
 .ljyc-icon(@x,@y,@w,@h){background-image:url('https://ljyc.oss-cn-hangzhou.aliyuncs.com/wx/background_img.png');background-position: @x @y;width:@w; height: @h;background-size:686rpx auto;display:block;}

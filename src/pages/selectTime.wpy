@@ -1,39 +1,58 @@
 <style lang="less">
+@import '../less/variable.less';
 .select-main{
     position: relative; top: 0; width: 100%;color: #282828;
-    .head{
-        padding: 40rpx 32rpx 82rpx 32rpx;line-height: 1;
-    }
-    .recharge{
-        width: 120rpx; height: 56rpx; line-height:56rpx;text-align: center;background: #fc8d1a;color:#fff; border-radius: 28rpx;
-    }
-    .time{
-        width: 100%; margin: 0 auto; text-align: center;
-    }
+    .head{padding: 40rpx 32rpx 82rpx 32rpx;line-height: 1;}
+    .recharge{width: 120rpx; height: 56rpx; line-height:56rpx;text-align: center;background: #fc8d1a;color:#fff; border-radius: 28rpx;}
+    .time{width: 100%;  height:116rpx; line-height:116rpx; margin: 0 auto; text-align: center;}
     .times{
         width: 100%;height:348rpx ; overflow: hidden;
-        .picker{
-            width: 100%; height: 348rpx;text-align: center;
-        }
-        .indicator{
-            height: 116rpx;
-        }
+        .picker{width: 100%; height: 348rpx;text-align: center;}
+        .indicator{ height: 116rpx;}
         .item{line-height: 116rpx}
     }
-    
+    .icon-24-22{
+        .mixin-icon-w-h(24rpx,22rpx);
+    }
+    .groupTime{
+        height:116rpx; line-height:1; padding: 0 32rpx;
+        .s{width:60rpx;}
+        .t{height:100%;}
+    }
 }
 </style>
 
 <template>
     <view class="select-main fs-32"  wx:if="{{init}}">
         <view class="row-between head ">
-            <view>按月选择时间</view>
-            <view>
+            <view @tap="handleTime" class="row"><view class="mr20">{{timeTitle}}</view><image class="icon-24-22" src="../images/icon/switch.png" mode="aspectFit" lazy-load="false"></image> </view>
+            <view @tap="handleSubmit">
                 <button class="recharge fs-26" hover-class="tap-active" type="defult">完成</button>
             </view>
         </view>
-        <view class="time">{{year}}年{{month}}月{{day}}日</view>
-        <pickerTime :year.sync="year" :month.sync="month" :day.sync="day"/>
+        <!-- 按月选择  -->
+        <view class="time border-b-f0" hidden="{{timeType}}">{{single_year}}年{{single_month}}月</view>
+        <pickerTimeSingle :year.sync="single_year" :month.sync="single_month" :isDay.sync="isDay"  hidden="{{timeType}}"/>
+        <!-- 按日选择 -->
+        <view hidden="{{!timeType}}">
+            <view class="row-between groupTime">
+                <view class="t border-b-f0" @tap="handleDate('start')">
+                    <view class="row-center {{act == 'start'?'c-fc8d1a' :'' }}" style="height:100%;">
+                        {{start_year}}年{{start_month}}月{{start_day}}日
+                    </view>
+                </view>
+                <view class="s">至</view>
+                <view class="t border-b-f0" @tap="handleDate('end')">
+                    <view class="row-center {{act == 'end'?'c-fc8d1a' :'' }}" style="height:100%;">
+                        {{end_year}}年{{end_month}}月{{end_day}}日
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view hidden="{{!timeType}}">
+            <pickerTimeStart hidden="{{act != 'start'}}" :year.sync="start_year" :month.sync="start_month" :day.sync="start_day"/>
+            <pickerTimeEnd hidden="{{act != 'end'}}" :year.sync="end_year" :month.sync="end_month" :day.sync="end_day"/>
+        </view>
     </view>
 </template>
 
@@ -41,6 +60,8 @@
 import wepy from 'wepy';
 import base from '@/mixins/base';
 import Lang from '@/lib/Lang';
+import Tips from '@/lib/Tips';
+
 
 import pickerTime from '@/components/pickerTime'
 
@@ -48,22 +69,77 @@ export default class selectTime extends wepy.page {
     def = {
         init: false,
         
-        year: '',
-        month: '',
-        day: ''
+        timeType:false, //false按月选择，true按日选择
+        timeTitle:'按月选择时间',
+        isDay:false,
+
+        single_year: '',
+        single_month: '',
+        single_day: '',
+
+        start_year: '',
+        start_month: '',
+        start_day: '',
+
+        end_year: '',
+        end_month: '',
+        end_day: '',
+
+        act:'start'
     }
     computed = {
        
     };
+    watch = {
+        
+    }
     components = {
-        pickerTime
+        pickerTimeSingle:pickerTime,
+        pickerTimeStart:pickerTime,
+        pickerTimeEnd:pickerTime,
     }
     config={
         navigationBarTitleText: '选择日期'
     };
     data={...this.def};
     methods = {
-        
+        handleTime(){
+            this.timeType = !this.timeType;
+            if(this.timeType){
+                this.timeTitle = '按日选择';
+                this.act = 'start';
+            }
+        },
+        handleDate(name){
+            this.act = name;
+        },
+        handleSubmit(){
+            if(!this.timeType){
+                Tips.toast(this.single_year+'-'+this.single_month,null,'none');
+            }
+            if(this.timeType){
+                let s = [this.start_year,this.start_month,this.start_day];
+                let e = [this.end_year,this.end_month,this.end_day];
+
+                let _s = s.join("");
+                let _e = e.join("");
+                if(_s > _e){
+                    Tips.toast('开始日期大于结束日期！',null,'none',1500);
+                    return;
+                }
+            }
+            //存储账单时间
+            wx.setStorageSync(
+                "BillTime", 
+                {
+                    single:this.single_year+'-'+this.single_month,
+                    start:this.start_year+'-'+this.start_month+'-'+this.start_day,
+                    end:this.end_year+'-'+this.end_month+'-'+this.end_day,
+                    timeType:this.timeType //false按月选择，true按日选择
+                }
+            );
+            wx.navigateBack({delta: 1});
+        }
     }
     mixins = [base];
     async onLoad (params, {preload}) {
