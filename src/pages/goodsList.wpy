@@ -9,7 +9,7 @@
         }
     }
     .filter-item{
-        position: fixed;z-index: 10;width: 100%;  background: @color-bg-body; line-height: 1;
+        position: absolute;z-index: 10;width: 100%;  background: @color-bg-body; line-height: 1;
         .group{ 
             padding: 0 32rpx 32rpx 32rpx; background: #ffffff;
             .title{padding: 36rpx 0;}

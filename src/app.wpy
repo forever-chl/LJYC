@@ -34,6 +34,7 @@ export default class extends wepy.app {
       'pages/my/recharge',//充值
       'pages/my/rechargeConfirm',//支付失败
       'pages/my/myCards',//我的卡包
+      'pages/selectTime',//选择日期
     ],
     window: {
       backgroundTextStyle: 'light',
