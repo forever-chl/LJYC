@@ -53,9 +53,12 @@
                 <view id="{{item.title}}" class="scroll-view-item">
                     <view class="list-group-title">{{item.title}}</view>
                     <repeat for="{{item.items}}" key="index" index="subindex" item="subItem">
-                        <view class="row list-group-info {{item.items.length-1 != subindex ? 'border-b-f0' : ''}} ">
-                            <image class="icon-xl icon" src="{{subItem.avatar}}"/>
-                            <text>{{subItem.name}}</text>
+                        <view class="row-between list-group-info {{item.items.length-1 != subindex ? 'border-b-f0' : ''}} " @tap="selected({{subItem.name}})">
+                            <view class="row">
+                                <image class="icon-xl icon" src="{{subItem.avatar}}"/>
+                                <text>{{subItem.name}}</text>
+                            </view>
+                            <!-- <image class="icon-xm" src="../images/icon/selected-server.png"/> -->
                         </view> 
                     </repeat>
                 </view>
@@ -72,6 +75,7 @@
 </template>
 <script>
 import wepy from 'wepy';
+import Tips from '@/lib/Tips'
 export default class indexList extends wepy.component {
     def = {
         wiHeight : 0,
@@ -146,6 +150,9 @@ export default class indexList extends wepy.component {
             this.toView = item;
             this.currentIndex = index;
             this.isClick = true;
+        },
+        selected(name){
+            Tips.confirm('是否选择：'+name);
         }
     };
     scrollY(y){

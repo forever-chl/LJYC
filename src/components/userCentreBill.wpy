@@ -91,7 +91,7 @@ export default class userCentreBill extends wepy.component {
     };
     methods={
         toPage(){
-            this.$root.$navigate('selectTime');
+            this.$root.$navigate('../selectTime');
         }
     }
 }

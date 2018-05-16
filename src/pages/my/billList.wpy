@@ -1,5 +1,5 @@
 <style lang="less">
-@import "../less/variable.less";
+@import "../../less/variable.less";
 .bill-main{
     position: relative; width: 100%;padding-bottom:102rpx;
     .filter{
@@ -39,7 +39,7 @@
                     <image class="icon-filter" src="{{isTpye?icon.orange:icon.silver}}" mode="aspectFit" lazy-load="false"></image>
                 </view>
             </view>
-            <view >搜索</view>
+            <view @tap="seach">搜索</view>
         </view>
         <!-- 筛选项目  -->
         <view class="filter-item border-t-f0" style="height:{{wiHeight}}px" hidden="{{!isFilter && !isTpye}}" catchtouchmove="moveFilter">
@@ -49,8 +49,8 @@
                 <view class="f-l mr60 lable active" >消费</view>
             </view>
             <view class="row fs-36 ft border-t-f0">
-                <view class="def c-6" @tap="">重置</view>
-                <view class="def right" @tap="">确认</view>
+                <view class="def c-6" hover-class="tap-active-de" hover-start-time="20" hover-stay-time="70" @tap="">重置</view>
+                <view class="def right" hover-class="tap-active" hover-start-time="20" hover-stay-time="70" @tap="">确认</view>
             </view>
         </view>
         <!-- 结果集合 -->
@@ -67,8 +67,8 @@ export default class billList extends wepy.page {
     def = {
         init: false,
         icon:{
-            orange:'../images/icon/filter-orange.png',
-            silver:'../images/icon/filter-silver.png'
+            orange:'../../images/icon/filter-orange.png',
+            silver:'../../images/icon/filter-silver.png'
         },
         isFilter:false,
         isTpye:false,
@@ -92,17 +92,19 @@ export default class billList extends wepy.page {
             if(name !== 'isTpye'){
                  this.isTpye = false;
             }
-
             this[name] = !this[name];
         },
         moveFilter(e){
 
+        },
+        seach(){
+            this.$navigate('seachBill');
         }
     };
     mixins = [base];
     async onLoad (options) {
-        this.loaded(); 
         this.getWiHeight();
+        this.loaded(); 
     };
     onShow(){
         const BillTime = wx.getStorageSync('BillTime');

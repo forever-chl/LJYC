@@ -72,8 +72,8 @@
                 </view>
             </view>
             <view class="row fs-36 ft border-t-f0">
-                <view class="def c-6" @tap="">重置</view>
-                <view class="def right" @tap="">确认</view>
+                <view class="def c-6" hover-class="tap-active-de" hover-start-time="20" hover-stay-time="70" @tap="">重置</view>
+                <view class="def right" hover-class="tap-active" hover-start-time="20" hover-stay-time="70" @tap="">确认</view>
             </view>
         </view>
         <view class="split-bar"></view>

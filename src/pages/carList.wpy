@@ -1,15 +1,55 @@
 <style lang="less">
+@import "../less/variable.less";
 .carList-main{
     position: relative;width: 100%;overflow: hidden;
     .head{
         position: relative;top: 0;left: 0;width: 100%;height: 110rpx; padding:10rpx 0 40rpx 0;background: #ffffff;z-index: 100;
+    }
+    .search-result{
+        position: fixed;z-index: 100;width: 100%; line-height: 1;
+        .res{
+            position: relative; width: 100%;height: 100%;
+            .surplus{
+            flex: 0 0 30%; height: 100%; background: @color-bg-body; opacity:.7;filter:alpha(opacity=70);
+            }
+            .f-items{
+                flex: 1;height: 100%;background: #ffffff;padding: 0 32rpx;
+                .bd{
+                    width: 100%;height: 100rpx;line-height: 100rpx;
+                }
+            }
+        }
     }
 }
 </style>
 
 <template>
     <view class="carList-main" style="height:{{wiHeight}}" wx:if="{{init}}">
-        <search class="head"/>
+        <search class="head" :inputVal.sync="inputVal"/>
+        <view hidden="{{!isFilter}}" class="search-result" style="height:{{wiHeight}}">
+            <view class="row fs-30 c-3 res">
+                <view class="surplus"></view>
+                <view class="f-items">
+                    <scroll-view scroll-y style="height: 100%;">
+                        <view style="padding-bottom:204rpx;">
+                            <view class="row bd border-b-f0">{{inputVal}}</view>
+                            <view class="row bd border-b-f0">{{inputVal}}</view>
+                            <view class="row bd border-b-f0">{{inputVal}}</view>
+                            <view class="row bd border-b-f0">{{inputVal}}</view>
+                            <view class="row bd border-b-f0">{{inputVal}}</view>
+                            <view class="row bd border-b-f0">{{inputVal}}</view>
+                            <view class="row bd border-b-f0">{{inputVal}}</view>
+                            <view class="row bd border-b-f0">{{inputVal}}</view>
+                            <view class="row bd border-b-f0">{{inputVal}}</view>
+                            <view class="row bd border-b-f0">{{inputVal}}</view>
+                            <view class="row bd border-b-f0">{{inputVal}}</view>
+                            <view class="row bd border-b-f0">{{inputVal}}</view>
+                            <view class="row bd border-b-f0">{{inputVal}}</view>
+                        </view>
+                    </scroll-view>
+                </view>
+            </view>
+        </view>
         <indexList/>
     </view>
 </template>
@@ -20,11 +60,14 @@ import indexList from '@/components/indexList';
 import search from '@/components/search';
 
 import base from '@/mixins/base';
+import { debounce } from '@/lib/utils';
 
 export default class carList extends wepy.page{
     def = {
         init: false,
-        wiHeight:0
+        wiHeight:0,
+        inputVal:'',
+        isFilter:false
     }
     config={
         navigationBarTitleText: '添加车辆',
@@ -36,6 +79,17 @@ export default class carList extends wepy.page{
     }
     data={...this.def}
     computed={}
+    watch = {
+      inputVal(value) {
+          console.log(value);
+          this.isFilter = value ? true : false
+          let _this = this;
+          this.searchUpdate(value);
+      }
+    };
+    searchUpdate=debounce((value,obj)=>{
+        console.log('---',value);
+    },1000);
     methods={}
     onLoad (option) {
         this.getSystemInfo();

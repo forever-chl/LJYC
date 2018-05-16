@@ -68,8 +68,8 @@
                         <view class="fs-36 c-3">点击登录</view>
                     </view>
                     <view class="f-r bill">
-                        <view class="info fs-28 c-2" @tap="toPage('billList')">账单</view>
-                        <button class="recharge fs-26" hover-class="tap-active" type="defult">
+                        <view class="info fs-28 c-2" @tap="toPage('my/billList')">账单</view>
+                        <button class="recharge fs-26" hover-class="tap-active" type="defult"  @tap="toPage('my/recharge')">
                             <text class="tx">充值</text>
                             <view class="icon-recharge">
                                 <image class="icon-28" src="{{icons.recharge}}" mode="aspectFit" lazy-load="false"></image>
@@ -86,7 +86,7 @@
                         <view class="fs-40 c-2 mb20">0</view>
                         <view class="fs-20 c-9">优惠券</view>
                     </view>
-                    <view class="column-center item">
+                    <view class="column-center item" @tap="toPage('my/myCards')">
                         <view class="fs-40 c-2 mb20">0</view>
                         <view class="fs-20 c-9">余额</view>
                     </view>

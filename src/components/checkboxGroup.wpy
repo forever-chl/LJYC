@@ -7,7 +7,7 @@
 
 <template>
     <checkbox-group class="checkboxGroup" bindchange="changeCheckbox">
-        <label class="weui-cell" wx:for="{{radioList}}">
+        <label class="weui-cell" wx:for="{{radioList}}" wx:key="index">
             <checkbox class="weui-check" value="{{item.value}}"/>
             <view class="weui-cell__hd weui-check__hd_in-checkbox">
                 <icon class="weui-icon-checkbox_circle" type="circle" size="18" wx:if="{{!item.checked}}"></icon>

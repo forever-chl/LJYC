@@ -28,13 +28,14 @@ export default class extends wepy.app {
       'pages/villageList', //选择小区列表
       'pages/goodsList', //商品列表
       'pages/payInfo',//支付
-	    'pages/billList',//账单	
+	    'pages/my/billList',//账单	
       'pages/paySuc',//支付成功
       'pages/payError',//支付失败
       'pages/my/recharge',//充值
       'pages/my/rechargeConfirm',//支付失败
       'pages/my/myCards',//我的卡包
       'pages/selectTime',//选择日期
+      'pages/my/seachBill',//搜索账单明细
     ],
     window: {
       backgroundTextStyle: 'light',

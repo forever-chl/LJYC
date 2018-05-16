@@ -1,0 +1,95 @@
+<style lang="less">
+@import "../../less/variable.less";
+.serachBill-main{
+    position: relative;
+    .old{
+        position:absolute;z-index:10; width:100%;line-height:1;
+       .title{
+            padding: 32rpx 32rpx 0 32rpx; height:78rpx;
+       }
+       .list{
+           padding: 40rpx 32rpx 0 32rpx;
+           .item{
+               padding-bottom:40rpx;
+           }
+       }
+    }
+    .mt32{margin-top:32rpx}
+}
+</style>
+<template>
+    <view class="serachBill-main">
+        <!-- 搜索栏 -->
+        <search class="head" :inputVal.sync="inputVal"/>
+        <view class="old" style="min-height:{{wiHeight}}" hidden="{{isFilter}}">
+            <view class="row-between title fs-24 c-464646 border-b-f0">
+                <view>历史记录</view>
+                <view class="row">
+                    <image class="icon-22 mr-20" src="../../images/icon/delete.png"/>
+                    <view>清除</view>
+                </view>
+            </view>
+            <view class="list">
+                 <view class="item fs-32 c-6">
+                    水榭春天1期-服务订单
+                </view>
+                <view class="item fs-32 c-6">
+                    水榭春天1期-服务订单
+                </view>
+            </view>
+        </view>
+        <!-- 结果集合 -->
+        <view class="mt32" hidden="{{!isFilter}}">
+            <userCentreBill/>
+        </view>
+    </view>
+    
+</template>
+<script>
+import wepy from 'wepy';
+import { debounce } from '@/lib/utils';
+import userCentreBill from '@/components/userCentreBill';
+import search from '@/components/search';
+
+export default class seachBill extends wepy.page {
+    def = {
+        inputVal:'',
+        wiHeight:'0px',
+        isFilter:false
+    }
+    data={...this.def};
+    watch = {
+      inputVal(value) {
+          console.log(value);
+          this.isFilter = value ? true : false
+          let _this = this;
+          this.searchUpdate(value);
+      }
+    };
+    searchUpdate=debounce((value,obj)=>{
+        console.log('---',value);
+    },1000);
+    methods = {
+        inputTyping: function (e) {
+            const input = e.detail.value;
+            this.inputVal = input;
+        },
+        moveFilter(){}
+    };
+    components={
+        userCentreBill,
+        search
+    };
+    async onLoad (options) {
+        this.getWindowHeight();
+    };
+    getWindowHeight(){
+        let _this = this;
+        wx.getSystemInfo({
+            success(res) {
+                _this.wiHeight = res.windowHeight+'px';
+            }
+        })
+    };
+}
+</script>

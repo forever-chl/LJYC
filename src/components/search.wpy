@@ -23,94 +23,41 @@
         }
     }
 }
-.search-result{
-    position: fixed;z-index: 100;width: 100%; line-height: 1;
-    .res{
-        position: relative; width: 100%;height: 100%;
-        .surplus{
-        flex: 0 0 30%; height: 100%; background: @color-bg-body; opacity:.7;filter:alpha(opacity=70);
-        }
-        .f-items{
-            flex: 1;height: 100%;background: #ffffff;padding: 0 32rpx;
-            .bd{
-                width: 100%;height: 100rpx;line-height: 100rpx;
-            }
-        }
-    }
-    
-}
+
 </style>
 <template>
     <view class="serach-main row-center">
         <!-- 搜索栏 -->
         <view class="wrapping">
-            <input class="input"  @input="inputTyping" name="name" value="" placeholder="搜索车辆品牌" placeholder-style="color: #999;" />
+            <input class="input"  @input="inputTyping" name="name" value="" placeholder="{{searchTitle}}" placeholder-style="color: #999;" />
             <image class="icon-mg s-icon" src="../images/icon/search-icon.png"/>
-        </view>
-    </view>
-    <view hidden="{{!isFilter}}" class="search-result" style="height:{{wiHeight}}" catchtouchmove="moveFilter">
-        <view class="row fs-30 c-3 res">
-            <view class="surplus"></view>
-            <view class="f-items">
-                <scroll-view scroll-y style="height: 100%;">
-                    <view style="padding-bottom:204rpx;">
-                        <view class="row bd border-b-f0">{{inputVal}}</view>
-                        <view class="row bd border-b-f0">{{inputVal}}</view>
-                        <view class="row bd border-b-f0">{{inputVal}}</view>
-                        <view class="row bd border-b-f0">{{inputVal}}</view>
-                        <view class="row bd border-b-f0">{{inputVal}}</view>
-                        <view class="row bd border-b-f0">{{inputVal}}</view>
-                        <view class="row bd border-b-f0">{{inputVal}}</view>
-                        <view class="row bd border-b-f0">{{inputVal}}</view>
-                        <view class="row bd border-b-f0">{{inputVal}}</view>
-                        <view class="row bd border-b-f0">{{inputVal}}</view>
-                        <view class="row bd border-b-f0">{{inputVal}}</view>
-                        <view class="row bd border-b-f0">{{inputVal}}</view>
-                        <view class="row bd border-b-f0">{{inputVal}}</view>
-                    </view>
-                </scroll-view>
-            </view>
         </view>
     </view>
 </template>
 <script>
 import wepy from 'wepy';
-import { debounce } from '@/lib/utils'
 export default class search extends wepy.component {
     def = {
-        inputVal:'',
-        wiHeight:'0px',
-        isFilter:false
+      
     }
     data={...this.def};
-    watch = {
-      inputVal(value) {
-          console.log(value);
-          this.isFilter = value ? true : false
-          let _this = this;
-          this.searchUpdate(value);
-      }
+    props={
+        inputVal:{
+            type: String,
+            default: '',
+            twoWay: true
+        },
+        searchTitle:{
+            type: String,
+            default: '搜索车辆品牌',
+        }
     };
-    searchUpdate=debounce((value,obj)=>{
-        console.log('---',value);
-    },1000);
     methods = {
         inputTyping: function (e) {
             const input = e.detail.value;
             this.inputVal = input;
         },
         moveFilter(){}
-    };
-    async onLoad (options) {
-        this.getWindowHeight();
-    };
-    getWindowHeight(){
-        let _this = this;
-        wx.getSystemInfo({
-            success(res) {
-                _this.wiHeight = res.windowHeight+'px';
-            }
-        })
     };
 }
 </script>

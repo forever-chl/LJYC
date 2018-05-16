@@ -24,6 +24,7 @@
 
 <template>
     <view class="select-main fs-32"  wx:if="{{init}}">
+        <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">开始时间不能大于结束时间</view>
         <view class="row-between head ">
             <view @tap="handleTime" class="row"><view class="mr20">{{timeTitle}}</view><image class="icon-24-22" src="../images/icon/switch.png" mode="aspectFit" lazy-load="false"></image> </view>
             <view @tap="handleSubmit">
@@ -60,8 +61,6 @@
 import wepy from 'wepy';
 import base from '@/mixins/base';
 import Lang from '@/lib/Lang';
-import Tips from '@/lib/Tips';
-
 
 import pickerTime from '@/components/pickerTime'
 
@@ -85,7 +84,8 @@ export default class selectTime extends wepy.page {
         end_month: '',
         end_day: '',
 
-        act:'start'
+        act:'start',
+        showTopTips:false
     }
     computed = {
        
@@ -114,9 +114,7 @@ export default class selectTime extends wepy.page {
             this.act = name;
         },
         handleSubmit(){
-            if(!this.timeType){
-                Tips.toast(this.single_year+'-'+this.single_month,null,'none');
-            }
+           
             if(this.timeType){
                 let s = [this.start_year,this.start_month,this.start_day];
                 let e = [this.end_year,this.end_month,this.end_day];
@@ -124,7 +122,11 @@ export default class selectTime extends wepy.page {
                 let _s = s.join("");
                 let _e = e.join("");
                 if(_s > _e){
-                    Tips.toast('开始日期大于结束日期！',null,'none',1500);
+                    this.showTopTips = true;
+                    setTimeout(() => {
+                        this.showTopTips = false;
+                        this.loaded(); 
+                    }, 1200);
                     return;
                 }
             }
