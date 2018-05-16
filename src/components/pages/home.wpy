@@ -16,8 +16,9 @@
     .tm-icon{width:88rpx;height:88rpx;}
 
     // 顶部其他功能
-    .top-menu-other{padding:50rpx 0;display:flex;}
-    .tmo-item{width:50%;padding-left:60rpx;display:flex;}
+    .top-menu-other{display:flex;}
+    .tmo-item{width:50%;padding:50rpx 0 50rpx 60rpx;display:flex;position:relative;}
+    .tmo-item+.tmo-item::before{content:"";display:block; position:absolute;width:2rpx;height:88rpx;top:50rpx;left:0; background-color:#f0f0f0;}
     .tmoi-icon{width:70rpx;height:70rpx;}
 
     // 门店列表
@@ -77,7 +78,7 @@
         </view>
         <view class="split-bar"></view>
         <view class="top-menu-other">
-            <view class="tmo-item">
+            <view class="tmo-item" @tap="toPage('my/recharge')">
                 <image src="../../images/icon/package-recharge.png" class="tmoi-icon"></image>
                 <view class="pl-32">
                     <view class="fs-32 c-2">套餐充值</view>
