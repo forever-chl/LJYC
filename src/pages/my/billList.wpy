@@ -30,27 +30,27 @@
     <view class="bill-main"  wx:if="{{init}}">
         <view class="row-between filter fs-28 c-2"  catchtouchmove="moveFilter">
             <view class="row">
-                <view class="row mr60" @tap="handChange('isFilter')">
-                    <view class="mr10 {{isFilter?'c-fc8d1a':''}}">筛选</view>
-                    <image class="icon-filter" src="{{isFilter?icon.orange:icon.silver}}" mode="aspectFit" lazy-load="false"></image>
+                <view class="row mr60" @tap="handleChange('filter')">
+                    <view class="mr10 {{filterName == 'filter'?'c-fc8d1a':''}}">筛选</view>
+                    <image class="icon-filter" src="{{filterName == 'filter'?icon.orange:icon.silver}}" mode="aspectFit" lazy-load="false"></image>
                 </view>
-                <view class="row" @tap="handChange('isTpye')">
-                    <view class="mr10 {{isTpye?'c-fc8d1a':''}}">分类</view>
-                    <image class="icon-filter" src="{{isTpye?icon.orange:icon.silver}}" mode="aspectFit" lazy-load="false"></image>
+                <view class="row" @tap="handleChange('type')">
+                    <view class="mr10 {{filterName == 'type'?'c-fc8d1a':''}}">分类</view>
+                    <image class="icon-filter" src="{{filterName == 'type'?icon.orange:icon.silver}}" mode="aspectFit" lazy-load="false"></image>
                 </view>
             </view>
             <view @tap="seach">搜索</view>
         </view>
         <!-- 筛选项目  -->
-        <view class="filter-item border-t-f0" style="height:{{wiHeight}}px" hidden="{{!isFilter && !isTpye}}" catchtouchmove="moveFilter">
+        <view class="filter-item border-t-f0" style="height:{{wiHeight}}px" hidden="{{filterName == ''}}" catchtouchmove="moveFilter">
             <view class="list fs-28 c-2 clear">
-                <view class="f-l mr60 lable">充值</view>
-                <view class="f-l mr60 lable" >套餐</view>
-                <view class="f-l mr60 lable active" >消费</view>
+                <block wx:for="{{filterTpye[filterName]}}" wx:key="index" wx:for-index="index" wx:for-item="item">
+                    <view class="f-l mr60 mb20 lable {{item.isact ? 'active':''}}" @tap="selected({{index}})">{{item.name}}</view>
+                </block>
             </view>
             <view class="row fs-36 ft border-t-f0">
-                <view class="def c-6" hover-class="tap-active-de" hover-start-time="20" hover-stay-time="70" @tap="">重置</view>
-                <view class="def right" hover-class="tap-active" hover-start-time="20" hover-stay-time="70" @tap="">确认</view>
+                <view class="def c-6" hover-class="tap-active-de" hover-start-time="20" hover-stay-time="70" @tap="handleRest">重置</view>
+                <view class="def right" hover-class="tap-active" hover-start-time="20" hover-stay-time="70" @tap="handleConfirm">确认</view>
             </view>
         </view>
         <!-- 结果集合 -->
@@ -70,9 +70,21 @@ export default class billList extends wepy.page {
             orange:'../../images/icon/filter-orange.png',
             silver:'../../images/icon/filter-silver.png'
         },
-        isFilter:false,
-        isTpye:false,
-        wiHeight:'0px'
+        wiHeight:'0px',
+        filterName:'',
+        filterTpye:{
+            filter:[
+                {id:1,name:'充值',isact:false},
+                {id:2,name:'套餐',isact:false},
+                {id:3,name:'消费',isact:true}
+            ],
+            type:[
+                {id:11,name:'洗车',isact:false},
+                {id:12,name:'美容',isact:false},
+                {id:13,name:'喷漆',isact:false},
+                {id:14,name:'保养',isact:false}
+            ]
+        }
     }
     config={
         navigationBarTitleText: '账单'
@@ -85,20 +97,37 @@ export default class billList extends wepy.page {
         userCentreBill
     };
     methods={
-        handChange(name){
-            if(name !== 'isFilter'){
-                this.isFilter = false;
-            }
-            if(name !== 'isTpye'){
-                 this.isTpye = false;
-            }
-            this[name] = !this[name];
+        handleChange(name){
+            this.filterName = name;
         },
         moveFilter(e){
 
         },
         seach(){
             this.$navigate('seachBill');
+        },
+        selected(index){
+            let item = this.filterTpye[this.filterName][index];
+            item.isact = !item.isact;
+        },
+        handleRest(){
+            let items = this.filterTpye;
+            for (var k in items){
+                items[k].forEach((obj) => {
+                    obj.isact = false;
+                });
+            }
+        },
+        handleConfirm(){
+            let items = this.filterTpye;
+            let selecteds = {};
+            for (var k in items){
+                selecteds[k] = items[k].filter((obj) => {
+                    return obj.isact == true;
+                });
+            }
+            console.log(selecteds);
+            this.filterName = '';
         }
     };
     mixins = [base];

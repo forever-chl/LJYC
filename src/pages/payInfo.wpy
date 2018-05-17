@@ -57,7 +57,7 @@
             </label>
         </radio-group>
         <view class="pi-recharge">余额充值 > </view>
-        <ljycButton buttonVal="立即支付" @buttonTap.user="openDialog"></ljyButton>
+        <ljycButton buttonVal="立即支付" @buttonTap.user="openDialog"/>
         <dialog  @payload.user="payload" confirmText="确认" cancelText="取消">
             <view slot="content" >预计15点完成订单，请确认是否下单</view>
         </dialog>
