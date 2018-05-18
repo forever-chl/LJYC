@@ -46,15 +46,15 @@
 <template>
   <view class="dialog-main {{isOpen?'dialog-open':'dialog-close'}}" style="height: {{wiHeight}};" catchtouchmove="touchmove">
         <view class="mask"></view>
-        <view class="wrapping" @tap.stop="close">
+        <view class="wrapping">
             <view class="column content fs-32 c-2">
                 <!-- <view class="hd"><text class="title">弹窗标题</text></view> -->
                 <view class="bd row-center">
                     <slot name="content">默认内容</slot>
                 </view>
                 <view class="ft row">
-                    <view class="row-center default c-9" @tap.stop="close">{{cancelText}}</view>
-                    <view class="row-center default primary" @tap="tap">{{confirmText}}</view>
+                    <view class="row-center default c-9" @tap.stop="cancel">{{cancelText}}</view>
+                    <view class="row-center default primary" @tap.stop="confirm">{{confirmText}}</view>
                 </view>
             </view>
         </view>
@@ -88,7 +88,12 @@ export default class dialog extends wepy.component {
         open(){
             this.open();
         },
-        tap(){
+        cancel(){
+            this.close();
+            this.$emit('cancel', 100);
+        },
+        confirm(){
+            this.close();
             console.log('child is clicked');
             this.$emit('payload', 100);
         }

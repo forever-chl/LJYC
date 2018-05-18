@@ -4,23 +4,26 @@
  /* 车牌信息 */
 .ljyc-car-info{display:flex;line-height: 1; background: #fff; height: 120rpx;}
 .ljyc-car-info>view{width:50%;padding:24rpx 44rpx 24rpx 130rpx;position:relative;}
-.ljyc-car-info>view::before{content:"";position:absolute;top:50%;left:48rpx;transform:translate(0,-50%);}
-.ljyc-car-info>view::after{content:"";position:absolute;top:50%;right:32rpx;transform:translate(0,-50%);.ljyc-icon(-674rpx,-218rpx,11rpx,20rpx);}
 .lci-info+.lci-info{border-left:solid 1px #f0f0f0;}
-.lci-info>image{position:absolute;width:52rpx;height:52rpx;left:44rpx;top:50%;transform:translate(0,-50%);}
+.lci-info>.def{position:absolute;width:52rpx;height:52rpx;left:44rpx;top:50%;transform:translate(0,-50%);}
+.ljyc-car-info .icon-11-20{
+    .mixin-icon-w-h(11rpx,20rpx);position:absolute;top:50%;right:32rpx;transform:translate(0,-50%);
+}
 </style>
 
 <template>
     <view class="ljyc-car-info">
         <view class="lci-info" @tap="addVillage">
-            <image src="../images/icon/stop.png"></image>
+            <image class="def" src="../images/icon/stop.png"></image>
             <view class="fs-32 c-2">停车场</view>
             <view class="fs-24 c-9 mt-16">水榭春天1期</view>
+            <image class="icon-11-20"  src="../images/icon/more.png"></image>
         </view>
         <view class="lci-info" @tap="addCar">
-            <image src="../images/icon/cardInfo.png"></image>
+            <image class="def"  src="../images/icon/cardInfo.png"></image>
             <view class="fs-32 c-2">车牌信息</view>
             <view class="fs-24 c-9 mt-16">粤B236489</view>
+            <image class="icon-11-20"  src="../images/icon/more.png"></image>
         </view>
     </view>
 </template>

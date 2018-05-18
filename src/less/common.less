@@ -93,6 +93,9 @@ image{
 .icon-round {
   border-radius: 50%;
 }
+.icon-30-22{
+  .mixin-icon-w-h(30rpx,22rpx);
+}
 
 //******间隔******/
 .hr{
@@ -188,6 +191,7 @@ image{
 .mr60{margin-right: 60rpx}
 .mr100{margin-right: 100rpx}
 .ml100{margin-left: 100rpx}
+.pr22{padding-right:22rpx;}
 
 // 内边距
 // 左
@@ -206,11 +210,11 @@ image{
 .ljyc-center{top:50%;left:50%;transform:translate(-50%,-50%);}
 
 // title
-.ljyc-title{overflow:hidden;padding:32rpx;}
+.ljyc-title{position: relative; overflow:hidden;padding:32rpx;}
 .ljyc-more{padding-right:22rpx;position: relative;}
 .ljyc-more::after{content:"";position: absolute;top:50%;right:0;transform:translate(0,-50%);.ljyc-icon(-674rpx,-218rpx,11rpx,20rpx);}
-.ljyct-down{padding-right:22rpx;height:32rpx; position: relative;}
-.ljyct-down::after{content:"";position: absolute;top:50%;right:0;transform:translate(0,-50%);.ljyc-icon(-299rpx,-393rpx,22rpx,22rpx);}
+/* .ljyct-down{padding-right:22rpx;height:32rpx; position: relative;}
+.ljyct-down::after{content:"";position: absolute;top:50%;right:0;transform:translate(0,-50%);.ljyc-icon(-299rpx,-393rpx,22rpx,22rpx);} */
 
 // 一行文字超出省略
 .overflow-text{width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
@@ -258,3 +262,15 @@ image{
 //按下去的样式
 .tap-active{background:#9c5b15 !important ;}
 .tap-active-de{background:#DEDEDE !important ;}
+
+//左右垂直居中
+.ljyct-rc{
+  position: absolute;top:50%;right:0;transform:translate(0,-50%);
+}
+.ljyct-lc{
+  position: absolute;top:50%;left:0;transform:translate(0,-50%);
+}
+
+//旋转
+.rotate90{transform:rotate(90deg) .3s;}
+.rotate180{transform:rotate(180deg) .3s;}

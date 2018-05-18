@@ -3,12 +3,12 @@
 .cleanCar-main{
     position: relative;padding-bottom:120rpx; 
     .cc-ljxc{
-        padding:0 0 40rpx 0; line-height: 1;
+        line-height: 1;
         .b-f0{
             padding-left: 0; margin-left: 32rpx;
         }
         .cc-ljxc-list{
-            padding:0 32rpx;
+            padding:0 32rpx 40rpx 32rpx;
         }
         .row-between{
             padding-top: 40rpx;
@@ -19,6 +19,7 @@
                 width: 80rpx;height: 34rpx;line-height: 34rpx; text-align: center;padding: 0;border-radius: 17rpx;border: 1px solid #f0f0f0;
             }
         }
+        .icon-right{position: absolute;right:0;top:0; height:98rpx;width:120rpx}
     }
     .card{
         height: 104rpx;line-height: 1;padding:0 32rpx;
@@ -32,96 +33,83 @@
 <template>
     <view class="cleanCar-main fs-32" wx:if="{{init}}">
         <view class="split-bar"></view>
-        <carinfo @addCar.user="addCar"/>
+        <carinfo @addVillage.user="addVillage" @addCar.user="addCar"/>
         <view class="split-bar"></view>
+        <!-- 邻家洗车 -->
         <view class="cc-ljxc fs-32">
-            <view class="ljyc-title b-f0 border-b-f0">
+            <view class="ljyc-title b-f0">
                 <text class="title">邻家洗车</text>
-                <icon class="ljyct-down f-r"></icon> 
+                <view class="pr22 icon-right" @tap="handleState('items1')">
+                    <image class="ljyct-rc icon-22 pr22 f-r" src="{{ items1 ? icon.card.on : icon.card.off}}"></image>
+                </view>
             </view>
-            <view class="cc-ljxc-list">
-                <view class="row-between">
-                    <view class="row left">
-                        <image class="icon-xm mr26" src="{{icon.server.off}}" mode="aspectFit" lazy-load="false"></image>
-                        <text >标准洗车</text>
+            <view class="cc-ljxc-list border-t-f0" hidden="{{!items1}}">
+                <block  wx:for="{{itemsList1}}" wx:key="index" wx:for-index="index" wx:for-item="item">
+                    <view class="row-between">
+                        <view class="row left" @tap="handleSelect('itemsList1',{{index}})">
+                            <image class="icon-xm mr26" src="{{ item.selected ? icon.server.on : icon.server.off}}" mode="aspectFit" lazy-load="false"></image>
+                            <text>{{item.name}}</text>
+                            <image wx:if="{{item.isCard}}" class="icon-30-22 ml26" src="{{ item.selected ? icon.serverCard.on : icon.serverCard.off}}" mode="aspectFit" lazy-load="false"></image>
+                        </view>
+                        <view class="row">
+                            <text class="c-ff3a32 fs-32 mr48">￥{{item.price}}</text>
+                            <text class="info fs-20 c-2" @tap="info">详情</text>
+                        </view>
                     </view>
-                    <view class="row">
-                        <text class="c-ff3a32 fs-32 mr48">￥40.0</text>
-                        <text class="info fs-20 c-2" @tap="info">详情</text>
-                    </view>
-                </view>
-                <view class="row-between">
-                    <view class="row left">
-                        <image class="icon-xm mr26" src="{{icon.server.on}}" mode="aspectFit" lazy-load="false"></image>
-                        <text >标准洗车</text>
-                    </view>
-                    <view class="row">
-                        <text class="c-ff3a32 fs-32 mr48">￥40.0</text>
-                        <text class="info fs-20 c-2" @tap="info">详情</text>
-                    </view>
-                </view>
+                </block>
             </view>
         </view>
+        <!-- 邻家美容 -->
         <view class="split-bar"></view>
         <view class="cc-ljxc fs-32">
-            <view class="ljyc-title b-f0 border-b-f0">
+            <view class="ljyc-title b-f0">
                 <text class="title">邻家美容</text>
-                <icon class="ljyct-down f-r"></icon> 
+                <view class="pr22 icon-right" @tap="handleState('items2')">
+                    <image class="ljyct-rc icon-22 pr22 f-r"  src="{{ items2 ? icon.card.on : icon.card.off}}"></image>
+                </view>
             </view>
-            <view class="cc-ljxc-list">
-                <view class="row-between">
-                    <view class="row left">
-                        <image class="icon-xm mr26" src="{{icon.server.off}}" mode="aspectFit" lazy-load="false"></image>
-                        <text >标准洗车</text>
+            <view class="cc-ljxc-list border-t-f0" hidden="{{!items2}}">
+                <block  wx:for="{{itemsList2}}" wx:key="index" wx:for-index="index" wx:for-item="item">
+                    <view class="row-between">
+                        <view class="row left" @tap="handleSelect('itemsList2',{{index}})">
+                            <image class="icon-xm mr26" src="{{ item.selected ? icon.server.on : icon.server.off}}" mode="aspectFit" lazy-load="false"></image>
+                            <text>{{item.name}}</text>
+                        </view>
+                        <view class="row">
+                            <text class="c-ff3a32 fs-32 mr48">￥{{item.price}}</text>
+                            <text class="info fs-20 c-2" @tap="info">详情</text>
+                        </view>
                     </view>
-                    <view class="row">
-                        <text class="c-ff3a32 fs-32 mr48">￥40.0</text>
-                        <text class="info fs-20 c-2" @tap="info">详情</text>
-                    </view>
-                </view>
-                <view class="row-between">
-                    <view class="row left">
-                        <image class="icon-xm mr26" src="{{icon.server.on}}" mode="aspectFit" lazy-load="false"></image>
-                        <text >标准洗车</text>
-                    </view>
-                    <view class="row">
-                        <text class="c-ff3a32 fs-32 mr48">￥40.0</text>
-                        <text class="info fs-20 c-2" @tap="info">详情</text>
-                    </view>
-                </view>
+                </block>
             </view>
         </view>
+        <!-- 11护航提醒 -->
         <view class="split-bar"></view>
         <view class="cc-ljxc fs-32">
             <view class="ljyc-title b-f0 border-b-f0">
                 <text class="title">11护航提醒</text>
-                <image class="icon-xm f-r" src="{{icon.warn}}" mode="aspectFit" lazy-load="false"></image>
+                <view class="pr22 icon-right">
+                   <image class="ljyct-rc pr22 icon-xm f-r" src="{{icon.warn}}" mode="aspectFit" lazy-load="false"></image>
+                </view>
             </view>
             <view class="cc-ljxc-list">
-                <view class="row-between">
-                    <view class="row left">
-                        <image class="icon-xm mr26" src="{{icon.server.off}}" mode="aspectFit" lazy-load="false"></image>
-                        <text >标准洗车</text>
+                <block  wx:for="{{itemsList3}}" wx:key="index" wx:for-index="index" wx:for-item="item">
+                    <view class="row-between">
+                        <view class="row left" @tap="handleSelect('itemsList3',{{index}})">
+                            <image class="icon-xm mr26" src="{{ item.selected ? icon.server.on : icon.server.off}}" mode="aspectFit" lazy-load="false"></image>
+                            <text>{{item.name}}</text>
+                        </view>
+                        <view class="row">
+                            <text class="c-ff3a32 fs-32">￥{{item.price}}</text>
+                            <text class="fs-20 c-fc8d1a" style="width:128rpx;text-align: right;">{{item.ischange?'建议更换':''}}</text>
+                        </view>
                     </view>
-                    <view class="row">
-                        <text class="c-ff3a32 fs-32 mr48">￥40.0</text>
-                        <text class="fs-20 c-fc8d1a">建议更换</text>
-                    </view>
-                </view>
-                <view class="row-between">
-                    <view class="row left">
-                        <image class="icon-xm mr26" src="{{icon.server.on}}" mode="aspectFit" lazy-load="false"></image>
-                        <text >标准洗车</text>
-                    </view>
-                    <view class="row">
-                        <text class="c-ff3a32 fs-32 mr48">￥40.0</text>
-                        <text class="fs-20 c-fc8d1a">建议更换</text>
-                    </view>
-                </view>
+                </block>
             </view>
         </view>
+        <!-- 优惠券 -->
         <view class="split-bar"></view>
-        <view class="row-between card" @tap="openDialog">
+        <view class="row-between card">
             <view><text>优惠券</text></view>
             <view class="row">
                 <text class="fs-28 c-6 mr26">3张可用优惠券</text>
@@ -129,9 +117,9 @@
             </view>
         </view>
         <view class="split-bar"></view>
-        <orderPanel @handleOrder.user="handleOrder"/>
+        <orderPanel @handleOrder.user="handleOrder" :nowPrice.sync="priceCount" :primaryPrice.sync="primaryPrice"/>
         <dialog  @payload.user="payload" :confirmText.sync="confirmText" :cancelText.sync="cancelText">
-            <view slot="content">剩余标准美容卡<text class="c-ff3a32">10</text>次</view>
+            <view slot="content">剩余标准洗车卡<text class="c-ff3a32">10</text>次</view>
         </dialog>
         <cardPanel/>
     </view>
@@ -144,10 +132,11 @@ import orderPanel from '@/components/orderPanel';
 import dialog from '@/components/dialog';
 import cardPanel from '@/components/cardPanel';
 import Tips from '@/lib/Tips';
+import Lang from '@/lib/Lang';
 
 import base from '@/mixins/base';
 
-export default class beautyCar extends wepy.page{
+export default class cleanCar extends wepy.page{
     def = {
         init: false,
         icon:{
@@ -155,11 +144,57 @@ export default class beautyCar extends wepy.page{
                 off:'../images/icon/not-selected-server.png',
                 on:'../images/icon/selected-server.png'
             },
+            serverCard:{
+                off:'../images/icon/card-orange.png',
+                on:'../images/icon/card-green.png'
+            },
+            card:{
+                off:'../images/icon/shrink.png',
+                on:'../images/icon/open.png'
+            },
             warn:'../images/icon/warn.png',
             more:'../images/icon/more.png'
         },
-        confirmText:'不使用卡',
-        cancelText:'使用卡'
+        items1:true,
+        items2:true,
+        itemsList1:[{
+            id:1,
+            selected:false,
+            name:'标准洗车',
+            price:'40.0',
+            isCard:true
+        },{
+            id:1,
+            selected:true,
+            name:'标准洗车',
+            price:'40.0'
+        }],
+        itemsList2:[{
+            id:1,
+            selected:false,
+            name:'标准洗车',
+            price:'40.0'
+        },{
+            id:1,
+            selected:true,
+            name:'标准洗车',
+            price:'40.0'
+        }],
+        itemsList3:[{
+            id:1,
+            selected:false,
+            name:'标准洗车',
+            price:'40.0',
+            ischange:true
+        },{
+            id:1,
+            selected:false,
+            name:'标准洗车',
+            price:'40.0',
+            ischange:false
+        }],
+        confirmText:'使用卡',
+        cancelText:'不使用卡'
     }
     config={
         navigationBarTitleText: '美容'
@@ -171,9 +206,35 @@ export default class beautyCar extends wepy.page{
         cardPanel:cardPanel
     };
     data={...this.def};
-    computed={};
-    openDialog(){
-        this.$invoke('dialog', 'open');
+    computed={
+        priceCount(){
+            let price = [];
+            this.itemsList1.forEach(item => {
+                if(item.selected){
+                    price.push(item.price);
+                }
+            });
+            this.itemsList2.forEach(item => {
+                if(item.selected){
+                    price.push(item.price);
+                }
+            });
+            this.itemsList3.forEach(item => {
+                if(item.selected){
+                    price.push(item.price);
+                }
+            });
+            return Lang.sum(price)+'';
+        },
+        primaryPrice(){
+            return '600.0';
+        }
+    };
+    watch = {
+        itemsList1 (value) {
+            console.log(value);
+
+        }
     }
     methods={
         openDialog(){
@@ -185,13 +246,34 @@ export default class beautyCar extends wepy.page{
         info(){
             this.$invoke('cardPanel', 'open');
         },
+        addVillage(){
+            console.log('add Village  添加小区');
+            this.$navigate('villageList');
+        },
         addCar(){
             console.log('add car');
             this.$navigate('addCar');
         },
         handleOrder(arg){
             console.log('美容订单提交 ...',arg);
+            let price = [];
+            
+
+            this.$navigate('payInfo');
+        },
+        handleState(name){
+            this[name] = !this[name];
+        },
+        handleSelect(name,index){
+            let item = this[name][index];
+            item.selected = !item.selected;
+            if(item.selected && item.isCard){
+                this.openDialog();
+            }
         }
+    };
+    openDialog(){
+        this.$invoke('dialog', 'open');
     };
     mixins = [base];
     async onLoad (options) {
